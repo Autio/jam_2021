@@ -24,7 +24,12 @@ ModelImporter:
   - first:
       43: 4300000
     second: BackgroundTerrainA-BaseMesh
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BackgroundTerrainA-BaseMeshMat
+    second: {fileID: 2100000, guid: 8f0c5f4f2c777cc4182c31719ec96422, type: 2}
   materials:
     materialImportMode: 1
     materialName: 1

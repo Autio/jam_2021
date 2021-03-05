@@ -24,7 +24,12 @@ ModelImporter:
   - first:
       43: 4300000
     second: SceneTerrain-CaveTopB-BaseMesh
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SceneTerrain-CaveTopB-BaseMeshMat
+    second: {fileID: 2100000, guid: 901cee98ef18c254d8fb962f972d5df4, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
