@@ -3,30 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : EnemyBase
 {
     public Transform model;
-    public CharacterDataScriptableObject EnemyData;
-    enum enemyStates {idle, attacking, retreating };
-    enemyStates enemyState = enemyStates.idle;
     private float jumpTicker = 1.0f;
     private float sinceLastJump = 0f;
     bool jumping = false;
-    private NavMeshAgent navmeshAgent;
 
     public GameObject groundParticles;
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-        navmeshAgent = GetComponent<NavMeshAgent>();
-        
+    public override void Awake(){
+        base.Awake();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(enemyState == enemyStates.idle)
+        if(enemyState == EnemyStates.idle)
         {
             IdleBehaviour();
         }
@@ -48,29 +40,24 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Jump()
-    {
+    void Jump(){
         jumping = true;
         sinceLastJump = 0;
         model.GetComponent<Rigidbody>().AddForce(transform.up * Random.Range(50, 130));
 
     }
 
-    public void SetJumping(bool b)
-    {
+    public void SetJumping(bool b){
         jumping = b;
     }
 
-    public void CreateGroundParticles(Vector3 pos)
-    {
+    public void CreateGroundParticles(Vector3 pos){
         GameObject gp = GameObject.Instantiate(groundParticles, pos, Quaternion.identity) as GameObject;
         Destroy(gp, .6f);
     }
 
     NavMeshHit hit;
-    public void GetHit(float damage, Vector3 knockback){
-        EnemyData.Health -= damage;
-        // navmeshAgent.speed *= 10;
+    public override void GetHit(float damage, Vector3 knockback){
         var tentativeKnockbackDestination = transform.position + knockback;
         NavMesh.Raycast(transform.position, tentativeKnockbackDestination, out hit, NavMesh.AllAreas);
         if (hit.hit){
@@ -78,6 +65,8 @@ public class Enemy : MonoBehaviour
             tentativeKnockbackDestination = hit.position;
         }
         navmeshAgent.SetDestination(tentativeKnockbackDestination);
+
+        base.GetHit(damage,knockback); //this takes care of dying
     }
 
 }
