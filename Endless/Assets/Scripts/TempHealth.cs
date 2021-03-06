@@ -44,7 +44,5 @@ public class TempHealth : MonoBehaviour
             ModifyHealth(-30);
             timer = 1f;
         }
-
-     
     }
 }

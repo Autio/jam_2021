@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class Healthbar : MonoBehaviour
 {
-
     [SerializeField]
     private Image foregroundImage;
     [SerializeField] 
@@ -25,15 +24,26 @@ public class Healthbar : MonoBehaviour
 
     private IEnumerator ChangeToPct(float pct){
         float preChangePct = foregroundImage.fillAmount;
+        // Make the health bar visible if it was previously full 
+        if(preChangePct == 1f)
+        {
+            ToggleHealthbarCanvas();
+        }
         float elapsed = 0f;
 
         while (elapsed < updateSpeedSeconds)
         {
             elapsed += Time.deltaTime;
             foregroundImage.fillAmount = Mathf.Lerp(preChangePct, pct, elapsed / updateSpeedSeconds);
+
             yield return null;
         }
 
+        // If the health goes back to 1, then hide it
+        if(elapsed > updateSpeedSeconds && pct >= 1)
+        {
+            ToggleHealthbarCanvas();
+        }
         foregroundImage.fillAmount = pct;
     }
 
