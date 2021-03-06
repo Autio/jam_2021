@@ -43,12 +43,10 @@ public class Enemy : MonoBehaviour
 
     }
 
-    // void OnCollisionEnter(Collision collision)
-    // {
-    //     if(collision.collider.gameobject.layer == 8)
-    //     {
-    //         jumping = false;
-    //     }
-    // }
+    public void SetJumping(bool b)
+    {
+        jumping = b;
+    }
+
 
 }
