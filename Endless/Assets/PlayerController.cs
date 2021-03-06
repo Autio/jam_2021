@@ -21,6 +21,6 @@ public class PlayerController : MonoBehaviour
     {
         var moveVec = inputActions.Player.Move.ReadValue<Vector2>();
         Debug.Log(moveVec);
-        GetComponent<NavMeshAgent>().Move(new Vector3(moveVec.x,0,moveVec.y) * Time.deltaTime);
+        GetComponent<NavMeshAgent>().Move(new Vector3(moveVec.x,0,moveVec.y) * Time.deltaTime * 10);
     }
 }
