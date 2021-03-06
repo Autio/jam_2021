@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Healthbar : MonoBehaviour
 {
@@ -8,11 +9,12 @@ public class Healthbar : MonoBehaviour
     [SerializeField]
     private Image foregroundImage;
     [SerializeField] 
-    private float updateSpeedSecongs = 0.5f;
+    private float updateSpeedSeconds = 0.5f;
 
-    private void Awake()
+    private void Start()
     {
-        GetComponentInParent<EnemyBase>().OnHealthPctChanged += HandleHealthChanged;
+        // Add delegate - but this needs to be defined in whatever contains the enemy health
+        GetComponentInParent<TempHealth>().OnHealthPctChanged += HandleHealthChanged;
     }
 
     private void HandleHealthChanged(float pct)
@@ -20,44 +22,30 @@ public class Healthbar : MonoBehaviour
         StartCoroutine(ChangeToPct(pct));
     }
 
-    private IEnumerator  ChangeToPct(float pct){
+    private IEnumerator ChangeToPct(float pct){
         float preChangePct = foregroundImage.fillAmount;
         float elapsed = 0f;
 
-        while (elapsed <updateSpeedSeconds)
+        while (elapsed < updateSpeedSeconds)
         {
-            elapsed += Time.deltaDime;
+            elapsed += Time.deltaTime;
+            foregroundImage.fillAmount = Mathf.Lerp(preChangePct, pct, elapsed / updateSpeedSeconds);
+            yield return null;
         }
+
+        foregroundImage.fillAmount = pct;
     }
 
-
-    // [SerializeField]
-    // private int maxHealth = 100;
-    // private int currentHealth;
-
-    // public event Action<float> OnHealthPctChanged = delegate {};
-    // // Start is called before the first frame update
-    
-    // void OnEnable()
-    // {
-    //     currentHealth = maxHealth;
-    // }
-
-    // public void ModifyHealth(int amount)
-    // {
-    //     currentHealth += amount;
-    //     float currentHealthPct = (float)currentHealth / (float)maxHealth; 
-    //     OnHealthPctChanged(currentHealthPct);
-    // }
-
-    void Start()
+    // Toggle the canvas
+    // Don't show full health bars
+    void ToggleHealthbarCanvas()
     {
-
+        GetComponent<Canvas>().enabled = !GetComponent<Canvas>().enabled;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
