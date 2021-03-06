@@ -437,6 +437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerModel: {fileID: 4665362997124806721}
+  playerCamera: {fileID: 660762258}
 --- !u!195 &1072092212
 NavMeshAgent:
   m_ObjectHideFlags: 0
