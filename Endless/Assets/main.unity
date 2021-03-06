@@ -3309,7 +3309,7 @@ PrefabInstance:
     - target: {fileID: 4795422738242632415, guid: adbee6203dd53784098820a991387168,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.574
+      value: -2.548
       objectReference: {fileID: 0}
     - target: {fileID: 4795422738242632415, guid: adbee6203dd53784098820a991387168,
         type: 3}
@@ -3682,6 +3682,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SmallBuilding
+      objectReference: {fileID: 0}
+    - target: {fileID: 4875867480428798050, guid: 897b8c728d1fd0240a07e1e12b52f088,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5313564675908372463, guid: 897b8c728d1fd0240a07e1e12b52f088,
         type: 3}
