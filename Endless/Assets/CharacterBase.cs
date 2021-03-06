@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.AI;
 public enum EnemyStates {idle, attacking, retreating };
 
-public class EnemyBase : MonoBehaviour
+public class CharacterBase : MonoBehaviour
 {
-    public CharacterDataScriptableObject EnemyData;
+    public CharacterDataScriptableObject CharacterData;
 
     protected NavMeshAgent navmeshAgent;
 
@@ -14,7 +14,7 @@ public class EnemyBase : MonoBehaviour
     protected EnemyStates enemyState = EnemyStates.idle;
 
     public virtual void Awake(){
-        currentHealth = EnemyData.Health;
+        currentHealth = CharacterData.Health;
         navmeshAgent = GetComponent<NavMeshAgent>();
     }
 
