@@ -72,7 +72,7 @@ public class Enemy : MonoBehaviour
         EnemyData.Health -= damage;
         // navmeshAgent.speed *= 10;
         var tentativeKnockbackDestination = transform.position + knockback;
-        NavMesh.Raycast(transform.position, tentativeKnockbackDestination, out hit, NavMesh.GetAreaFromName("Walkable"));
+        NavMesh.Raycast(transform.position, tentativeKnockbackDestination, out hit, NavMesh.AllAreas);
         if (hit.hit){
             Debug.Log($"Logging: WE HIT THE THING");
             tentativeKnockbackDestination = hit.position;
