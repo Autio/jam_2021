@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
         {
             Jump(); // Go ahead and jump
             jumpTicker = Random.Range(0.4f,0.7f);
-        } else if (sinceLastJump > 5.0f) {
+        } else if (sinceLastJump > 2.5f) {
             jumping = false;
             Jump();
             jumpTicker = Random.Range(0.4f,0.7f);

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36993b1dacf2fe94f88c7cc875ee2eda, type: 3}
   m_Name: SpearManCharacterData
   m_EditorClassIdentifier: 
-  MovementSpeed: 2
+  MovementSpeed: 12
   Health: 10
   HitDamage: 5
   KnockBack: 5
