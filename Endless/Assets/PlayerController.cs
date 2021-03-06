@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : CharacterBase
 {
+    enum PlayerStates {idle, attacking};
+    PlayerStates playerState = PlayerStates.idle;
      public WeaponBase Weapon;
     // public InputAction stikazzi;
     public GameObject playerModel;
@@ -17,7 +19,11 @@ public class PlayerController : CharacterBase
         inputActions = new EndlessInputActions();
         inputActions.Player.Enable();
         base.Awake();
+
     }
+
+    // Tick for player refresh
+    float staminaTick = 0.6f;
 
     void Update()
     {
@@ -35,7 +41,31 @@ public class PlayerController : CharacterBase
             playerModel.transform.rotation = Quaternion.LookRotation(new Vector3(moveVec.x, 0, moveVec.y),transform.up);
         }
         if (inputActions.Player.Fire.triggered){
-            Weapon.TrySwing();
+            if(currentStamina > 4)
+            {
+                // Swing if not already swinging
+                if(playerState != PlayerStates.attacking)
+                    {
+                        Weapon.TrySwing();
+                        // Deplete stamina
+                        ModifyStamina(-4); // Temp fixed arbitrary value
+                        staminaTick = 0.6f;
+                    }
+                playerState = PlayerStates.attacking;
+            }
+            
+        }
+
+        // Periodically recharge stamina
+        staminaTick -= Time.deltaTime;
+        if(staminaTick < 0)
+        {
+            staminaTick = 0.6f;
+            playerState = PlayerStates.idle;
+            if(currentStamina < maxStamina)
+            {
+                ModifyStamina((int)staminaRechargeRate);
+            }
         }
     }
 

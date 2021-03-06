@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementSpeed: 4
   Health: 10
+  Stamina: 10
+  StaminaRechargeRate: 2
   HitDamage: 5
   KnockBack: 1

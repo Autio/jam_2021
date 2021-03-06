@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Healthbar : MonoBehaviour
+public class Staminabar : MonoBehaviour
 {
     [SerializeField]
     private Image foregroundImage;
@@ -14,11 +14,12 @@ public class Healthbar : MonoBehaviour
     private void Start()
     {
         // Add delegate - but this needs to be defined in whatever contains the enemy health
-        GetComponentInParent<CharacterBase>().OnHealthPctChanged += HandleHealthChanged;
+        GetComponentInParent<CharacterBase>().OnStaminaPctChanged += HandleStaminaChanged;
     }
 
-    private void HandleHealthChanged(float pct)
+    private void HandleStaminaChanged(float pct)
     {
+        Debug.Log("Stamina: " + pct);
         StartCoroutine(ChangeToPct(pct));
     }
 
@@ -27,7 +28,7 @@ public class Healthbar : MonoBehaviour
         // Make the health bar visible if it was previously full 
         if(preChangePct == 1f)
         {
-            ToggleHealthbarCanvas();
+            ToggleStaminabarCanvas();
         }
 
         float elapsed = 0f;
@@ -43,14 +44,14 @@ public class Healthbar : MonoBehaviour
         // If the health goes back to 1, then hide it
         if(elapsed > updateSpeedSeconds && pct >= 1)
         {
-            ToggleHealthbarCanvas();
+            ToggleStaminabarCanvas();
         }
         foregroundImage.fillAmount = pct;
     }
 
     // Toggle the canvas
     // Don't show full health bars
-    void ToggleHealthbarCanvas()
+    void ToggleStaminabarCanvas()
     {
         GetComponent<Canvas>().enabled = !GetComponent<Canvas>().enabled;
     }
