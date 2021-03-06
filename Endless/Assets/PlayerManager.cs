@@ -31,4 +31,17 @@ public class PlayerManager : Singleton<PlayerManager>
             currentlySelectedPlayer.SetSelectedState(true);
         }
     }
+
+    public void PlayerDied(PlayerController deadPlayer){
+        players.Remove(deadPlayer);
+        if (players.Count > 0){
+            currentlySelectedPlayer = players[0];
+            currentlySelectedPlayer.SetSelectedState(true);
+        }
+        else{
+            Debug.LogError("ALL PLAYERS DEAD YOU LOSE AND WE DON'T HAVE AN END SCREEN");
+        }
+
+    }
+
 }
