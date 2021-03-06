@@ -15,4 +15,4 @@ MonoBehaviour:
   MovementSpeed: 4
   Health: 10
   HitDamage: 5
-  KnockBack: 5
+  KnockBack: 1
