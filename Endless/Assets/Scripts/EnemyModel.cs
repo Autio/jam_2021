@@ -18,11 +18,11 @@ public class EnemyModel : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.layer);
+//        Debug.Log(collision.gameObject.layer);
         if(collision.gameObject.layer == 8)
         {
             transform.parent.GetComponent<Enemy>().SetJumping(false);
-
+            transform.parent.GetComponent<Enemy>().CreateGroundParticles(this.transform.position);
         }
     }
 

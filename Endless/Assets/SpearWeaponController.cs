@@ -39,11 +39,21 @@ public class SpearWeaponController : WeaponBase,IWeaponController
     }
 
 
-    void OnCollisionEnter(Collision other) {
-        Debug.Log($"Logging: AMCOLLIDE");
+//DEPRECATE
+    // void OnCollisionEnter(Collision other) {
+    //     Debug.Log($"Logging: AMCOLLIDE");
+    //     if (!isSwinging) return;
+    //     if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")) { 
+    //         Debug.Log($"We hit monster");
+    //     }
+    // }
+    void OnTriggerEnter(Collider other) {
         if (!isSwinging) return;
-        if (other.gameObject.layer == LayerMask.NameToLayer("Monster")) { 
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")) { 
             Debug.Log($"We hit monster");
+            var enemy = other.GetComponentInParent<Enemy>();
+            Vector3 knockBackVector = (enemy.transform.position - SpearOwner.transform.position) * SpearOwner.CharacterData.KnockBack;
+            enemy.GetHit(SpearOwner.CharacterData.HitDamage, knockBackVector);
         }
     }
 }

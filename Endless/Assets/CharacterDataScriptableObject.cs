@@ -8,4 +8,6 @@ public class CharacterDataScriptableObject : ScriptableObject
     public float MovementSpeed;
     public float Health;
     public float HitDamage;
+    public float KnockBack;
+
 }

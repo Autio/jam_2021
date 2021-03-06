@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1124706463159373363}
+  - component: {fileID: 665642730}
+  - component: {fileID: 3959358025744068291}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -23,14 +25,51 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1124706463159373362}
-  m_LocalRotation: {x: -0, y: -0.99353665, z: -0, w: 0.11351181}
+  m_LocalRotation: {x: 0, y: -0.99353623, z: 0, w: 0.11351541}
   m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 3406218420796740815}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -166.964, z: 0}
+--- !u!195 &665642730
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124706463159373362}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &3959358025744068291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124706463159373362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 095fcb7084fbf124ca194cf580b651e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 3406218420796740815}
+  groundParticles: {fileID: 295324791256371965, guid: 3597c91853dd17b4284697ebc98b4d76,
+    type: 3}
 --- !u!1 &1124706463896150647
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,6 +160,7 @@ GameObject:
   - component: {fileID: 3406218420796740815}
   - component: {fileID: 3337242590016264342}
   - component: {fileID: 8345119374154987599}
+  - component: {fileID: 1064745848}
   m_Layer: 10
   m_Name: Model
   m_TagString: Untagged
@@ -178,7 +218,19 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
+--- !u!114 &1064745848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728080801516599389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb6ec25051e0873439f59f6f1240ff89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1852851446446176074
 GameObject:
   m_ObjectHideFlags: 0
