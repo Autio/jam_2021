@@ -4,21 +4,19 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : CharacterBase
 {
-    public CharacterDataScriptableObject CharacterData;
      public WeaponBase Weapon;
     // public InputAction stikazzi;
     public GameObject playerModel;
     public Camera playerCamera;
     private EndlessInputActions inputActions;
-    private NavMeshAgent navmeshAgent;
     private bool isCurrentlySelected = true;
-    void Awake()
+    public override void Awake()
     {
         inputActions = new EndlessInputActions();
         inputActions.Player.Enable();
-        navmeshAgent = GetComponent<NavMeshAgent>();
+        base.Awake();
     }
 
     void Update()
@@ -26,7 +24,6 @@ public class PlayerController : MonoBehaviour
         if (!isCurrentlySelected){
             return;
         }
-
 
         var moveVec = inputActions.Player.Move.ReadValue<Vector2>();
         var lookVec = inputActions.Player.Look.ReadValue<Vector2>();
@@ -40,6 +37,12 @@ public class PlayerController : MonoBehaviour
         if (inputActions.Player.Fire.triggered){
             Weapon.TrySwing();
         }
+    }
+
+    public override void GetHit(float damage, Vector3 knockback)
+    {
+        base.GetHit(damage, knockback);
+        
     }
 
     public void SetSelectedState(bool isSelected){

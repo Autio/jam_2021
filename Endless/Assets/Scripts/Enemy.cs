@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : EnemyBase
+public class Enemy : CharacterBase
 {
     public Transform model;
     private float jumpTicker = 1.0f;
