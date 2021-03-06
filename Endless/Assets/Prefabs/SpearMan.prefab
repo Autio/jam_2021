@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660762256}
-  m_LocalRotation: {x: -0.25957724, y: -0.6651526, z: 0.26665452, w: -0.6473693}
-  m_LocalPosition: {x: -4.57, y: 4.3740206, z: 0}
+  m_LocalRotation: {x: 0.3970518, y: 0, z: 0, w: 0.9177962}
+  m_LocalPosition: {x: 0, y: 5.8516917, z: -4.5057945}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6542326757959930651}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 46.788002, y: 0, z: 0}
 --- !u!20 &660762258
 Camera:
   m_ObjectHideFlags: 0
@@ -436,6 +436,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12c6177c9fb2f1940be578c97a20c71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stikazzi:
+    m_Name: Stikazzi
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 3f92260f-196c-455b-a56b-fea7c25cbd5a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
   playerModel: {fileID: 4665362997124806721}
   playerCamera: {fileID: 660762258}
 --- !u!195 &1072092212
