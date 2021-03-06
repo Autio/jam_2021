@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1124706463159373363}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 1124706463896150644}
   - component: {fileID: 1124706463896150635}
   - component: {fileID: 1124706463896150634}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy
   m_TagString: FrontWall
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 3406218420796740815}
   - component: {fileID: 3337242590016264342}
   - component: {fileID: 8345119374154987599}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 2506016872963359528}
   - component: {fileID: 2752656836654547236}
   - component: {fileID: 1318550561660664669}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy (6)
   m_TagString: FrontWall
   m_Icon: {fileID: 0}
@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 3791874826069776635}
   - component: {fileID: 2583999410696682814}
   - component: {fileID: 3577018158923201695}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy (2)
   m_TagString: FrontWall
   m_Icon: {fileID: 0}
@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 4190024153342635019}
   - component: {fileID: 9135200550184608027}
   - component: {fileID: 1450922406362131334}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy (1)
   m_TagString: FrontWall
   m_Icon: {fileID: 0}
@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 7585517908986956646}
   - component: {fileID: 2868919380457465375}
   - component: {fileID: 3531239435932829171}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy (5)
   m_TagString: FrontWall
   m_Icon: {fileID: 0}
@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 456565091476586555}
   - component: {fileID: 8768216718818824611}
   - component: {fileID: 6947394763692298516}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy (3)
   m_TagString: FrontWall
   m_Icon: {fileID: 0}
@@ -585,7 +585,7 @@ GameObject:
   - component: {fileID: 8520398027940782265}
   - component: {fileID: 4411096223097834182}
   - component: {fileID: 6136797163662194229}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy (4)
   m_TagString: FrontWall
   m_Icon: {fileID: 0}
@@ -664,7 +664,7 @@ GameObject:
   - component: {fileID: 876899882146225159}
   - component: {fileID: 4084359985465275234}
   - component: {fileID: 214460987368638237}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy (7)
   m_TagString: FrontWall
   m_Icon: {fileID: 0}
