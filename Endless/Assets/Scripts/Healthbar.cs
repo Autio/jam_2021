@@ -14,7 +14,7 @@ public class Healthbar : MonoBehaviour
     private void Start()
     {
         // Add delegate - but this needs to be defined in whatever contains the enemy health
-        GetComponentInParent<TempHealth>().OnHealthPctChanged += HandleHealthChanged;
+        GetComponentInParent<CharacterBase>().OnHealthPctChanged += HandleHealthChanged;
     }
 
     private void HandleHealthChanged(float pct)
@@ -29,6 +29,7 @@ public class Healthbar : MonoBehaviour
         {
             ToggleHealthbarCanvas();
         }
+
         float elapsed = 0f;
 
         while (elapsed < updateSpeedSeconds)
@@ -57,6 +58,9 @@ public class Healthbar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Look at the camera
+        transform.LookAt(transform.position - Camera.main.transform.position);
+
 
     }
 }
