@@ -2603,12 +2603,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1064745844 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1728080801516599389, guid: 003614ce35d5f584a91117fae2f03929,
+    type: 3}
+  m_PrefabInstance: {fileID: 1124706462579271898}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1064745845 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3406218420796740815, guid: 003614ce35d5f584a91117fae2f03929,
     type: 3}
   m_PrefabInstance: {fileID: 1124706462579271898}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1064745848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064745844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb6ec25051e0873439f59f6f1240ff89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1076568158
 GameObject:
   m_ObjectHideFlags: 0
@@ -3458,6 +3476,14 @@ PrefabInstance:
     - target: {fileID: 660762259, guid: bc752af94e83c2c4e9776ce9d75f6136, type: 3}
       propertyPath: m_LocalPosition.y
       value: 10.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072092210, guid: bc752af94e83c2c4e9776ce9d75f6136, type: 3}
+      propertyPath: stikazzi.m_Id
+      value: 12c94ffb-a195-4bd2-9dd8-d2b2d50d3782
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072092210, guid: bc752af94e83c2c4e9776ce9d75f6136, type: 3}
+      propertyPath: stikazzi.m_Name
+      value: Stikazzi
       objectReference: {fileID: 0}
     - target: {fileID: 1072092212, guid: bc752af94e83c2c4e9776ce9d75f6136, type: 3}
       propertyPath: m_Speed
