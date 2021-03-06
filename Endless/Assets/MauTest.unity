@@ -389,6 +389,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1072092210, guid: bc752af94e83c2c4e9776ce9d75f6136, type: 3}
+      propertyPath: stikazzi.m_Id
+      value: 6c093ad9-e806-4168-93b5-9088415aa822
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072092210, guid: bc752af94e83c2c4e9776ce9d75f6136, type: 3}
+      propertyPath: stikazzi.m_Name
+      value: Stikazzi
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072092210, guid: bc752af94e83c2c4e9776ce9d75f6136, type: 3}
+      propertyPath: stikazzi.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072092210, guid: bc752af94e83c2c4e9776ce9d75f6136, type: 3}
+      propertyPath: stikazzi.m_SingletonActionBindings.Array.data[0].m_Id
+      value: c2f9e2b8-3029-4147-822e-9e543b460550
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072092210, guid: bc752af94e83c2c4e9776ce9d75f6136, type: 3}
+      propertyPath: stikazzi.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Gamepad>/rightShoulder
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072092210, guid: bc752af94e83c2c4e9776ce9d75f6136, type: 3}
+      propertyPath: stikazzi.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Stikazzi
+      objectReference: {fileID: 0}
     - target: {fileID: 6542326757959930650, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
       propertyPath: m_Name
