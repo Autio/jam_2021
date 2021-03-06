@@ -7,8 +7,11 @@ public class Enemy : MonoBehaviour
     public Transform model;
     enum enemyStates {idle, attacking, retreating };
     enemyStates enemyState = enemyStates.idle;
-    private float jumpTicker = 1.0f; 
+    private float jumpTicker = 1.0f;
+    private float sinceLastJump = 0f;
     bool jumping = false;
+
+    public GameObject groundParticles;
 
     // Start is called before the first frame update
     void Start()
@@ -28,18 +31,24 @@ public class Enemy : MonoBehaviour
     // Get the enemy to jump in an agitated state
     void IdleBehaviour()
     {
+        sinceLastJump += Time.deltaTime;
         jumpTicker -= Time.deltaTime;
         if(jumpTicker < 0 && !jumping)
         {
             Jump(); // Go ahead and jump
-            jumpTicker = Random.Range(0.2f,0.6f);
+            jumpTicker = Random.Range(0.4f,0.7f);
+        } else if (sinceLastJump > 5.0f) {
+            jumping = false;
+            Jump();
+            jumpTicker = Random.Range(0.4f,0.7f);
         }
     }
 
     void Jump()
     {
         jumping = true;
-        model.GetComponent<Rigidbody>().AddForce(transform.up * Random.Range(60, 120));
+        sinceLastJump = 0;
+        model.GetComponent<Rigidbody>().AddForce(transform.up * Random.Range(50, 130));
 
     }
 
@@ -48,5 +57,10 @@ public class Enemy : MonoBehaviour
         jumping = b;
     }
 
+    public void CreateGroundParticles(Vector3 pos)
+    {
+        GameObject gp = GameObject.Instantiate(groundParticles, pos, Quaternion.identity) as GameObject;
+        Destroy(gp, .6f);
+    }
 
 }
