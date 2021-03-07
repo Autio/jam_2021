@@ -5703,6 +5703,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 914499332}
+  - component: {fileID: 914499333}
   m_Layer: 0
   m_Name: Objects
   m_TagString: Untagged
@@ -5758,6 +5759,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &914499333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914499331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa8c8c480f478240932219352c9a286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects:
+  - {fileID: 1124706463159373362, guid: 003614ce35d5f584a91117fae2f03929, type: 3}
+  itemsToPool:
+  - amountToPool: 50
+    objectToPool: {fileID: 1124706463159373362, guid: 003614ce35d5f584a91117fae2f03929,
+      type: 3}
+    shouldExpand: 1
 --- !u!1 &915818041 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4795422738242632414, guid: adbee6203dd53784098820a991387168,

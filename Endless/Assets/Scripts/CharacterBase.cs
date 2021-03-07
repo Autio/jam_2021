@@ -73,7 +73,9 @@ public class CharacterBase : MonoBehaviour
 
     public virtual void Die(){
         
-        GameObject.Destroy(gameObject);
+        // Go back to pool instead
+        gameObject.SetActive(false);
+//        GameObject.Destroy(gameObject);
     }
 
 }

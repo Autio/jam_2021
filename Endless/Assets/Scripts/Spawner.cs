@@ -16,7 +16,7 @@ public class Spawner : MonoBehaviour{
     void Update(){
         if (Time.time >= nextSpawnTime){
             Spawn();
-            nextSpawnTime = GetNextSpawnTime();
+        nextSpawnTime = GetNextSpawnTime();
         }
     }
 
@@ -27,11 +27,16 @@ public class Spawner : MonoBehaviour{
     private void Spawn()
     {
         for (int i = 0; i < SpawnerData.UnitsSpawnedPerTick; i++)
-        {
-            var unitToSpawn = SpawnerData.CharacterTypesToSpawn[Random.Range(0, SpawnerData.CharacterTypesToSpawn.Length)];
+        {   
+
+            var unitToSpawn = ObjectPooler.SharedInstance.GetPooledObject(SpawnerData.CharacterTypesToSpawn[Random.Range(0, SpawnerData.CharacterTypesToSpawn.Length)]);
+            // var unitToSpawn = SpawnerData.CharacterTypesToSpawn[Random.Range(0, SpawnerData.CharacterTypesToSpawn.Length)];
+
             Vector2 randomPositionInCircle = Random.insideUnitCircle * SpawnerData.SpawnRadius;
             var spawnPos = transform.position + new Vector3(randomPositionInCircle.x,0,randomPositionInCircle.y);
-            GameObject.Instantiate(unitToSpawn, spawnPos, Quaternion.identity);
+            // Move the object from the pool to the right spot and activate
+            unitToSpawn.transform.position = spawnPos;
+            unitToSpawn.SetActive(true);
         }
     }
 }
