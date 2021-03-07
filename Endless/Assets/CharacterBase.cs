@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-public enum EnemyStates {idle, attacking, retreating };
+public enum EnemyStates {idle, attacking, retreating, stunned };
 
 public class CharacterBase : MonoBehaviour
 {
@@ -17,6 +17,8 @@ public class CharacterBase : MonoBehaviour
 
     protected float currentHealth, maxHealth, currentStamina, maxStamina, staminaRechargeRate;
     protected EnemyStates enemyState = EnemyStates.idle;
+
+    protected float stunStartTime;
 
     public virtual void Awake(){
         currentHealth = CharacterData.Health;
@@ -32,7 +34,13 @@ public class CharacterBase : MonoBehaviour
         ModifyHealth(-(int)damage); // Healthbar tracks as int
         if (currentHealth <= 0){
             Die();
+            return;
         }
+        if (CharacterData.StunTimeAfterBeingHit >0){
+            stunStartTime = Time.time;
+            enemyState = EnemyStates.stunned;
+        }
+        
     }
 
     public void ModifyHealth(int amount) {
