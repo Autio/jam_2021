@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7713126448920948795}
   - component: {fileID: 4890250587670071665}
   - component: {fileID: 8284392263033515493}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 7273325407236363189}
   - component: {fileID: 7273325407236363188}
   - component: {fileID: 7273325407236363191}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Base (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 7273325407955401070}
   - component: {fileID: 7273325407955401073}
   - component: {fileID: 7273325407955401072}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Base (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 7273325408391831904}
   - component: {fileID: 7273325408391831907}
   - component: {fileID: 7273325408391831906}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Base (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,7 +367,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7168239192686149987}
-  m_Layer: 0
+  - component: {fileID: 4103240738442966722}
+  m_Layer: 12
   m_Name: LargeBuilding01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,3 +393,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &4103240738442966722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7507891169656249305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 201ab24d97799904cb82c959946bc940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StructureData: {fileID: 11400000, guid: 06ef961df0a27fd4fb370df2f9c0a3da, type: 2}

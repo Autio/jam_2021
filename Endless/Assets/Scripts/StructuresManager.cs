@@ -29,4 +29,8 @@ public class StructuresManager : Singleton<StructuresManager>
         }
     }
 
+    public void RemoveDeadStructure(Structure deadStructure){
+        Structures.Remove(deadStructure);
+    }
+
 }

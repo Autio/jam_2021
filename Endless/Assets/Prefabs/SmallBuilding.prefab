@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8488653156029938632}
   - component: {fileID: 4492346047859819610}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SmallBuilding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 201ab24d97799904cb82c959946bc940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StructureData: {fileID: 11400000, guid: 06ef961df0a27fd4fb370df2f9c0a3da, type: 2}
 --- !u!1 &7856434203064470772
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,7 +58,7 @@ GameObject:
   - component: {fileID: 5082507465414050069}
   - component: {fileID: 2975032984158973957}
   - component: {fileID: 1466756429974901380}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,6 +208,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6f67afaa85a98dd49ada917590b82d01,
         type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6f67afaa85a98dd49ada917590b82d01,
+        type: 3}
       propertyPath: m_NavMeshLayer
       value: 1
       objectReference: {fileID: 0}
@@ -214,6 +220,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 6f67afaa85a98dd49ada917590b82d01,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: 6f67afaa85a98dd49ada917590b82d01,
         type: 3}

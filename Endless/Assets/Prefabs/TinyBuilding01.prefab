@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1683201548}
   - component: {fileID: 1683201547}
   - component: {fileID: 1683201546}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Base (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 7614153869053770669}
   - component: {fileID: 4719147639604478695}
   - component: {fileID: 8095358763363247731}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7051190782871505653}
   - component: {fileID: 7237743838373005338}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TinyBuilding01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,3 +217,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 201ab24d97799904cb82c959946bc940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StructureData: {fileID: 11400000, guid: 06ef961df0a27fd4fb370df2f9c0a3da, type: 2}
