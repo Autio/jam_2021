@@ -15,9 +15,11 @@ MonoBehaviour:
   MovementSpeed: 2
   Health: 15
   Stamina: 0
+  AttackStaminaCost: 0
   StaminaRechargeRate: 0
   HitDamage: 5
   StunTimeAfterBeingHit: 1
   KnockBack: 0
+  KnockBackSpeed: 10
   MaxDistanceToChasePlayer: 5
   MaxDistanceToChaseStructures: 20
