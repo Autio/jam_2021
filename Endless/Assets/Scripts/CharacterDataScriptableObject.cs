@@ -14,6 +14,7 @@ public class CharacterDataScriptableObject : ScriptableObject
     public float HitDamage;
     public float StunTimeAfterBeingHit;
     public float KnockBack;
+    public float KnockBackSpeed = 1f;
     public float MaxDistanceToChasePlayer;
     public float MaxDistanceToChaseStructures;
 

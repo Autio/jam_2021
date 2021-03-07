@@ -23,6 +23,7 @@ public class Blob : CharacterBase
                 enemyState = EnemyStates.idle;
             }
             else{
+                ExecuteKnockBack();
                 return;
             }
         }
@@ -85,15 +86,8 @@ public class Blob : CharacterBase
         Destroy(gp, .6f);
     }
 
-    NavMeshHit hit;
     public override void GetHit(float damage, Vector3 knockback){
-        var tentativeKnockbackDestination = transform.position + knockback;
-        NavMesh.Raycast(transform.position, tentativeKnockbackDestination, out hit, NavMesh.AllAreas);
-        if (hit.hit){
-            Debug.Log($"Logging: WE HIT THE THING");
-            tentativeKnockbackDestination = hit.position;
-        }
-        navmeshAgent.SetDestination(tentativeKnockbackDestination);
+        
         
         base.GetHit(damage,knockback); //this takes care of dying
     }
