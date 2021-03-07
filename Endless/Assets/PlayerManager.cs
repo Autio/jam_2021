@@ -44,4 +44,18 @@ public class PlayerManager : Singleton<PlayerManager>
 
     }
 
+    public PlayerController GetClosestPlayerCharacter(Vector3 fromPosition){
+        float closest = float.PositiveInfinity;
+        PlayerController closestPlayer = null;
+        foreach (var player in players)
+        {
+            float currentDistance = Vector3.Distance(fromPosition, player.transform.position);
+            if ( currentDistance< closest){
+                closest = currentDistance;
+                closestPlayer = player;
+            }
+        }
+        return closestPlayer;
+    }
+
 }

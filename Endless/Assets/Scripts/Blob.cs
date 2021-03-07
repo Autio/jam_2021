@@ -1,9 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : CharacterBase
+public class Blob : CharacterBase
 {
     public Transform model;
     private float jumpTicker = 1.0f;
@@ -18,6 +18,35 @@ public class Enemy : CharacterBase
 
     void Update()
     {
+        if (enemyState == EnemyStates.stunned){
+            if ( (Time.time - stunStartTime ) >= CharacterData.StunTimeAfterBeingHit){
+                enemyState = EnemyStates.idle;
+            }
+            else{
+                return;
+            }
+        }
+
+        var closestPlayerCharacter = PlayerManager.Instance.GetClosestPlayerCharacter(transform.position);
+        var distanceToPlayerChar = Vector3.Distance(transform.position,closestPlayerCharacter.transform.position);
+        if (distanceToPlayerChar <= CharacterData.MaxDistanceToChasePlayer){
+            enemyState = EnemyStates.attacking;
+            navmeshAgent.SetDestination(closestPlayerCharacter.transform.position);
+        }
+        else{
+            var closestStructure = StructuresManager.Instance.GetClosestStructure(transform.position);
+            var distanceToStructure = Vector3.Distance(transform.position,closestPlayerCharacter.transform.position);
+            if (distanceToStructure <= CharacterData.MaxDistanceToChaseStructures){
+                enemyState = EnemyStates.attacking;
+                navmeshAgent.SetDestination(closestStructure.transform.position);
+            }
+            else{
+                enemyState = EnemyStates.idle;
+            }
+        }
+
+
+
         if(enemyState == EnemyStates.idle)
         {
             IdleBehaviour();
@@ -65,7 +94,7 @@ public class Enemy : CharacterBase
             tentativeKnockbackDestination = hit.position;
         }
         navmeshAgent.SetDestination(tentativeKnockbackDestination);
-
+        
         base.GetHit(damage,knockback); //this takes care of dying
     }
 

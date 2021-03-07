@@ -22,8 +22,8 @@ public class EnemyModel : MonoBehaviour
 
         if(collision.gameObject.layer == 8)
         {
-            transform.parent.GetComponent<Enemy>().SetJumping(false);
-            transform.parent.GetComponent<Enemy>().CreateGroundParticles(this.transform.position);
+            transform.parent.GetComponent<Blob>().SetJumping(false);
+            transform.parent.GetComponent<Blob>().CreateGroundParticles(this.transform.position);
         }
     }
 }

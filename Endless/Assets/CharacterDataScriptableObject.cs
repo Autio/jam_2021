@@ -10,6 +10,9 @@ public class CharacterDataScriptableObject : ScriptableObject
     public float Stamina;
     public float StaminaRechargeRate;
     public float HitDamage;
+    public float StunTimeAfterBeingHit;
     public float KnockBack;
+    public float MaxDistanceToChasePlayer;
+    public float MaxDistanceToChaseStructures;
 
 }

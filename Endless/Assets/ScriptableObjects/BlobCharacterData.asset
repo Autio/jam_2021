@@ -14,5 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementSpeed: 2
   Health: 15
+  Stamina: 0
+  StaminaRechargeRate: 0
   HitDamage: 5
+  StunTimeAfterBeingHit: 1
   KnockBack: 0
+  MaxDistanceToChasePlayer: 5
+  MaxDistanceToChaseStructures: 20
