@@ -16,7 +16,7 @@ MonoBehaviour:
   Health: 10
   Stamina: 10
   StaminaRechargeRate: 2
-  HitDamage: 1
+  HitDamage: 5
   StunTimeAfterBeingHit: 0
   KnockBack: 0.5
   MaxDistanceToChasePlayer: 0
