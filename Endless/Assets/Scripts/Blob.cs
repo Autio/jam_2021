@@ -92,4 +92,14 @@ public class Blob : CharacterBase
         base.GetHit(damage,knockback); //this takes care of dying
     }
 
+    void OnTriggerEnter(Collider other) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player")) { 
+            Debug.Log($"Logging:  YO IMMA PLAYER II GOT IT  ");
+
+            var playerCharacter = other.GetComponentInParent<CharacterBase>();//We'll need some weird shit to know we're calling the right function here, the specific enemy's rather than the character base one. 
+            Vector3 knockBackVector = (playerCharacter.transform.position - transform.position) * CharacterData.KnockBack;
+            playerCharacter.GetHit(CharacterData.HitDamage, knockBackVector);
+        }
+    }
+
 }
