@@ -22,4 +22,11 @@ public class StructuresManager : Singleton<StructuresManager>
         }
         return closestStructure;
     }
+
+    public void AddNewStructure(Structure structure){
+        if (!Structures.Contains(structure)){
+            Structures.Add(structure);
+        }
+    }
+
 }

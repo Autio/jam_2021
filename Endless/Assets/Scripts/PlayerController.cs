@@ -27,6 +27,15 @@ public class PlayerController : CharacterBase
 
     void Update()
     {
+        if (enemyState == EnemyStates.stunned){ //awful awful workaround
+            if ( (Time.time - stunStartTime ) >= CharacterData.StunTimeAfterBeingHit){
+                enemyState = EnemyStates.idle;
+            }
+            else{
+                ExecuteKnockBack();
+                return;
+            }
+        }
         if (!isCurrentlySelected){
             return;
         }
@@ -71,6 +80,7 @@ public class PlayerController : CharacterBase
 
     public override void GetHit(float damage, Vector3 knockback)
     {
+        Debug.Log($"Logging: GOTHITIHTHIGN");
         base.GetHit(damage, knockback);
         
     }

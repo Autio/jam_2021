@@ -22,11 +22,11 @@ public class PlayerManager : Singleton<PlayerManager>
     // Update is called once per frame
     void Update()
     {
-        if (inputActions.Player.PrevCharacter.triggered){
+        if (inputActions.Player.ChangeCharacter.triggered){
             Debug.Log($"Logging: CHANGE CHAR");
             var currentPlayerIndex = players.IndexOf(currentlySelectedPlayer);
             currentlySelectedPlayer.SetSelectedState(false);
-            var newSelectedPlayerIndex = (currentPlayerIndex + (int) inputActions.Player.PrevCharacter.ReadValue<float>()) % players.Count;
+            var newSelectedPlayerIndex = (currentPlayerIndex + (int) inputActions.Player.ChangeCharacter.ReadValue<float>()) % players.Count;
             currentlySelectedPlayer = players[newSelectedPlayerIndex];
             currentlySelectedPlayer.SetSelectedState(true);
         }

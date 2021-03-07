@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 660762259}
   - component: {fileID: 660762258}
   - component: {fileID: 660762257}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -333,7 +333,6 @@ GameObject:
   - component: {fileID: 766165213}
   - component: {fileID: 4658470671035997136}
   - component: {fileID: 5741935949637489313}
-  - component: {fileID: 766165214}
   - component: {fileID: 766165217}
   m_Layer: 9
   m_Name: Spear
@@ -408,19 +407,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &766165214
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 766165211}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.014123436, y: 0.50915366, z: 0.016379783}
-  m_Center: {x: 0.051292162, y: 0.41422078, z: -0.019435398}
 --- !u!65 &766165217
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -432,8 +418,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.62642473, y: 0.2509802, z: 0.11135003}
-  m_Center: {x: 0.13957655, y: 0.53706497, z: -0.015514228}
+  m_Size: {x: 0.809739, y: 0.3675394, z: 0.11135003}
+  m_Center: {x: 0.23123945, y: 0.4787851, z: -0.015516808}
 --- !u!114 &813894619306167504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -831,7 +817,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4131199888455978472}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -871,7 +857,7 @@ GameObject:
   - component: {fileID: 6542326757925693528}
   - component: {fileID: 6542326757925693531}
   - component: {fileID: 6542326757925693530}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -964,7 +950,9 @@ GameObject:
   - component: {fileID: 1072092209}
   - component: {fileID: 1072092210}
   - component: {fileID: 1072092212}
-  m_Layer: 0
+  - component: {fileID: 1097663386082464998}
+  - component: {fileID: 2960514827597785407}
+  m_Layer: 11
   m_Name: SpearMan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1097,7 +1085,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6542326757959930650}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.11
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -1106,10 +1094,39 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 0.79
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &1097663386082464998
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6542326757959930650}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.23878384, y: 0.81148267, z: 0.24617434}
+  m_Center: {x: 0, y: 0.4047581, z: 0.00000023841858}
+--- !u!54 &2960514827597785407
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6542326757959930650}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6542326757977389470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1122,7 +1139,7 @@ GameObject:
   - component: {fileID: 6542326757977389458}
   - component: {fileID: 6542326757977389469}
   - component: {fileID: 6542326757977389468}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1215,7 +1232,7 @@ GameObject:
   - component: {fileID: 6542326758474733906}
   - component: {fileID: 6542326758474733917}
   - component: {fileID: 6542326758474733916}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1308,7 +1325,7 @@ GameObject:
   - component: {fileID: 6542326758791365732}
   - component: {fileID: 6542326758791365735}
   - component: {fileID: 6542326758791365734}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1401,7 +1418,7 @@ GameObject:
   - component: {fileID: 6542326759021912147}
   - component: {fileID: 6542326759021912146}
   - component: {fileID: 6542326759021912157}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1494,7 +1511,7 @@ GameObject:
   - component: {fileID: 6542326759255614391}
   - component: {fileID: 6542326759255614390}
   - component: {fileID: 6542326759255614385}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1705,6 +1722,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: StaminabarCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4841677570506950831, guid: cd46a2f4e80e27b468de759c892e681d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841677571510481606, guid: cd46a2f4e80e27b468de759c892e681d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841677571722271465, guid: cd46a2f4e80e27b468de759c892e681d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd46a2f4e80e27b468de759c892e681d, type: 3}
 --- !u!224 &4841677571739240782 stripped
@@ -1847,18 +1879,39 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthbarCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4841677570506950831, guid: cd46a2f4e80e27b468de759c892e681d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841677571510481606, guid: cd46a2f4e80e27b468de759c892e681d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4841677571722271463, guid: cd46a2f4e80e27b468de759c892e681d,
         type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 9ca07fbd0b464da43b7502f01b668726,
         type: 3}
+    - target: {fileID: 4841677571722271465, guid: cd46a2f4e80e27b468de759c892e681d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1420997181, guid: cd46a2f4e80e27b468de759c892e681d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cd46a2f4e80e27b468de759c892e681d, type: 3}
 --- !u!224 &1035963538 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4841677570506950828, guid: cd46a2f4e80e27b468de759c892e681d,
+    type: 3}
+  m_PrefabInstance: {fileID: 4841677570702607422}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1035963537 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4841677570506950831, guid: cd46a2f4e80e27b468de759c892e681d,
     type: 3}
   m_PrefabInstance: {fileID: 4841677570702607422}
   m_PrefabAsset: {fileID: 0}
@@ -1874,9 +1927,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1035963537 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4841677570506950831, guid: cd46a2f4e80e27b468de759c892e681d,
-    type: 3}
-  m_PrefabInstance: {fileID: 4841677570702607422}
-  m_PrefabAsset: {fileID: 0}

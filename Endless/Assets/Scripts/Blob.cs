@@ -23,6 +23,7 @@ public class Blob : CharacterBase
                 enemyState = EnemyStates.idle;
             }
             else{
+                ExecuteKnockBack();
                 return;
             }
         }
@@ -85,17 +86,20 @@ public class Blob : CharacterBase
         Destroy(gp, .6f);
     }
 
-    NavMeshHit hit;
     public override void GetHit(float damage, Vector3 knockback){
-        var tentativeKnockbackDestination = transform.position + knockback;
-        NavMesh.Raycast(transform.position, tentativeKnockbackDestination, out hit, NavMesh.AllAreas);
-        if (hit.hit){
-            Debug.Log($"Logging: WE HIT THE THING");
-            tentativeKnockbackDestination = hit.position;
-        }
-        navmeshAgent.SetDestination(tentativeKnockbackDestination);
+        
         
         base.GetHit(damage,knockback); //this takes care of dying
+    }
+
+    void OnTriggerEnter(Collider other) {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player")) { 
+            Debug.Log($"Logging:  YO IMMA PLAYER II GOT IT  ");
+
+            var playerCharacter = other.GetComponentInParent<CharacterBase>();//We'll need some weird shit to know we're calling the right function here, the specific enemy's rather than the character base one. 
+            Vector3 knockBackVector = (playerCharacter.transform.position - transform.position) * CharacterData.KnockBack;
+            playerCharacter.GetHit(CharacterData.HitDamage, knockBackVector);
+        }
     }
 
 }
