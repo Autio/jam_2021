@@ -19,7 +19,6 @@ public class Staminabar : MonoBehaviour
 
     private void HandleStaminaChanged(float pct)
     {
-        Debug.Log("Stamina: " + pct);
         StartCoroutine(ChangeToPct(pct));
     }
 
