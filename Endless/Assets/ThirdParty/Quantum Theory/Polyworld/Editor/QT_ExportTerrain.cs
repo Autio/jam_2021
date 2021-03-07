@@ -78,9 +78,9 @@ class QT_ExportTerrain : EditorWindow
 
 
     void OnEnable(){
-        GenerateIcon = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Quantum Theory/Polyworld/Editor/QT_Generate-icon.png", typeof(Texture));
+        GenerateIcon = (Texture)AssetDatabase.LoadAssetAtPath("Assets/ThirdParty/Quantum Theory/Polyworld/Editor/QT_Generate-icon.png", typeof(Texture));
         //Texture DivideIcon = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Editor/QT_Divide-icon.png", typeof(Texture));
-	    WorldIcon = (Texture)AssetDatabase.LoadAssetAtPath("Assets/Quantum Theory/Polyworld/Editor/QT_PolyWorld-icon.png", typeof(Texture));
+	    WorldIcon = (Texture)AssetDatabase.LoadAssetAtPath("Assets/ThirdParty/Quantum Theory/Polyworld/Editor/QT_PolyWorld-icon.png", typeof(Texture));
     }
 
 	void OnGUI()

@@ -43,7 +43,7 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""PrevCharacter"",
+                    ""name"": ""ChangeCharacter"",
                     ""type"": ""Button"",
                     ""id"": ""00441a8e-bd75-4edb-ba5b-32d5310d384c"",
                     ""expectedControlType"": ""Button"",
@@ -279,7 +279,7 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PrevCharacter"",
+                    ""action"": ""ChangeCharacter"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -290,7 +290,7 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""PrevCharacter"",
+                    ""action"": ""ChangeCharacter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -301,7 +301,7 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""PrevCharacter"",
+                    ""action"": ""ChangeCharacter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -312,7 +312,7 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PrevCharacter"",
+                    ""action"": ""ChangeCharacter"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -323,7 +323,7 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""PrevCharacter"",
+                    ""action"": ""ChangeCharacter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -334,7 +334,7 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""PrevCharacter"",
+                    ""action"": ""ChangeCharacter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -926,7 +926,7 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
-        m_Player_PrevCharacter = m_Player.FindAction("PrevCharacter", throwIfNotFound: true);
+        m_Player_ChangeCharacter = m_Player.FindAction("ChangeCharacter", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -991,7 +991,7 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
-    private readonly InputAction m_Player_PrevCharacter;
+    private readonly InputAction m_Player_ChangeCharacter;
     public struct PlayerActions
     {
         private @EndlessInputActions m_Wrapper;
@@ -999,7 +999,7 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
-        public InputAction @PrevCharacter => m_Wrapper.m_Player_PrevCharacter;
+        public InputAction @ChangeCharacter => m_Wrapper.m_Player_ChangeCharacter;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1018,9 +1018,9 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                 @Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
-                @PrevCharacter.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrevCharacter;
-                @PrevCharacter.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrevCharacter;
-                @PrevCharacter.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrevCharacter;
+                @ChangeCharacter.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeCharacter;
+                @ChangeCharacter.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeCharacter;
+                @ChangeCharacter.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeCharacter;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1034,9 +1034,9 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
-                @PrevCharacter.started += instance.OnPrevCharacter;
-                @PrevCharacter.performed += instance.OnPrevCharacter;
-                @PrevCharacter.canceled += instance.OnPrevCharacter;
+                @ChangeCharacter.started += instance.OnChangeCharacter;
+                @ChangeCharacter.performed += instance.OnChangeCharacter;
+                @ChangeCharacter.canceled += instance.OnChangeCharacter;
             }
         }
     }
@@ -1205,7 +1205,7 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
-        void OnPrevCharacter(InputAction.CallbackContext context);
+        void OnChangeCharacter(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

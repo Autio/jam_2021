@@ -30,7 +30,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "PrevCharacter",
+                    "name": "ChangeCharacter",
                     "type": "Button",
                     "id": "00441a8e-bd75-4edb-ba5b-32d5310d384c",
                     "expectedControlType": "Button",
@@ -266,7 +266,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PrevCharacter",
+                    "action": "ChangeCharacter",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -277,7 +277,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "PrevCharacter",
+                    "action": "ChangeCharacter",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -288,7 +288,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "PrevCharacter",
+                    "action": "ChangeCharacter",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -299,7 +299,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PrevCharacter",
+                    "action": "ChangeCharacter",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -310,7 +310,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "PrevCharacter",
+                    "action": "ChangeCharacter",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -321,7 +321,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "PrevCharacter",
+                    "action": "ChangeCharacter",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }
