@@ -74,7 +74,12 @@ public class PlayerController : CharacterBase
         base.GetHit(damage, knockback);
         
     }
+    public override void Die()
+    {
+        PlayerManager.Instance.PlayerDied(this);
+        base.Die();
 
+    }
     public void SetSelectedState(bool isSelected){
         playerCamera.gameObject.SetActive(isSelected);
         isCurrentlySelected = isSelected;
