@@ -13,8 +13,9 @@ public class Healthbar : MonoBehaviour
 
     private void Start()
     {
-        // Add delegate - but this needs to be defined in whatever contains the enemy health
-        GetComponentInParent<CharacterBase>().OnHealthPctChanged += HandleHealthChanged;
+        // Add delegate - but this needs to be defined in whatever contains health       
+        GetComponentInParent<Health>().OnHealthPctChanged += HandleHealthChanged;
+
     }
 
     private void HandleHealthChanged(float pct)

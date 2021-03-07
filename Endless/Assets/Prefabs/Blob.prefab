@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 665642730}
   - component: {fileID: 3959358025744068291}
   - component: {fileID: 8763665231190296172}
+  - component: {fileID: 5609918277379532861}
   m_Layer: 10
   m_Name: Blob
   m_TagString: Blob
@@ -86,6 +87,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.33883035, y: 0.22724968, z: 0.33407104}
   m_Center: {x: 0.0034081042, y: 0.05909261, z: 0.0011363626}
+--- !u!114 &5609918277379532861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124706463159373362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76761de1433088c4b93c24d01ee952bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1124706463896150647
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,6 +972,7 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents:
     - {fileID: 1420997181, guid: cd46a2f4e80e27b468de759c892e681d, type: 3}
+    - {fileID: -2148373001252849101, guid: cd46a2f4e80e27b468de759c892e681d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cd46a2f4e80e27b468de759c892e681d, type: 3}
 --- !u!1 &5524468174138875241 stripped
 GameObject:

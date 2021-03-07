@@ -9,32 +9,43 @@ public enum EnemyStates {idle, attacking, retreating, stunned };
 public class CharacterBase : MonoBehaviour
 {
     public CharacterDataScriptableObject CharacterData;
-    public event Action<float> OnHealthPctChanged = delegate {};
     public event Action<float> OnStaminaPctChanged = delegate {};
 
     protected Vector3 knockBackDestination;
 
     protected NavMeshAgent navmeshAgent;
 
-    protected float currentHealth, maxHealth, currentStamina, maxStamina, staminaRechargeRate;
+    protected float currentStamina, maxStamina, staminaRechargeRate;
     protected EnemyStates enemyState = EnemyStates.idle;
     protected NavMeshHit hit;
 
     protected float stunStartTime;
+    Health health;
 
     public virtual void Awake(){
-        currentHealth = CharacterData.Health;
-        maxHealth = currentHealth;
-        currentStamina = CharacterData.Stamina;
-        maxStamina = currentStamina;
-        staminaRechargeRate = CharacterData.StaminaRechargeRate;
-
+        
         navmeshAgent = GetComponent<NavMeshAgent>();
     }
 
+    public virtual void OnEnable() {
+        health = GetComponent<Health>();
+        health.SetCurrentHealth(CharacterData.Health);
+        health.SetMaxHealth(health.GetCurrentHealth());     
+        
+        currentStamina = CharacterData.Stamina;
+        maxStamina = currentStamina;
+        staminaRechargeRate = CharacterData.StaminaRechargeRate;
+        
+    }
+
     public virtual void GetHit(float damage, Vector3 knockBack) { 
-        ModifyHealth(-(int)damage); // Healthbar tracks as int
-        if (currentHealth <= 0){
+        try{ 
+            health.ModifyHealth(-(int)damage); // Healthbar tracks as int
+        } 
+        catch {
+            Debug.Log("$Health script is missing!");
+        }
+        if (health.GetCurrentHealth() <= 0){
             Die();
             return;
         }
@@ -45,11 +56,6 @@ public class CharacterBase : MonoBehaviour
         ApplyKnockBack(knockBack);
     }
 
-    public void ModifyHealth(float amount) {
-        currentHealth += amount;
-        float currentHealthPct = currentHealth / maxHealth; 
-        OnHealthPctChanged(currentHealthPct);
-    }   
     public void ModifyStamina(float amount) {
         currentStamina += amount;
         currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
@@ -75,7 +81,6 @@ public class CharacterBase : MonoBehaviour
         
         // Go back to pool instead
         gameObject.SetActive(false);
-//        GameObject.Destroy(gameObject);
     }
 
 }

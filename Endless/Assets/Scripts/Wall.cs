@@ -15,7 +15,12 @@ public class Wall : MonoBehaviour
         {
             if(Random.Range(0,10) < 2)
             {
+                try {
                 wallblock.GetComponent<Renderer>().material = altWallMaterial;
+                }
+                catch{
+                    // No material on child
+                }
             }
         }
     }

@@ -69,7 +69,7 @@ public class PlayerController : CharacterBase
         staminaTick -= Time.deltaTime;
         if(staminaTick < 0)
         {
-            staminaTick = 0.6f;
+            staminaTick = 0.2f;
             playerState = PlayerStates.idle;
             if(currentStamina < maxStamina)
             {

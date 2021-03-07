@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4841677570506950827}
   - component: {fileID: 4841677570506950826}
   - component: {fileID: 4841677570506950829}
-  - component: {fileID: 1420997181}
+  - component: {fileID: -2148373001252849101}
   m_Layer: 0
   m_Name: HealthbarCanvas
   m_TagString: Untagged
@@ -38,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.977}
+  m_AnchoredPosition: {x: 0, y: 0.97698975}
   m_SizeDelta: {x: 120, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4841677570506950827
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1420997181
+--- !u!114 &-2148373001252849101
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4841677570506950831}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 231453f9bfe53e948a474cd5f9eb9204, type: 3}
+  m_Script: {fileID: 11500000, guid: 515d5a0989ad09c4e827d3e5c5352c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   foregroundImage: {fileID: 0}
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 058087ad4c4fd7746847f08378eab176, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9ca07fbd0b464da43b7502f01b668726, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1

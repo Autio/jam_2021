@@ -5,17 +5,25 @@ using UnityEngine;
 public class Structure : MonoBehaviour
 {
     public StructureDataScriptableObject StructureData;
-    private float currentHealth;
+
+    // Handle health in the separate component
+    Health health;
 
     void Awake()
     {
+        health = GetComponent<Health>();
         StructuresManager.Instance.AddNewStructure(this);
-        currentHealth = StructureData.Health;
+        try {
+        health.SetCurrentHealth(StructureData.Health);
+        health.SetMaxHealth(StructureData.Health);
+        } catch{
+            Debug.Log("Couldn't set health for " + gameObject.name);
+        }
     }
 
     public void GetHit(float damage){
-        currentHealth -= damage;
-        if (currentHealth <= 0) {
+        health.ModifyHealth(-damage);
+        if (health.GetCurrentHealth() <= 0) {
             Die();
         }
     }
