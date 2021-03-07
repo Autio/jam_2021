@@ -18,6 +18,6 @@ MonoBehaviour:
   StaminaRechargeRate: 2
   HitDamage: 1
   StunTimeAfterBeingHit: 0
-  KnockBack: 1
+  KnockBack: 0.5
   MaxDistanceToChasePlayer: 0
   MaxDistanceToChaseStructures: 0
