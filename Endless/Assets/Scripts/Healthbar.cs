@@ -59,7 +59,6 @@ public class Healthbar : MonoBehaviour
     void Update()
     {
         // Look at the camera
-        transform.LookAt(transform.position - Camera.main.transform.position);
-
+        transform.forward = Camera.main.transform.forward;
     }
 }
