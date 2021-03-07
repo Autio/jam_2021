@@ -13,8 +13,9 @@ public class CharacterDataScriptableObject : ScriptableObject
     public float StaminaRechargeRate;
     public float HitDamage;
     public float StunTimeAfterBeingHit;
-    public float KnockBack;
-    public float KnockBackSpeed = 1f;
+    //This is fucked up, comments per line should explain
+    public float KnockBack; //this is the knockback we INFLICT upon hitting something
+    public float KnockBackSpeed = 1f; //This is the knockback speed we are SUBJECT to when hit
     public float MaxDistanceToChasePlayer;
     public float MaxDistanceToChaseStructures;
 

@@ -93,12 +93,22 @@ public class Blob : CharacterBase
     }
 
     void OnTriggerEnter(Collider other) {
+        //We hit a player
         if (other.gameObject.layer == LayerMask.NameToLayer("Player")) { 
             Debug.Log($"Logging:  YO IMMA PLAYER II GOT IT  ");
 
             var playerCharacter = other.GetComponentInParent<CharacterBase>();//We'll need some weird shit to know we're calling the right function here, the specific enemy's rather than the character base one. 
             Vector3 knockBackVector = (playerCharacter.transform.position - transform.position) * CharacterData.KnockBack;
             playerCharacter.GetHit(CharacterData.HitDamage, knockBackVector);
+        }
+        //We hit a structure
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Structure") ){
+            var structure = other.GetComponentInParent<Structure>();
+            Vector3 knockBackVector = (transform.position - structure.transform.position) * structure.StructureData.KnockBackInflictedUponAttacker;
+            this.GetHit(0, knockBackVector);
+            //really bad hack to give this a different stuntime, as demanded not by the blob's own data, but by the structure's. this is really horrible.
+            stunStartTime = Time.time + ( CharacterData.StunTimeAfterBeingHit - structure.StructureData.StuntimeInflictedUponAttacker ); // ha ha lol! 
+            structure.GetHit(CharacterData.HitDamage);
         }
     }
 

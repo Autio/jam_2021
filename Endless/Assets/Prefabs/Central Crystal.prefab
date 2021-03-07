@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3291310325765612717}
-  m_Layer: 0
+  - component: {fileID: -7491529431504841208}
+  m_Layer: 12
   m_Name: Central Crystal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,6 +33,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7491529431504841208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19437041327458174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 201ab24d97799904cb82c959946bc940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StructureData: {fileID: 11400000, guid: 06ef961df0a27fd4fb370df2f9c0a3da, type: 2}
 --- !u!1 &577052714475481634
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,7 +57,7 @@ GameObject:
   - component: {fileID: 202326313715809602}
   - component: {fileID: 6214195298887861088}
   - component: {fileID: 47963658363822130}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Crystal_003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +136,7 @@ GameObject:
   - component: {fileID: 6284138841721911542}
   - component: {fileID: 7543090235873599090}
   - component: {fileID: 3160854972300100075}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Quartz_002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +214,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2115306201468646498}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Quartz_002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3197813298871294493}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OBJECTS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +279,7 @@ GameObject:
   - component: {fileID: 1797051008620427818}
   - component: {fileID: 1797051008620427819}
   - component: {fileID: 1797051008620427816}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CrystalBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +375,7 @@ GameObject:
   - component: {fileID: 1797051008710249069}
   - component: {fileID: 1797051008710249071}
   - component: {fileID: 1797051008710249068}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Quartz_002 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,7 +455,7 @@ GameObject:
   - component: {fileID: 1797051009226951859}
   - component: {fileID: 1797051009226951856}
   - component: {fileID: 1797051009226951857}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -533,7 +547,7 @@ GameObject:
   - component: {fileID: 1797051009527626259}
   - component: {fileID: 1797051009527626261}
   - component: {fileID: 1797051009527626258}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Quartz_002 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -613,7 +627,7 @@ GameObject:
   - component: {fileID: 1797051009957171405}
   - component: {fileID: 1797051009957171407}
   - component: {fileID: 1797051009957171404}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Quartz_002 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -690,7 +704,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1538816028398557662}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Crystal_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -721,7 +735,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7172634984878671846}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OBJECTS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -755,7 +769,7 @@ GameObject:
   - component: {fileID: 4004815534174732553}
   - component: {fileID: 3166087743958253411}
   - component: {fileID: 5638817769300582445}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Crystal_004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -832,7 +846,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5958728555670923673}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Crystal_003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -863,7 +877,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6145452562962519940}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Crystal_004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -894,7 +908,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7749493510522022490}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OBJECTS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
