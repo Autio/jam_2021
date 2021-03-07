@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 public enum EnemyStates {idle, attacking, retreating, stunned };
 
+[Serializable]
 public class CharacterBase : MonoBehaviour
 {
     public CharacterDataScriptableObject CharacterData;
@@ -43,15 +44,15 @@ public class CharacterBase : MonoBehaviour
         
     }
 
-    public void ModifyHealth(int amount) {
+    public void ModifyHealth(float amount) {
         currentHealth += amount;
-        float currentHealthPct = (float)currentHealth / (float)maxHealth; 
+        float currentHealthPct = currentHealth / maxHealth; 
         OnHealthPctChanged(currentHealthPct);
     }   
-    public void ModifyStamina(int amount) {
+    public void ModifyStamina(float amount) {
         currentStamina += amount;
         currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
-        float currentStaminaPct = (float)currentStamina / (float)maxStamina; 
+        float currentStaminaPct = currentStamina / maxStamina; 
         OnStaminaPctChanged(currentStaminaPct);
     }   
     public virtual void Die(){

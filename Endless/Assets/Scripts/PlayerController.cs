@@ -48,7 +48,7 @@ public class PlayerController : CharacterBase
                     {
                         Weapon.TrySwing();
                         // Deplete stamina
-                        ModifyStamina(-4); // Temp fixed arbitrary value
+                        ModifyStamina(-CharacterData.AttackStaminaCost); // Temp fixed arbitrary value
                         staminaTick = 0.6f;
                     }
                 playerState = PlayerStates.attacking;
@@ -64,7 +64,7 @@ public class PlayerController : CharacterBase
             playerState = PlayerStates.idle;
             if(currentStamina < maxStamina)
             {
-                ModifyStamina((int)staminaRechargeRate);
+                ModifyStamina(staminaRechargeRate);
             }
         }
     }

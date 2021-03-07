@@ -8,6 +8,8 @@ public class CharacterDataScriptableObject : ScriptableObject
     public float MovementSpeed;
     public float Health;
     public float Stamina;
+    public float AttackStaminaCost;
+
     public float StaminaRechargeRate;
     public float HitDamage;
     public float StunTimeAfterBeingHit;
