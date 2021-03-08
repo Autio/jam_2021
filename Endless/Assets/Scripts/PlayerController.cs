@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : CharacterBase
 {
-    enum PlayerStates {idle, attacking, building};
-    PlayerStates playerState = PlayerStates.idle;
+    public enum PlayerStates {idle, attacking, building};
+    public PlayerStates playerState = PlayerStates.idle;
     public WeaponBase Weapon;
     // public InputAction stikazzi;
     public GameObject playerModel;
@@ -75,19 +75,14 @@ public class PlayerController : CharacterBase
         var moveVec = inputActions.Player.Move.ReadValue<Vector2>();
         var lookVec = inputActions.Player.Look.ReadValue<Vector2>();
 
-        // Don't move when building
-        if(playerState != PlayerStates.building)
+        navmeshAgent.Move(new Vector3(moveVec.x,0,moveVec.y) * Time.deltaTime * CharacterData.MovementSpeed);       
+        
+        // Move the building you are placing 
+        if (playerState == PlayerStates.building && currentPlaceableObject != null)
         {
-            navmeshAgent.Move(new Vector3(moveVec.x,0,moveVec.y) * Time.deltaTime * CharacterData.MovementSpeed);
-        } else 
-        {
-            // Move the building you are placing 
-            if (currentPlaceableObject != null)
-            {
-                MoveCurrentPlaceableObject(moveVec, lookVec);
-            }
-                
+            MoveCurrentPlaceableObject();
         }
+        
         if (lookVec.magnitude > 0.1f){
             playerModel.transform.rotation = Quaternion.LookRotation(new Vector3(lookVec.x, 0, lookVec.y),transform.up);
         }
@@ -113,7 +108,7 @@ public class PlayerController : CharacterBase
         if(playerState != PlayerStates.building)
         // Periodically recharge stamina
         {
-                staminaTick -= Time.deltaTime;
+            staminaTick -= Time.deltaTime;
             if(staminaTick < 0)
             {
                 staminaTick = 0.2f;
@@ -159,26 +154,68 @@ public class PlayerController : CharacterBase
         Physics.Raycast(new Vector3(transform.position.x + 2, transform.position.y + 10, transform.position.z), down, out hit); 
         currentPlaceableObject.transform.position = hit.point + new Vector3(0, .5f, 0);
 
+        // Disable collider
+        foreach(Transform child in currentPlaceableObject.transform)
+        {
+            try{ 
+                child.GetComponent<Collider>().enabled = false;
+            } catch 
+            {
+
+            }
+        }
+
         // Assumes buildings have a base and a model
         originalModelMaterial = currentPlaceableObject.transform.Find("model").GetComponent<Renderer>().material;
         originalBaseMaterial = currentPlaceableObject.transform.Find("Base").GetComponent<Renderer>().material;
         currentPlaceableObject.transform.Find("model").GetComponent<Renderer>().material = buildingPlacementMaterial;
         currentPlaceableObject.transform.Find("Base").GetComponent<Renderer>().material = buildingPlacementMaterial;
     }
-    private void MoveCurrentPlaceableObject(Vector3 moveVec, Vector3 lookVec)
-    {
-        currentPlaceableObject.transform.Translate(new Vector3(moveVec.x, 0, moveVec.y) * Time.deltaTime * CharacterData.MovementSpeed, Space.World);
-        if (lookVec.magnitude > 0.1f){
-            currentPlaceableObject.transform.rotation = Quaternion.LookRotation(new Vector3(lookVec.x, 0, lookVec.y),transform.up);
-        }
+
+    private void MoveCurrentPlaceableObject(){
+        
+        // The building is always a bit ahead of the player's facing
+        Vector3 down = transform.TransformDirection(Vector3.down);
+        RaycastHit hit;
+        Physics.Raycast(new Vector3(transform.position.x + 2, transform.position.y + 10, transform.position.z), down, out hit); 
+        currentPlaceableObject.transform.position = hit.point + new Vector3(0, .5f, 0);
+
+        // Shoulder buttons rotate
+        int dir = (int)inputActions.Player.ChangeCharacter.ReadValue<float>();
+        float rotationSpeed = 180f;
+        float rotation = dir * Time.deltaTime * rotationSpeed;
+
+        currentPlaceableObject.transform.Rotate(0, rotation, 0);
 
     }
+
+    // Method to move the building around freely, not just close to the player
+    // private void MoveCurrentPlaceableObject(Vector3 moveVec, Vector3 lookVec)
+    // {
+    //     currentPlaceableObject.transform.Translate(new Vector3(moveVec.x, 0, moveVec.y) * Time.deltaTime * CharacterData.MovementSpeed, Space.World);
+    //     if (lookVec.magnitude > 0.1f){
+    //         currentPlaceableObject.transform.rotation = Quaternion.LookRotation(new Vector3(lookVec.x, 0, lookVec.y),transform.up);
+    //     }
+
+    // }
 
     private void PlaceCurrentPlaceableObject()
     {
         currentPlaceableObject.transform.Find("model").GetComponent<Renderer>().material = originalModelMaterial;
         currentPlaceableObject.transform.Find("Base").GetComponent<Renderer>().material = originalBaseMaterial;
 
+        // Enable the collider
+
+        // Disable collider
+        foreach(Transform child in currentPlaceableObject.transform)
+        {
+            try{ 
+                child.GetComponent<Collider>().enabled = true;
+            } catch 
+            {
+                
+            }
+        }
         currentPlaceableObject = null;
 
         playerState = PlayerStates.idle;

@@ -22,6 +22,16 @@ public class PlayerManager : Singleton<PlayerManager>
     // Update is called once per frame
     void Update()
     {
+
+        // Handle player switching, but disallow when placing buildings
+        foreach(PlayerController pc in players)
+        {
+            if(pc.playerState == PlayerController.PlayerStates.building)
+            {
+                return;
+            }
+        }
+    
         if (inputActions.Player.ChangeCharacter.triggered){
             Debug.Log($"Logging: CHANGE CHAR");
             var currentPlayerIndex = players.IndexOf(currentlySelectedPlayer);

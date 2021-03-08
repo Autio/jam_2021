@@ -387,7 +387,7 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9461f658-ea1f-4704-8c15-32a15033958a"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -409,7 +409,7 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f662a3a7-3240-43a8-9574-161463628fe2"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
