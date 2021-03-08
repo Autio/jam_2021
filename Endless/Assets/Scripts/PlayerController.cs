@@ -33,8 +33,6 @@ public class PlayerController : CharacterBase
     private Vector3 buildingExtents;
     public Material buildingPlacementMaterial;
     public Material invalidPlacementMaterial;
-    private Material originalModelMaterial;
-    private Material originalBaseMaterial;
 
 
     // Tick for player refresh
@@ -150,6 +148,22 @@ public class PlayerController : CharacterBase
 
     }
 
+    // Change building being placed
+    private void ChangeBuilding()
+    {
+        
+        // Only if building
+        if (inputActions.Player.ChangeCharacter.triggered){
+            Debug.Log($"Logging: CHANGE BUILDING");
+            // StructuresManager.Instance
+            // var currentStructureIndex = Structure.IndexOf(currentlySelectedPlayer);
+            
+            // var newSelectedStructureIndex = Mathf.Abs((currentPlayerIndex + (int) inputActions.Player.ChangeCharacter.ReadValue<float>()) % players.Count);
+            // currentlySeletctedStructure = structures[newSelectedStructureIndex];
+            
+        }
+    }
+
     // Sets the materials of the building to be placed to show if it's a valid placement or not
     private void SetPlacementValidity(bool isValid){
         if(isValid)
@@ -210,9 +224,10 @@ public class PlayerController : CharacterBase
         // Check if overlapping with existing buildings
         int s_layerMask = LayerMask.GetMask("Structure");
         Collider[] hitColliders = Physics.OverlapBox(currentPlaceableObject.transform.position + new Vector3(0, -.5f, 0), buildingExtents / 1.6f, currentPlaceableObject.transform.rotation, s_layerMask);
-        Debug.Log(validPlacement);
+        
         foreach(Collider c in hitColliders)
         {
+            // Check isn't self
             if (c.transform != currentPlaceableObject.transform)
             {
                 validPlacement = false;
