@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public Transform target;
     // Checks for impact and tries to do stuff
     // Disappears after a while
-    public float lifetime;
-    public float knockBack = 2.0f;
-    public float damage = 2.0f;
-    public float speed = 0.3f;
+    public Transform target;
+    public ProjectileDataScriptableObject ProjectileData;
+    float lifetime, damage, speed, knockBack;
     // Start is called before the first frame update
     void Start()
     {
+        damage = ProjectileData.damage;
+        speed = ProjectileData.speed;
+        knockBack = ProjectileData.knockBack;
+
         transform.LookAt(target);
+    }
+
+    private void OnEnable() {
+        lifetime = ProjectileData.lifetime;
+
     }
 
     // Update is called once per frame
@@ -26,21 +33,26 @@ public class Projectile : MonoBehaviour
             gameObject.SetActive(false);
             
         } else {
+            try{
                 transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * speed);
+            }
+            catch{
+                gameObject.SetActive(false);
+            }
         }
     }
 
 
     void OnTriggerEnter(Collider other) {
     {
-        Debug.Log("Projectile hit!");
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")) { 
-            Debug.Log("Enemy hit by projectile");
             var enemy = other.transform.GetComponentInParent<CharacterBase>(); // We'll need some weird shit to know we're calling the right function here, the specific enemy's rather than the character base one. 
             Vector3 knockBackVector = (enemy.transform.position - transform.position) * knockBack;
             enemy.GetHit(damage, knockBackVector);
             gameObject.SetActive(false);
+
         }      
+
     }
 }
 }

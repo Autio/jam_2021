@@ -1169,7 +1169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1072092210, guid: bc752af94e83c2c4e9776ce9d75f6136, type: 3}
       propertyPath: fireRate
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1072092210, guid: bc752af94e83c2c4e9776ce9d75f6136, type: 3}
       propertyPath: muzzlePoint
@@ -1204,7 +1204,7 @@ PrefabInstance:
     - target: {fileID: 6542326757959930651, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.8
+      value: 4.646
       objectReference: {fileID: 0}
     - target: {fileID: 6542326757959930651, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
@@ -1214,12 +1214,12 @@ PrefabInstance:
     - target: {fileID: 6542326757959930651, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.55
+      value: -4.023
       objectReference: {fileID: 0}
     - target: {fileID: 6542326757959930651, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6542326757959930651, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
@@ -1229,7 +1229,7 @@ PrefabInstance:
     - target: {fileID: 6542326757959930651, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6542326757959930651, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
@@ -1244,7 +1244,7 @@ PrefabInstance:
     - target: {fileID: 6542326757959930651, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 6542326757959930651, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
@@ -5467,11 +5467,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daa8c8c480f478240932219352c9a286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pooledObjects:
-  - {fileID: 1124706463159373362, guid: 003614ce35d5f584a91117fae2f03929, type: 3}
+  pooledObjects: []
   itemsToPool:
   - amountToPool: 50
     objectToPool: {fileID: 1124706463159373362, guid: 003614ce35d5f584a91117fae2f03929,
+      type: 3}
+    shouldExpand: 1
+  - amountToPool: 50
+    objectToPool: {fileID: 1238213150754825875, guid: 74b636fa16d0f8b4c8f12f956aed0b29,
       type: 3}
     shouldExpand: 1
 --- !u!1 &924171790 stripped
@@ -8797,6 +8800,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1072092210, guid: bc752af94e83c2c4e9776ce9d75f6136, type: 3}
+      propertyPath: fireRate
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1072092210, guid: bc752af94e83c2c4e9776ce9d75f6136, type: 3}
       propertyPath: muzzlePoint
       value: 

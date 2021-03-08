@@ -29,7 +29,7 @@ public class Spawner : MonoBehaviour{
         for (int i = 0; i < SpawnerData.UnitsSpawnedPerTick; i++)
         {   
 
-            var unitToSpawn = ObjectPooler.SharedInstance.GetPooledObject(SpawnerData.CharacterTypesToSpawn[Random.Range(0, SpawnerData.CharacterTypesToSpawn.Length)]);
+            var unitToSpawn = ObjectPooler.SharedInstance.GetPooledCharacter(SpawnerData.CharacterTypesToSpawn[Random.Range(0, SpawnerData.CharacterTypesToSpawn.Length)]);
             // var unitToSpawn = SpawnerData.CharacterTypesToSpawn[Random.Range(0, SpawnerData.CharacterTypesToSpawn.Length)];
 
             Vector2 randomPositionInCircle = Random.insideUnitCircle * SpawnerData.SpawnRadius;

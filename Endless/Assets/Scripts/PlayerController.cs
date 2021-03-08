@@ -8,7 +8,7 @@ public class PlayerController : CharacterBase
 {
     enum PlayerStates {idle, attacking};
     PlayerStates playerState = PlayerStates.idle;
-     public WeaponBase Weapon;
+    public WeaponBase Weapon;
     // public InputAction stikazzi;
     public GameObject playerModel;
     public Camera playerCamera;
@@ -22,12 +22,11 @@ public class PlayerController : CharacterBase
 
     }
 
-    // Temp for firing
-    public float fireRate = 3f;
+    // Temp for firing as a turret when idle
+    public float fireRate = 2f; // Should come from a weapon eventually
     public GameObject muzzlePoint; // Where the projectile is spawned
     public GameObject projectileObject;
     private float fireCountdown = 1f;
-    private int targetingRound = 0;
 
     // Tick for player refresh
     float staminaTick = 0.6f;
@@ -99,8 +98,6 @@ public class PlayerController : CharacterBase
     {
         float closest = range;
         GameObject target = null;
-        targetingRound++;
-        Debug.Log("Targeting round "  + targetingRound);
         // Target the closest enemy in range
         foreach (GameObject enemy in ObjectPooler.SharedInstance.pooledObjects)
         {
@@ -116,9 +113,13 @@ public class PlayerController : CharacterBase
         }
         if(target != null)
         {
+            // Turn towards the target
+            transform.LookAt(target.transform);
             // Fire a projectile
-            GameObject projectile = Instantiate(projectileObject, muzzlePoint.transform.position + new Vector3(0,0.1f,0), Quaternion.identity);
+            GameObject projectile = ObjectPooler.SharedInstance.GetPooledObject(projectileObject);
+            projectile.transform.position = muzzlePoint.transform.position + new Vector3(0, 0.4f, 0);
             projectile.GetComponent<Projectile>().target = target.transform;
+            projectile.SetActive(true);
 
         }
 
@@ -134,7 +135,6 @@ public class PlayerController : CharacterBase
     {
         PlayerManager.Instance.PlayerDied(this);
         base.Die();
-
     }
     public void SetSelectedState(bool isSelected){
         playerCamera.gameObject.SetActive(isSelected);
