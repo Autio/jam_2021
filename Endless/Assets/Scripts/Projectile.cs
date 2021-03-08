@@ -16,11 +16,11 @@ public class Projectile : MonoBehaviour
         speed = ProjectileData.speed;
         knockBack = ProjectileData.knockBack;
 
-        transform.LookAt(target);
     }
 
     private void OnEnable() {
         lifetime = ProjectileData.lifetime;
+        transform.LookAt(target);
 
     }
 
@@ -44,15 +44,15 @@ public class Projectile : MonoBehaviour
 
 
     void OnTriggerEnter(Collider other) {
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")) { 
-            var enemy = other.transform.GetComponentInParent<CharacterBase>(); // We'll need some weird shit to know we're calling the right function here, the specific enemy's rather than the character base one. 
-            Vector3 knockBackVector = (enemy.transform.position - transform.position) * knockBack;
-            enemy.GetHit(damage, knockBackVector);
-            gameObject.SetActive(false);
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")) { 
+                var enemy = other.transform.GetComponentInParent<CharacterBase>(); // We'll need some weird shit to know we're calling the right function here, the specific enemy's rather than the character base one. 
+                Vector3 knockBackVector = (enemy.transform.position - transform.position) * knockBack;
+                enemy.GetHit(damage, knockBackVector);
+                gameObject.SetActive(false);
 
-        }      
+            }      
 
+        }
     }
-}
 }
