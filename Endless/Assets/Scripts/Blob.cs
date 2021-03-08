@@ -67,8 +67,6 @@ public class Blob : CharacterBase
             }
         }
 
-
-
         if(enemyState == EnemyStates.idle)
         {
             IdleBehaviour();
@@ -78,6 +76,7 @@ public class Blob : CharacterBase
     // Get the enemy to jump in an agitated state
     void IdleBehaviour()
     {
+        // TODO: Replace with an animation
         sinceLastJump += Time.deltaTime;
         jumpTicker -= Time.deltaTime;
         if(jumpTicker < 0 && !jumping)
