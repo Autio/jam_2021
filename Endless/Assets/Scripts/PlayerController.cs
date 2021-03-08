@@ -148,13 +148,14 @@ public class PlayerController : CharacterBase
 
     }
 
+    // Sets the materials of the building to be placed to show if it's a valid placement or not
     private void SetPlacementValidity(bool isValid){
         if(isValid)
         {
-            foreach(Transform child in currentPlaceableObject.transform)
-            {
-
-            }   
+            currentPlaceableObject.GetComponent<Structure>().SetMaterials(buildingPlacementMaterial);
+        }   else 
+        {
+            currentPlaceableObject.GetComponent<Structure>().SetMaterials(buildingPlacementMaterial);
         }
         
     }
@@ -178,10 +179,14 @@ public class PlayerController : CharacterBase
         }
 
         // Assumes buildings have a base and a model
-        originalModelMaterial = currentPlaceableObject.transform.Find("model").GetComponent<Renderer>().material;
-        originalBaseMaterial = currentPlaceableObject.transform.Find("Base").GetComponent<Renderer>().material;
-        currentPlaceableObject.transform.Find("model").GetComponent<Renderer>().material = buildingPlacementMaterial;
-        currentPlaceableObject.transform.Find("Base").GetComponent<Renderer>().material = buildingPlacementMaterial;
+        // Check if valid placement
+
+        // If valid
+        SetPlacementValidity(true);
+        // originalModelMaterial = currentPlaceableObject.transform.Find("model").GetComponent<Renderer>().material;
+        // originalBaseMaterial = currentPlaceableObject.transform.Find("Base").GetComponent<Renderer>().material;
+        // currentPlaceableObject.transform.Find("model").GetComponent<Renderer>().material = buildingPlacementMaterial;
+        // currentPlaceableObject.transform.Find("Base").GetComponent<Renderer>().material = buildingPlacementMaterial;
     }
 
     private void MoveCurrentPlaceableObject(){
@@ -220,13 +225,8 @@ public class PlayerController : CharacterBase
     // }
 
     private void PlaceCurrentPlaceableObject()
-    {
-        currentPlaceableObject.transform.Find("model").GetComponent<Renderer>().material = originalModelMaterial;
-        currentPlaceableObject.transform.Find("Base").GetComponent<Renderer>().material = originalBaseMaterial;
-
-        // Enable the collider
-
-        // Disable collider
+    {   
+        currentPlaceableObject.GetComponent<Structure>().ResetMaterials();
         foreach(Transform child in currentPlaceableObject.transform)
         {
             try{ 
