@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StructureData: {fileID: 11400000, guid: 06ef961df0a27fd4fb370df2f9c0a3da, type: 2}
+  projectileObject: {fileID: 1238213150754825875, guid: 74b636fa16d0f8b4c8f12f956aed0b29,
+    type: 3}
 --- !u!1 &7856434203064470772
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,6 +104,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -126,6 +129,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &1466756429974901380
 BoxCollider:
   m_ObjectHideFlags: 0

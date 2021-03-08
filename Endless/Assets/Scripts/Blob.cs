@@ -13,15 +13,22 @@ public class Blob : CharacterBase
     public GameObject groundParticles;
     private GameObject crystal;
     private NavMeshPath pathToCrystal;
+    private Rigidbody modelRb;
 
     public override void Awake(){
         base.Awake();
         crystal = GameObject.FindGameObjectWithTag("Crystal");
         pathToCrystal = new NavMeshPath();
+        modelRb = model.GetComponent<Rigidbody>();
     }
 
     void Update()
     {
+        if(enemyState != EnemyStates.idle)
+        {
+            modelRb.isKinematic = true; //else they fall through the ground when hit or knocked or whatever.
+        }
+
         if (enemyState == EnemyStates.stunned){
             if ( (Time.time - stunStartTime ) >= CharacterData.StunTimeAfterBeingHit){
                 enemyState = EnemyStates.idle;
@@ -78,6 +85,7 @@ public class Blob : CharacterBase
     // Get the enemy to jump in an agitated state
     void IdleBehaviour()
     {
+        modelRb.isKinematic = false; //else they don't fall when they jump. I really wish this was a normal animation already :D 
         sinceLastJump += Time.deltaTime;
         jumpTicker -= Time.deltaTime;
         if(jumpTicker < 0 && !jumping)

@@ -64,6 +64,7 @@ public class CharacterBase : MonoBehaviour
     }   
 
     public void ApplyKnockBack(Vector3 knockBack){
+        // knockBack = new Vector3(knockBack.x, 0, knockBack.z);
         var tentativeKnockbackDestination = transform.position + knockBack;
         NavMesh.Raycast(transform.position, tentativeKnockbackDestination, out hit, NavMesh.AllAreas);
         if (hit.hit){

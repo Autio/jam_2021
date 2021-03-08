@@ -23,3 +23,5 @@ MonoBehaviour:
   KnockBackSpeed: 10
   MaxDistanceToChasePlayer: 0
   MaxDistanceToChaseStructures: 0
+  MaxPathedDistanceToChaseCrystal: 0
+  AttackRadiusAsTurret: 5

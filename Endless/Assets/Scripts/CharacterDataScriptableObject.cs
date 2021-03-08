@@ -19,5 +19,6 @@ public class CharacterDataScriptableObject : ScriptableObject
     public float MaxDistanceToChasePlayer;
     public float MaxDistanceToChaseStructures;
     public float MaxPathedDistanceToChaseCrystal;
+    public float AttackRadiusAsTurret;
 
 }

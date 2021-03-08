@@ -26,7 +26,7 @@ public class PlayerManager : Singleton<PlayerManager>
             Debug.Log($"Logging: CHANGE CHAR");
             var currentPlayerIndex = players.IndexOf(currentlySelectedPlayer);
             currentlySelectedPlayer.SetSelectedState(false);
-            var newSelectedPlayerIndex = (currentPlayerIndex + (int) inputActions.Player.ChangeCharacter.ReadValue<float>()) % players.Count;
+            var newSelectedPlayerIndex = Mathf.Abs((currentPlayerIndex + (int) inputActions.Player.ChangeCharacter.ReadValue<float>()) % players.Count);
             currentlySelectedPlayer = players[newSelectedPlayerIndex];
             currentlySelectedPlayer.SetSelectedState(true);
         }

@@ -15,14 +15,8 @@ public class PlayerController : CharacterBase
     private EndlessInputActions inputActions;
     private bool isCurrentlySelected = true;
     enum CameraStates {near, far};
+    
     CameraStates cameraState = CameraStates.near;
-    public override void Awake()
-    {
-        inputActions = new EndlessInputActions();
-        inputActions.Player.Enable();
-        base.Awake();
-
-    }
 
     // Temp for firing as a turret when idle
     public float fireRate = 2f; // Should come from a weapon eventually
@@ -32,6 +26,16 @@ public class PlayerController : CharacterBase
 
     // Tick for player refresh
     float staminaTick = 0.6f;
+    private Collider[] results = new Collider[100];
+
+
+    public override void Awake()
+    {
+        inputActions = new EndlessInputActions();
+        inputActions.Player.Enable();
+        base.Awake();
+    }
+
 
     void Update()
     {
@@ -50,7 +54,7 @@ public class PlayerController : CharacterBase
             fireCountdown -= Time.deltaTime;
             if(fireCountdown < 0f)
             {
-                Turret(10f);
+                Turret();
                 fireCountdown = 1f / fireRate;
             }
 
@@ -99,35 +103,36 @@ public class PlayerController : CharacterBase
         }
     }
 
-    void Turret(float range)
+
+    void Turret()
     {
-        float closest = range;
-        GameObject target = null;
-        // Target the closest enemy in range
-        foreach (GameObject enemy in ObjectPooler.Instance.pooledObjects)
-        {
-            if (enemy.layer == LayerMask.NameToLayer("Enemy") && enemy.activeInHierarchy)
+        var numberOfSurroundingEnemies = Physics.OverlapCapsuleNonAlloc(transform.position + Vector3.up * 5, transform.position + Vector3.down * 5, CharacterData.AttackRadiusAsTurret, results, LayerMask.GetMask("Enemy"), QueryTriggerInteraction.Ignore);
+        if ( numberOfSurroundingEnemies > 0){
+            float closest = CharacterData.AttackRadiusAsTurret;
+            Collider target = null;
+            // Target the closest enemy in range
+            for (int i = 0; i < numberOfSurroundingEnemies; i++)
             {
+                var enemy = results[i];
                 float dist = (enemy.transform.position - transform.position).magnitude;
-                if(dist < closest)
-                {
-                    closest = dist;
-                    target = enemy;
-                }
+                    if(dist < closest)
+                    {
+                        closest = dist;
+                        target = enemy;
+                    }
+            }
+            if(target != null)
+            {
+                // Turn towards the target
+                playerModel.transform.LookAt(target.transform);
+                // Fire a projectile
+                GameObject projectile = ObjectPooler.Instance.GetPooledObject(projectileObject);
+                projectile.transform.position = muzzlePoint.transform.position + new Vector3(0, 0.4f, 0);
+                projectile.GetComponent<Projectile>().target = target.transform;
+                projectile.SetActive(true);
+
             }
         }
-        if(target != null)
-        {
-            // Turn towards the target
-            playerModel.transform.LookAt(target.transform);
-            // Fire a projectile
-            GameObject projectile = ObjectPooler.Instance.GetPooledObject(projectileObject);
-            projectile.transform.position = muzzlePoint.transform.position + new Vector3(0, 0.4f, 0);
-            projectile.GetComponent<Projectile>().target = target.transform;
-            projectile.SetActive(true);
-
-        }
-
     }
 
     public override void GetHit(float damage, Vector3 knockback)
