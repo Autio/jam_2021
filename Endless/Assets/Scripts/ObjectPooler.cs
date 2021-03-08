@@ -10,18 +10,14 @@ public class ObjectPoolItem{
 
 }
 
-public class ObjectPooler : MonoBehaviour
+public class ObjectPooler : Singleton<ObjectPooler>
 {
-    public static ObjectPooler SharedInstance;
+    // public static ObjectPooler SharedInstance;
 
     public List<GameObject> pooledObjects; 
 
     public List<ObjectPoolItem> itemsToPool;
 
-    void Awake()
-    {
-        SharedInstance = this;
-    }
 
     void Start()
     {

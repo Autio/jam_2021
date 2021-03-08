@@ -99,7 +99,7 @@ public class PlayerController : CharacterBase
         float closest = range;
         GameObject target = null;
         // Target the closest enemy in range
-        foreach (GameObject enemy in ObjectPooler.SharedInstance.pooledObjects)
+        foreach (GameObject enemy in ObjectPooler.Instance.pooledObjects)
         {
             if (enemy.layer == LayerMask.NameToLayer("Enemy") && enemy.activeInHierarchy)
             {
@@ -114,9 +114,9 @@ public class PlayerController : CharacterBase
         if(target != null)
         {
             // Turn towards the target
-            transform.LookAt(target.transform);
+            playerModel.transform.LookAt(target.transform);
             // Fire a projectile
-            GameObject projectile = ObjectPooler.SharedInstance.GetPooledObject(projectileObject);
+            GameObject projectile = ObjectPooler.Instance.GetPooledObject(projectileObject);
             projectile.transform.position = muzzlePoint.transform.position + new Vector3(0, 0.4f, 0);
             projectile.GetComponent<Projectile>().target = target.transform;
             projectile.SetActive(true);
