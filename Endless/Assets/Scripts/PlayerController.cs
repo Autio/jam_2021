@@ -30,6 +30,7 @@ public class PlayerController : CharacterBase
     private GameObject placeableObjectPrefab;
     private GameObject currentPlaceableObject;
     public Material buildingPlacementMaterial;
+    public Material invalidPlacementMaterial;
     private Material originalModelMaterial;
     private Material originalBaseMaterial;
 
@@ -147,6 +148,17 @@ public class PlayerController : CharacterBase
 
     }
 
+    private void SetPlacementValidity(bool isValid){
+        if(isValid)
+        {
+            foreach(Transform child in currentPlaceableObject.transform)
+            {
+
+            }   
+        }
+        
+    }
+
     private void ShowCurrentPlaceableObject()
     {
         Vector3 down = transform.TransformDirection(Vector3.down);
@@ -177,7 +189,8 @@ public class PlayerController : CharacterBase
         // The building is always a bit ahead of the player's facing
         Vector3 down = transform.TransformDirection(Vector3.down);
         RaycastHit hit;
-        Physics.Raycast(new Vector3(transform.position.x + 2, transform.position.y + 10, transform.position.z), down, out hit); 
+        float distanceFromPlayer = 1.5f;
+        Physics.Raycast((playerModel.transform.forward * distanceFromPlayer + transform.position) + new Vector3(0, 20f, 0), down, out hit); 
         currentPlaceableObject.transform.position = hit.point + new Vector3(0, .5f, 0);
 
         // Shoulder buttons rotate
@@ -186,6 +199,13 @@ public class PlayerController : CharacterBase
         float rotation = dir * Time.deltaTime * rotationSpeed;
 
         currentPlaceableObject.transform.Rotate(0, rotation, 0);
+
+        // Check if too far
+        float allowedRadius = 10f;
+        if(transform.position.magnitude > allowedRadius)
+        {
+
+        }
 
     }
 
