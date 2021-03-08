@@ -34,7 +34,6 @@ public class Structure : MonoBehaviour
                 materialMaps.Add(m);
             }
         }
-
     }
 
     void Update(){
