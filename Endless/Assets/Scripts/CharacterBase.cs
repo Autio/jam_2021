@@ -29,7 +29,8 @@ public class CharacterBase : MonoBehaviour
 
     public virtual void OnEnable() {
         health = GetComponent<Health>();
-        health.SetCurrentHealth(CharacterData.Health);
+        health.SetCurrentHealth(0);
+        health.ModifyHealth(CharacterData.Health);
         health.SetMaxHealth(health.GetCurrentHealth());     
         
         currentStamina = CharacterData.Stamina;
@@ -82,6 +83,7 @@ public class CharacterBase : MonoBehaviour
         
         // Go back to pool instead
         gameObject.SetActive(false);
+        transform.position = new Vector3(0, -100,0);
     }
 
 }

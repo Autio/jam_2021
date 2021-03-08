@@ -74,8 +74,6 @@ public class Blob : CharacterBase
             }
         }
 
-
-
         if(enemyState == EnemyStates.idle)
         {
             IdleBehaviour();
@@ -85,6 +83,7 @@ public class Blob : CharacterBase
     // Get the enemy to jump in an agitated state
     void IdleBehaviour()
     {
+        // TODO: Replace with an animation
         modelRb.isKinematic = false; //else they don't fall when they jump. I really wish this was a normal animation already :D 
         sinceLastJump += Time.deltaTime;
         jumpTicker -= Time.deltaTime;
