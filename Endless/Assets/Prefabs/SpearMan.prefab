@@ -1103,6 +1103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterData: {fileID: 11400000, guid: 97625383473f26b43aecf55178947ac0, type: 2}
+  playerState: 0
   Weapon: {fileID: 4658470671035997136}
   playerModel: {fileID: 4665362997124806721}
   playerCamera: {fileID: 660762258}
@@ -1113,6 +1114,8 @@ MonoBehaviour:
   placeableObjectPrefab: {fileID: 5460035795136086729, guid: b122d40512d889b4b9157d460fe05f5d,
     type: 3}
   buildingPlacementMaterial: {fileID: 2100000, guid: 39a15513f0af62c44bbd3f5476410f7d,
+    type: 2}
+  invalidPlacementMaterial: {fileID: 2100000, guid: 0b73cd78696a8284fb74b52f817a2638,
     type: 2}
 --- !u!195 &1072092212
 NavMeshAgent:

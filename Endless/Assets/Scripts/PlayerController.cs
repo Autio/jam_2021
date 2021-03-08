@@ -28,11 +28,14 @@ public class PlayerController : CharacterBase
     private float fireCountdown = 1f;
 
 
-    // Building
+    // Building placement
     [SerializeField] 
     private GameObject placeableObjectPrefab;
     private GameObject currentPlaceableObject;
+    private bool validPlacement;
+    private Vector3 buildingExtents;
     public Material buildingPlacementMaterial;
+    public Material invalidPlacementMaterial;
     private Material originalModelMaterial;
     private Material originalBaseMaterial;
 
@@ -191,45 +194,75 @@ public class PlayerController : CharacterBase
 
     }
 
+    // Sets the materials of the building to be placed to show if it's a valid placement or not
+    private void SetPlacementValidity(bool isValid){
+        if(isValid)
+        {
+            currentPlaceableObject.GetComponent<Structure>().SetMaterials(buildingPlacementMaterial);
+        }   else 
+        {
+            currentPlaceableObject.GetComponent<Structure>().SetMaterials(invalidPlacementMaterial);
+        }
+        
+    }
+
     private void ShowCurrentPlaceableObject()
     {
+        // Only check for the ground
+        int layer_mask = LayerMask.GetMask("Ground");
         Vector3 down = transform.TransformDirection(Vector3.down);
         RaycastHit hit;
-        Physics.Raycast(new Vector3(transform.position.x + 2, transform.position.y + 10, transform.position.z), down, out hit); 
+        float distanceFromPlayer = 2f;
+        Physics.Raycast((playerModel.transform.forward * distanceFromPlayer + transform.position) + new Vector3(0, 20f, 0), down, out hit, 100f, layer_mask); 
         currentPlaceableObject.transform.position = hit.point + new Vector3(0, .5f, 0);
 
+        // Grab extents before the collider is disabled
+        buildingExtents = currentPlaceableObject.GetComponent<Structure>().StructureCollider.bounds.extents;
         // Disable collider
-        foreach(Transform child in currentPlaceableObject.transform)
-        {
-            try{ 
-                child.GetComponent<Collider>().enabled = false;
-            } catch 
-            {
+        currentPlaceableObject.GetComponent<Structure>().StructureCollider.enabled = false;
 
-            }
-        }
+        // If valid
+        SetPlacementValidity(true);
 
-        // Assumes buildings have a base and a model
-        originalModelMaterial = currentPlaceableObject.transform.Find("model").GetComponent<Renderer>().material;
-        originalBaseMaterial = currentPlaceableObject.transform.Find("Base").GetComponent<Renderer>().material;
-        currentPlaceableObject.transform.Find("model").GetComponent<Renderer>().material = buildingPlacementMaterial;
-        currentPlaceableObject.transform.Find("Base").GetComponent<Renderer>().material = buildingPlacementMaterial;
     }
 
     private void MoveCurrentPlaceableObject(){
-        
+
+        // Only check for the ground
+        int layer_mask = LayerMask.GetMask("Ground");
+
         // The building is always a bit ahead of the player's facing
         Vector3 down = transform.TransformDirection(Vector3.down);
         RaycastHit hit;
-        Physics.Raycast(new Vector3(transform.position.x + 2, transform.position.y + 10, transform.position.z), down, out hit); 
+        float distanceFromPlayer = 2f;
+        Physics.Raycast((playerModel.transform.forward * distanceFromPlayer + transform.position) + new Vector3(0, 20f, 0), down, out hit, 100f, layer_mask); 
         currentPlaceableObject.transform.position = hit.point + new Vector3(0, .5f, 0);
 
         // Shoulder buttons rotate
         int dir = (int)inputActions.Player.ChangeCharacter.ReadValue<float>();
         float rotationSpeed = 180f;
         float rotation = dir * Time.deltaTime * rotationSpeed;
-
         currentPlaceableObject.transform.Rotate(0, rotation, 0);
+
+        validPlacement = true;
+        // Check if too far
+        float allowedRadius = 10f;
+        if(transform.position.magnitude > allowedRadius)
+        {
+            validPlacement = false;
+        }
+        // Check if overlapping with existing buildings
+        int s_layerMask = LayerMask.GetMask("Structure");
+        Collider[] hitColliders = Physics.OverlapBox(currentPlaceableObject.transform.position + new Vector3(0, -.5f, 0), buildingExtents / 1.6f, currentPlaceableObject.transform.rotation, s_layerMask);
+        Debug.Log(validPlacement);
+        foreach(Collider c in hitColliders)
+        {
+            if (c.transform != currentPlaceableObject.transform)
+            {
+                validPlacement = false;
+            }
+        }
+        SetPlacementValidity(validPlacement);
 
     }
 
@@ -244,25 +277,15 @@ public class PlayerController : CharacterBase
     // }
 
     private void PlaceCurrentPlaceableObject()
-    {
-        currentPlaceableObject.transform.Find("model").GetComponent<Renderer>().material = originalModelMaterial;
-        currentPlaceableObject.transform.Find("Base").GetComponent<Renderer>().material = originalBaseMaterial;
-
-        // Enable the collider
-
-        // Disable collider
-        foreach(Transform child in currentPlaceableObject.transform)
+    {   
+        if(validPlacement)
         {
-            try{ 
-                child.GetComponent<Collider>().enabled = true;
-            } catch 
-            {
-                
-            }
-        }
-        currentPlaceableObject = null;
+            currentPlaceableObject.GetComponent<Structure>().ResetMaterials();
+            currentPlaceableObject.GetComponent<Structure>().StructureCollider.enabled = true;
+            currentPlaceableObject = null;
 
-        playerState = PlayerStates.idle;
+            playerState = PlayerStates.idle;
+        }
     }
 
 

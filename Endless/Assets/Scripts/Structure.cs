@@ -11,6 +11,7 @@ public class Structure : MonoBehaviour
     public GameObject projectileObject;
     private Collider[] results = new Collider[100];
     private float fireCountdown;
+    private List<MaterialMap> materialMaps = new List<MaterialMap>();
     public Transform TurretStandPoint;
     private bool isManned;
     private PlayerController manningPlayer;
@@ -24,6 +25,17 @@ public class Structure : MonoBehaviour
         health.SetMaxHealth(StructureData.Health);
         } catch{
             Debug.Log("Couldn't set health for " + gameObject.name);
+        }
+        // Store all the original renderers and materials 
+        foreach(Transform child in transform)
+        {
+            if (child.TryGetComponent(out Renderer renderer))
+            {
+                MaterialMap m = new MaterialMap();
+                m.renderer = renderer;
+                m.originalMaterial = renderer.material;
+                materialMaps.Add(m);
+            }
         }
     }
 
@@ -95,4 +107,33 @@ public class Structure : MonoBehaviour
     public void OnDestroy(){
         StructuresManager.Instance.RemoveDeadStructure(this);
     }
+
+    // Set all the materials in the renderers of this building back to what they were at Awake
+    public void ResetMaterials()
+    {
+        foreach(MaterialMap m in materialMaps)
+        {
+            m.renderer.material = m.originalMaterial;
+        }
+    }
+
+    // Set all the materials in the renderers of this building to one uniform material
+    // Used for valid and invalid placement colouration
+    public void SetMaterials(Material material)
+    {
+        foreach(MaterialMap m in materialMaps)
+        {
+            m.renderer.material = material;
+        }
+    }
+
+}
+
+
+class MaterialMap 
+{
+    // Stores the original materials of a structure's parts so that they can be swapped
+    // To show valid and invalid placement instead
+    public Renderer renderer;
+    public Material originalMaterial;
 }
