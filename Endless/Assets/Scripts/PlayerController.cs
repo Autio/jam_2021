@@ -22,11 +22,19 @@ public class PlayerController : CharacterBase
 
     }
 
+    // Temp for firing
+    public float fireRate = 3f;
+    public GameObject muzzlePoint; // Where the projectile is spawned
+    public GameObject projectileObject;
+    private float fireCountdown = 1f;
+    private int targetingRound = 0;
+
     // Tick for player refresh
     float staminaTick = 0.6f;
 
     void Update()
     {
+        Debug.Log(gameObject.name + " " + isCurrentlySelected);
         if (enemyState == EnemyStates.stunned){ //awful awful workaround
             if ( (Time.time - stunStartTime ) >= CharacterData.StunTimeAfterBeingHit){
                 enemyState = EnemyStates.idle;
@@ -37,6 +45,15 @@ public class PlayerController : CharacterBase
             }
         }
         if (!isCurrentlySelected){
+            // Do idle stuff
+            // By default, behave like a turret
+            fireCountdown -= Time.deltaTime;
+            if(fireCountdown < 0f)
+            {
+                Turret(10f);
+                fireCountdown = 1f / fireRate;
+            }
+
             return;
         }
 
@@ -76,6 +93,35 @@ public class PlayerController : CharacterBase
                 ModifyStamina(staminaRechargeRate);
             }
         }
+    }
+
+    void Turret(float range)
+    {
+        float closest = range;
+        GameObject target = null;
+        targetingRound++;
+        Debug.Log("Targeting round "  + targetingRound);
+        // Target the closest enemy in range
+        foreach (GameObject enemy in ObjectPooler.SharedInstance.pooledObjects)
+        {
+            if (enemy.layer == LayerMask.NameToLayer("Enemy") && enemy.activeInHierarchy)
+            {
+                float dist = (enemy.transform.position - transform.position).magnitude;
+                if(dist < closest)
+                {
+                    closest = dist;
+                    target = enemy;
+                }
+            }
+        }
+        if(target != null)
+        {
+            // Fire a projectile
+            GameObject projectile = Instantiate(projectileObject, muzzlePoint.transform.position + new Vector3(0,0.1f,0), Quaternion.identity);
+            projectile.GetComponent<Projectile>().target = target.transform;
+
+        }
+
     }
 
     public override void GetHit(float damage, Vector3 knockback)
