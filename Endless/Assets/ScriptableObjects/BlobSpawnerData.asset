@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2082316ffedefe54fa5f0b03e162e463, type: 3}
   m_Name: BlobSpawnerData
   m_EditorClassIdentifier: 
-  UnitsSpawnedPerTick: 6
+  UnitsSpawnedPerTick: 2
   MinTickPeriod: 3
   MaxTickPeriod: 9
   SpawnRadius: 2

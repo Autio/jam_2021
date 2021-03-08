@@ -6,6 +6,7 @@ using UnityEngine;
 public class StructuresManager : Singleton<StructuresManager>
 {
     public List<Structure> Structures;
+  
     void Awake(){
         Structures = GameObject.FindObjectsOfType<Structure>().ToList();
     }
@@ -31,6 +32,17 @@ public class StructuresManager : Singleton<StructuresManager>
 
     public void RemoveDeadStructure(Structure deadStructure){
         Structures.Remove(deadStructure);
+    }
+
+    public void HandleNewObject()
+    {
+
+
+    }
+
+
+    void Update() 
+    {
     }
 
 }
