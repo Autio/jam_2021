@@ -6,7 +6,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : CharacterBase
 {
-    public enum PlayerStates {idle, attacking, building};
+    public enum PlayerStates {idle, attacking, building, turreting};
+
+    public Vector3 positionBeforeGettingInTurret { get; private set; }
+
     public PlayerStates playerState = PlayerStates.idle;
     public WeaponBase Weapon;
     // public InputAction stikazzi;
@@ -37,7 +40,7 @@ public class PlayerController : CharacterBase
     // Tick for player refresh
     float staminaTick = 0.6f;
     private Collider[] results = new Collider[100];
-
+    private Structure hostStructure;
 
     public override void Awake()
     {
@@ -49,7 +52,6 @@ public class PlayerController : CharacterBase
 
     void Update()
     {
-        Debug.Log(playerState);
         if (enemyState == EnemyStates.stunned){ //awful awful workaround. Awful
             if ( (Time.time - stunStartTime ) >= CharacterData.StunTimeAfterBeingHit){
                 enemyState = EnemyStates.idle;
@@ -60,6 +62,9 @@ public class PlayerController : CharacterBase
             }
         }
         if (!isCurrentlySelected){
+            if (playerState == PlayerStates.turreting){
+                return;
+            }
             // Do idle stuff
             // By default, behave like a turret
             fireCountdown -= Time.deltaTime;
@@ -73,6 +78,25 @@ public class PlayerController : CharacterBase
         }
 
         var moveVec = inputActions.Player.Move.ReadValue<Vector2>();
+
+        if (playerState == PlayerStates.turreting ){
+            if (moveVec.magnitude < 0.2f){
+                return;
+            }
+            else{
+                // NavMeshHit hit = new NavMeshHit();
+                Debug.Log($"Logging: TRYING TO GET OUT ");
+
+                // if (NavMesh.SamplePosition(transform.position,out hit,20,NavMesh.GetAreaFromName("Walkable"))){
+                    Debug.Log($"Logging: HITPOSITINION");
+                    transform.position = positionBeforeGettingInTurret;
+                    playerState = PlayerStates.idle;
+                    navmeshAgent.enabled = true;
+                    hostStructure.RemovePlayerInTurret(this);
+                // }
+                return;
+            }
+        }
         var lookVec = inputActions.Player.Look.ReadValue<Vector2>();
 
         navmeshAgent.Move(new Vector3(moveVec.x,0,moveVec.y) * Time.deltaTime * CharacterData.MovementSpeed);       
@@ -102,7 +126,27 @@ public class PlayerController : CharacterBase
                     }
                 playerState = PlayerStates.attacking;
             }
-            
+        }
+
+        if (inputActions.Player.PlaceBuilding.triggered && playerState != PlayerStates.building){
+            // Debug.DrawLine(transform.position + playerModel.transform.forward * 2 + Vector3.up * 10, transform.position + playerModel.transform.forward * 2 + Vector3.up * 10 + Vector3.down * 20, Color.red, 4);
+            var ray = new Ray(transform.position + playerModel.transform.forward * 1 + Vector3.up * 10, Vector3.down * 20);
+            Debug.DrawRay(transform.position + playerModel.transform.forward * 2 + Vector3.up * 10, Vector3.down * 20, Color.blue, 4);
+            RaycastHit hit;
+            if (Physics.Raycast(ray,out hit,20,1 << LayerMask.NameToLayer("Structure"))){
+                Debug.Log($"Logging: WE GOT BULDISNG");
+                var structure = hit.collider.GetComponent<Structure>();
+                if(structure.StructureData.IsTurret){
+                    Debug.Log($"Logging: AND S TURRET");
+                    positionBeforeGettingInTurret = transform.position;
+                    playerState = PlayerStates.turreting;
+                    navmeshAgent.enabled = false;
+                    structure.PlacePlayerInTurret(this);
+                    hostStructure = structure;
+                    
+                    return;
+                }
+            }
         }
 
         if(playerState != PlayerStates.building)

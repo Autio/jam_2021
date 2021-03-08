@@ -11,6 +11,9 @@ public class Structure : MonoBehaviour
     public GameObject projectileObject;
     private Collider[] results = new Collider[100];
     private float fireCountdown;
+    public Transform TurretStandPoint;
+    private bool isManned;
+    private PlayerController manningPlayer;
 
     void Awake()
     {
@@ -29,11 +32,15 @@ public class Structure : MonoBehaviour
         fireCountdown -= Time.deltaTime;
 
         if (StructureData.IsTurret && fireCountdown < 0f){
-            fireCountdown = StructureData.AttackRateAsTurret;
 
-            var numberOfSurroundingEnemies = Physics.OverlapCapsuleNonAlloc(transform.position + Vector3.up * 5, transform.position + Vector3.down * 5, StructureData.AttackRadiusAsTurret, results, LayerMask.GetMask("Enemy"), QueryTriggerInteraction.Ignore);
+            var turretRange = isManned ? StructureData.AttackRadiusAsTurret * manningPlayer.CharacterData.AttackRadiusModifierWhenInTurret : StructureData.AttackRadiusAsTurret;
+            var turretDamage = isManned ? StructureData.AttackDamageAsTurret * manningPlayer.CharacterData.AttackDamageModifierWhenInTurret : StructureData.AttackDamageAsTurret;
+            var turretRateOfFire = isManned ? StructureData.AttackRateAsTurret * manningPlayer.CharacterData.AttackSpeedModifierWhenInTurret : StructureData.AttackRateAsTurret;
+            
+            fireCountdown = turretRateOfFire;
+            var numberOfSurroundingEnemies = Physics.OverlapCapsuleNonAlloc(transform.position + Vector3.up * 5, transform.position + Vector3.down * 5, turretRange, results, LayerMask.GetMask("Enemy"), QueryTriggerInteraction.Ignore);
             if ( numberOfSurroundingEnemies > 0){
-                float closest = StructureData.AttackRadiusAsTurret;
+                float closest = turretRange;
                 Collider target = null;
                 // Target the closest enemy in range
                 for (int i = 0; i < numberOfSurroundingEnemies; i++)
@@ -52,13 +59,27 @@ public class Structure : MonoBehaviour
                     // Fire a projectile
                     GameObject projectile = ObjectPooler.Instance.GetPooledObject(projectileObject);
                     projectile.transform.position = transform.position + Vector3.up * 3;
-                    projectile.GetComponent<Projectile>().target = target.transform;
+                    var projectileComponent = projectile.GetComponent<Projectile>();
+                    projectileComponent.SetProjectileDamage(turretDamage);
+                    projectileComponent.target = target.transform;
                     projectile.SetActive(true);
-
                 }
             }
 
         }
+    }
+
+    public void PlacePlayerInTurret(PlayerController player){
+        isManned = true;
+        manningPlayer = player;
+        
+        player.transform.position = TurretStandPoint.transform.position;
+
+        // player.playerModel.transform.position = TurretStandPoint.transform.position;
+    }
+    public void RemovePlayerInTurret(PlayerController player){
+        isManned = false;
+        manningPlayer = null;
     }
 
     public void GetHit(float damage){

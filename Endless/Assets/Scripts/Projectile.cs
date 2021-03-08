@@ -42,6 +42,9 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    public void SetProjectileDamage(float dmg){
+        damage = dmg;
+    }
 
     void OnTriggerEnter(Collider other) {
         {
