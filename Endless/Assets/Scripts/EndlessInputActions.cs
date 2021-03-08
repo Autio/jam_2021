@@ -57,6 +57,22 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ToggleBuildMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""b1072e80-f220-4c2d-bd2e-a0b426144b54"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""PlaceBuilding"",
+                    ""type"": ""Button"",
+                    ""id"": ""094afc87-589c-41b2-849b-1f4f567db25a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -365,6 +381,50 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard;Keyboard&Mouse"",
                     ""action"": ""ToggleCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9461f658-ea1f-4704-8c15-32a15033958a"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ToggleBuildMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4a8a2d96-b1f6-4edf-bef7-5335a4b4ee4c"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ToggleBuildMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f662a3a7-3240-43a8-9574-161463628fe2"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""PlaceBuilding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""98533de9-45d6-4c67-b729-dbcb79eec7cb"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""PlaceBuilding"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -958,6 +1018,8 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_ChangeCharacter = m_Player.FindAction("ChangeCharacter", throwIfNotFound: true);
         m_Player_ToggleCamera = m_Player.FindAction("ToggleCamera", throwIfNotFound: true);
+        m_Player_ToggleBuildMode = m_Player.FindAction("ToggleBuildMode", throwIfNotFound: true);
+        m_Player_PlaceBuilding = m_Player.FindAction("PlaceBuilding", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1024,6 +1086,8 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_ChangeCharacter;
     private readonly InputAction m_Player_ToggleCamera;
+    private readonly InputAction m_Player_ToggleBuildMode;
+    private readonly InputAction m_Player_PlaceBuilding;
     public struct PlayerActions
     {
         private @EndlessInputActions m_Wrapper;
@@ -1033,6 +1097,8 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @ChangeCharacter => m_Wrapper.m_Player_ChangeCharacter;
         public InputAction @ToggleCamera => m_Wrapper.m_Player_ToggleCamera;
+        public InputAction @ToggleBuildMode => m_Wrapper.m_Player_ToggleBuildMode;
+        public InputAction @PlaceBuilding => m_Wrapper.m_Player_PlaceBuilding;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1057,6 +1123,12 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                 @ToggleCamera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleCamera;
                 @ToggleCamera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleCamera;
                 @ToggleCamera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleCamera;
+                @ToggleBuildMode.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleBuildMode;
+                @ToggleBuildMode.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleBuildMode;
+                @ToggleBuildMode.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleBuildMode;
+                @PlaceBuilding.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPlaceBuilding;
+                @PlaceBuilding.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPlaceBuilding;
+                @PlaceBuilding.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPlaceBuilding;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1076,6 +1148,12 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                 @ToggleCamera.started += instance.OnToggleCamera;
                 @ToggleCamera.performed += instance.OnToggleCamera;
                 @ToggleCamera.canceled += instance.OnToggleCamera;
+                @ToggleBuildMode.started += instance.OnToggleBuildMode;
+                @ToggleBuildMode.performed += instance.OnToggleBuildMode;
+                @ToggleBuildMode.canceled += instance.OnToggleBuildMode;
+                @PlaceBuilding.started += instance.OnPlaceBuilding;
+                @PlaceBuilding.performed += instance.OnPlaceBuilding;
+                @PlaceBuilding.canceled += instance.OnPlaceBuilding;
             }
         }
     }
@@ -1246,6 +1324,8 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnChangeCharacter(InputAction.CallbackContext context);
         void OnToggleCamera(InputAction.CallbackContext context);
+        void OnToggleBuildMode(InputAction.CallbackContext context);
+        void OnPlaceBuilding(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
