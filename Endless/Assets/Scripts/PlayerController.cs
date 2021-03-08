@@ -14,6 +14,8 @@ public class PlayerController : CharacterBase
     public Camera playerCamera;
     private EndlessInputActions inputActions;
     private bool isCurrentlySelected = true;
+    enum CameraStates {near, far};
+    CameraStates cameraState = CameraStates.near;
     public override void Awake()
     {
         inputActions = new EndlessInputActions();
@@ -33,7 +35,7 @@ public class PlayerController : CharacterBase
 
     void Update()
     {
-        if (enemyState == EnemyStates.stunned){ //awful awful workaround
+        if (enemyState == EnemyStates.stunned){ //awful awful workaround. Awful
             if ( (Time.time - stunStartTime ) >= CharacterData.StunTimeAfterBeingHit){
                 enemyState = EnemyStates.idle;
             }
@@ -91,6 +93,10 @@ public class PlayerController : CharacterBase
                 ModifyStamina(staminaRechargeRate);
             }
         }
+
+        if (inputActions.Player.ToggleCamera.triggered){
+            ToggleCameraView();
+        }
     }
 
     void Turret(float range)
@@ -139,4 +145,23 @@ public class PlayerController : CharacterBase
         playerCamera.gameObject.SetActive(isSelected);
         isCurrentlySelected = isSelected;
     }
+
+    public void ToggleCameraView()
+    {
+        // Switches between preset camera positions
+        Vector3 cameraNear = new Vector3(0, 5.85f, -4.5f);
+        Vector3 cameraFar = new Vector3(0, 10, -8);
+        if(cameraState == CameraStates.near)
+        {
+            cameraState = CameraStates.far;
+            Camera.main.transform.localPosition = cameraFar;
+        } else 
+        {
+            cameraState = CameraStates.near;
+            Camera.main.transform.localPosition = cameraNear;
+        }
+
+
+    }
+
 }

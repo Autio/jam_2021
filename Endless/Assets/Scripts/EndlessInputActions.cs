@@ -49,6 +49,14 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ToggleCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""ba91aac8-f228-474b-a731-0ca9aea5c0f4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -337,6 +345,28 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                     ""action"": ""ChangeCharacter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b5968df-1839-464d-aaa8-7aef4e73fb6e"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad"",
+                    ""action"": ""ToggleCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""730cefd9-02a7-4181-84e8-5adb7c6c9dee"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard;Keyboard&Mouse"",
+                    ""action"": ""ToggleCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -927,6 +957,7 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_ChangeCharacter = m_Player.FindAction("ChangeCharacter", throwIfNotFound: true);
+        m_Player_ToggleCamera = m_Player.FindAction("ToggleCamera", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -992,6 +1023,7 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_ChangeCharacter;
+    private readonly InputAction m_Player_ToggleCamera;
     public struct PlayerActions
     {
         private @EndlessInputActions m_Wrapper;
@@ -1000,6 +1032,7 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @ChangeCharacter => m_Wrapper.m_Player_ChangeCharacter;
+        public InputAction @ToggleCamera => m_Wrapper.m_Player_ToggleCamera;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1021,6 +1054,9 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                 @ChangeCharacter.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeCharacter;
                 @ChangeCharacter.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeCharacter;
                 @ChangeCharacter.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeCharacter;
+                @ToggleCamera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleCamera;
+                @ToggleCamera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleCamera;
+                @ToggleCamera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleCamera;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1037,6 +1073,9 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                 @ChangeCharacter.started += instance.OnChangeCharacter;
                 @ChangeCharacter.performed += instance.OnChangeCharacter;
                 @ChangeCharacter.canceled += instance.OnChangeCharacter;
+                @ToggleCamera.started += instance.OnToggleCamera;
+                @ToggleCamera.performed += instance.OnToggleCamera;
+                @ToggleCamera.canceled += instance.OnToggleCamera;
             }
         }
     }
@@ -1206,6 +1245,7 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnChangeCharacter(InputAction.CallbackContext context);
+        void OnToggleCamera(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
