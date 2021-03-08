@@ -11,9 +11,13 @@ public class Blob : CharacterBase
     bool jumping = false;
 
     public GameObject groundParticles;
+    private GameObject crystal;
+    private NavMeshPath pathToCrystal;
 
     public override void Awake(){
         base.Awake();
+        crystal = GameObject.FindGameObjectWithTag("Crystal");
+        pathToCrystal = new NavMeshPath();
     }
 
     void Update()
@@ -28,6 +32,7 @@ public class Blob : CharacterBase
             }
         }
 
+        
         var closestPlayerCharacter = PlayerManager.Instance.GetClosestPlayerCharacter(transform.position);
         var distanceToPlayerChar = Vector3.Distance(transform.position,closestPlayerCharacter.transform.position);
         if (distanceToPlayerChar <= CharacterData.MaxDistanceToChasePlayer){
@@ -35,6 +40,22 @@ public class Blob : CharacterBase
             navmeshAgent.SetDestination(closestPlayerCharacter.transform.position);
         }
         else{
+            var directDistanceToCrystal = Vector3.Distance(transform.position, crystal.transform.position);
+            if (directDistanceToCrystal < CharacterData.MaxPathedDistanceToChaseCrystal){
+                navmeshAgent.CalculatePath(crystal.transform.position, pathToCrystal);
+                if(pathToCrystal.status == NavMeshPathStatus.PathComplete){
+                    Debug.Log($"We got path to crystal");
+                    navmeshAgent.SetPath(pathToCrystal);
+                    //if we are here, there _is_ a path to crystal
+                    if (navmeshAgent.remainingDistance > CharacterData.MaxPathedDistanceToChaseCrystal){
+                        navmeshAgent.ResetPath();
+                    }
+                    else{
+                        Debug.Log($"We are going to crystal");
+                        return; //terrible but else they don't go to the crystal.
+                    }
+                }
+            }
             var closestStructure = StructuresManager.Instance.GetClosestStructure(transform.position);
             var distanceToStructure = Vector3.Distance(transform.position,closestPlayerCharacter.transform.position);
             if (distanceToStructure <= CharacterData.MaxDistanceToChaseStructures){

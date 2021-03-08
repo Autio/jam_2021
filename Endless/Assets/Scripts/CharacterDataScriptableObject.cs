@@ -18,5 +18,6 @@ public class CharacterDataScriptableObject : ScriptableObject
     public float KnockBackSpeed = 1f; //This is the knockback speed we are SUBJECT to when hit
     public float MaxDistanceToChasePlayer;
     public float MaxDistanceToChaseStructures;
+    public float MaxPathedDistanceToChaseCrystal;
 
 }

@@ -33,7 +33,6 @@ public class PlayerController : CharacterBase
 
     void Update()
     {
-        Debug.Log(gameObject.name + " " + isCurrentlySelected);
         if (enemyState == EnemyStates.stunned){ //awful awful workaround
             if ( (Time.time - stunStartTime ) >= CharacterData.StunTimeAfterBeingHit){
                 enemyState = EnemyStates.idle;

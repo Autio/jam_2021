@@ -1261,22 +1261,22 @@ PrefabInstance:
     - target: {fileID: 6542326757959930651, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.646
+      value: 4.66
       objectReference: {fileID: 0}
     - target: {fileID: 6542326757959930651, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.53
+      value: -0.86
       objectReference: {fileID: 0}
     - target: {fileID: 6542326757959930651, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.023
+      value: -3.48
       objectReference: {fileID: 0}
     - target: {fileID: 6542326757959930651, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6542326757959930651, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
@@ -1286,7 +1286,7 @@ PrefabInstance:
     - target: {fileID: 6542326757959930651, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6542326757959930651, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
@@ -1301,7 +1301,7 @@ PrefabInstance:
     - target: {fileID: 6542326757959930651, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6542326757959930651, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
@@ -2701,6 +2701,11 @@ PrefabInstance:
       propertyPath: foregroundImage
       value: 
       objectReference: {fileID: 391514963}
+    - target: {fileID: 4841677570506950826, guid: cd46a2f4e80e27b468de759c892e681d,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4841677570506950828, guid: cd46a2f4e80e27b468de759c892e681d,
         type: 3}
       propertyPath: m_Pivot.x
@@ -4793,6 +4798,10 @@ MonoBehaviour:
     objectToPool: {fileID: 1238213150754825875, guid: 74b636fa16d0f8b4c8f12f956aed0b29,
       type: 3}
     shouldExpand: 1
+  - amountToPool: 50
+    objectToPool: {fileID: 295324791256371965, guid: 3597c91853dd17b4284697ebc98b4d76,
+      type: 3}
+    shouldExpand: 1
 --- !u!1001 &783804676
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6612,6 +6621,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Central Crystal
+      objectReference: {fileID: 0}
+    - target: {fileID: 19437041327458174, guid: f7ca1d5e390c48a468167113c418bb54,
+        type: 3}
+      propertyPath: m_TagString
+      value: Crystal
       objectReference: {fileID: 0}
     - target: {fileID: 1797051008620427816, guid: f7ca1d5e390c48a468167113c418bb54,
         type: 3}

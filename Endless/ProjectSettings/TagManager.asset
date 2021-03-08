@@ -7,6 +7,7 @@ TagManager:
   - FrontWall
   - Blob
   - Projectile
+  - Crystal
   layers:
   - Default
   - TransparentFX

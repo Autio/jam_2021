@@ -23,3 +23,4 @@ MonoBehaviour:
   KnockBackSpeed: 10
   MaxDistanceToChasePlayer: 5
   MaxDistanceToChaseStructures: 20
+  MaxPathedDistanceToChaseCrystal: 30
