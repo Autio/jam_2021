@@ -25,3 +25,6 @@ MonoBehaviour:
   MaxDistanceToChaseStructures: 0
   MaxPathedDistanceToChaseCrystal: 0
   AttackRadiusAsTurret: 5
+  AttackRadiusModifierWhenInTurret: 1.3
+  AttackDamageModifierWhenInTurret: 1.4
+  AttackSpeedModifierWhenInTurret: 1.3

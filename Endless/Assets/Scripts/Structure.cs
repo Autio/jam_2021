@@ -5,7 +5,7 @@ using UnityEngine;
 public class Structure : MonoBehaviour
 {
     public StructureDataScriptableObject StructureData;
-
+    public Collider StructureCollider;
     // Handle health in the separate component
     Health health;
     public GameObject projectileObject;
