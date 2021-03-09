@@ -145,6 +145,7 @@ MonoBehaviour:
   StructureData: {fileID: 11400000, guid: 06ef961df0a27fd4fb370df2f9c0a3da, type: 2}
   StructureCollider: {fileID: 0}
   projectileObject: {fileID: 0}
+  TurretStandPoint: {fileID: 0}
 --- !u!1 &4105859
 GameObject:
   m_ObjectHideFlags: 0
@@ -4778,6 +4779,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Structures: []
+  AllowedStructures:
+  - {fileID: 1891635801, guid: b122d40512d889b4b9157d460fe05f5d, type: 3}
+  - {fileID: 8597664279001224746, guid: adbee6203dd53784098820a991387168, type: 3}
 --- !u!114 &778583513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12892,6 +12896,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MySuperTinyBuilding
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057203694383055575, guid: b122d40512d889b4b9157d460fe05f5d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b122d40512d889b4b9157d460fe05f5d, type: 3}

@@ -114,18 +114,22 @@ public class PlayerController : CharacterBase
         else if (moveVec.magnitude > 0.1f){
             playerModel.transform.rotation = Quaternion.LookRotation(new Vector3(moveVec.x, 0, moveVec.y),transform.up);
         }
-        if (inputActions.Player.Fire.triggered){
-            if(currentStamina > 4)
-            {
-                // Swing if not already swinging
-                if(playerState != PlayerStates.attacking)
-                    {
-                        Weapon.TrySwing();
-                        // Deplete stamina
-                        ModifyStamina(-CharacterData.AttackStaminaCost); // Temp fixed arbitrary value
-                        staminaTick = 0.6f;
-                    }
-                playerState = PlayerStates.attacking;
+        if(playerState != PlayerStates.building)
+        {      
+            if (inputActions.Player.Fire.triggered){
+                // Needs to check against something dynamic 
+                if(currentStamina > 4)
+                {
+                    // Swing if not already swinging
+                    if(playerState != PlayerStates.attacking)
+                        {
+                            Weapon.TrySwing();
+                            // Deplete stamina
+                            ModifyStamina(-CharacterData.AttackStaminaCost); // Temp fixed arbitrary value
+                            staminaTick = 0.6f;
+                        }
+                    playerState = PlayerStates.attacking;
+                }
             }
         }
 
@@ -176,7 +180,7 @@ public class PlayerController : CharacterBase
             // Should check whether player is near base? 
             if(currentPlaceableObject == null)
             {
-                currentPlaceableObject = Instantiate(placeableObjectPrefab); // Todo - Grab from pool?
+                currentPlaceableObject = Instantiate(placeableObjectPrefab); 
                 ShowCurrentPlaceableObject();
                 playerState = PlayerStates.building;
             } else 
@@ -195,13 +199,12 @@ public class PlayerController : CharacterBase
     // Change building being placed
     private void ChangeBuilding()
     {
-        
+        var x = StructuresManager.Instance.AllowedStructures.Count;
         // Only if building
-        if (inputActions.Player.ChangeCharacter.triggered){
+        if (inputActions.Player.ChangeBuilding.triggered){
             Debug.Log($"Logging: CHANGE BUILDING");
             // StructuresManager.Instance
             // var currentStructureIndex = Structure.IndexOf(currentlySelectedPlayer);
-            
             // var newSelectedStructureIndex = Mathf.Abs((currentPlayerIndex + (int) inputActions.Player.ChangeCharacter.ReadValue<float>()) % players.Count);
             // currentlySeletctedStructure = structures[newSelectedStructureIndex];
             
@@ -253,14 +256,14 @@ public class PlayerController : CharacterBase
         currentPlaceableObject.transform.position = hit.point + new Vector3(0, .5f, 0);
 
         // Shoulder buttons rotate
-        int dir = (int)inputActions.Player.ChangeCharacter.ReadValue<float>();
+        int dir = (int)inputActions.Player.RotateBuilding.ReadValue<float>();
         float rotationSpeed = 180f;
         float rotation = dir * Time.deltaTime * rotationSpeed;
         currentPlaceableObject.transform.Rotate(0, rotation, 0);
 
         validPlacement = true;
         // Check if too far
-        float allowedRadius = 10f;
+        float allowedRadius = 10f; //TODO: Get from somewhere better
         if(transform.position.magnitude > allowedRadius)
         {
             validPlacement = false;

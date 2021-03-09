@@ -73,6 +73,22 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ChangeBuilding"",
+                    ""type"": ""Button"",
+                    ""id"": ""36c1b089-8824-4b79-8792-b4ecbf683416"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""RotateBuilding"",
+                    ""type"": ""Button"",
+                    ""id"": ""26bcc824-b05a-44ba-827f-1eea4e6e022f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -427,6 +443,138 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                     ""action"": ""PlaceBuilding"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""87106d40-163a-4566-aca0-286ef6b862bb"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeBuilding"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""33199578-c295-489b-9311-b10533844fc9"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ChangeBuilding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""939b8a93-615c-418a-8740-8d7f266bb8b4"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ChangeBuilding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""1cb15881-a307-4c72-b671-eefae2f50dea"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeBuilding"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""b5dedc93-1651-4e0b-b149-bdf1c89c2762"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ChangeBuilding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""d366f715-bafa-4923-a5b5-9d45366b930a"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ChangeBuilding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""f21bd292-9b26-4f18-b1c3-b62387082a14"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateBuilding"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""e4be1230-7ee7-4227-a3a4-78e93bee2646"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""RotateBuilding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""901f22cc-e93e-445d-84f9-e5fda6054f73"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""RotateBuilding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""74ec03be-9672-4117-bdad-42789c9e1c6d"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateBuilding"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""3d1069ea-4773-4eb3-90b6-25df0f92a7f2"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""RotateBuilding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""608326d4-a4c4-4cac-adb4-8cdcf07c61da"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""RotateBuilding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -1020,6 +1168,8 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
         m_Player_ToggleCamera = m_Player.FindAction("ToggleCamera", throwIfNotFound: true);
         m_Player_ToggleBuildMode = m_Player.FindAction("ToggleBuildMode", throwIfNotFound: true);
         m_Player_PlaceBuilding = m_Player.FindAction("PlaceBuilding", throwIfNotFound: true);
+        m_Player_ChangeBuilding = m_Player.FindAction("ChangeBuilding", throwIfNotFound: true);
+        m_Player_RotateBuilding = m_Player.FindAction("RotateBuilding", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1088,6 +1238,8 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_ToggleCamera;
     private readonly InputAction m_Player_ToggleBuildMode;
     private readonly InputAction m_Player_PlaceBuilding;
+    private readonly InputAction m_Player_ChangeBuilding;
+    private readonly InputAction m_Player_RotateBuilding;
     public struct PlayerActions
     {
         private @EndlessInputActions m_Wrapper;
@@ -1099,6 +1251,8 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
         public InputAction @ToggleCamera => m_Wrapper.m_Player_ToggleCamera;
         public InputAction @ToggleBuildMode => m_Wrapper.m_Player_ToggleBuildMode;
         public InputAction @PlaceBuilding => m_Wrapper.m_Player_PlaceBuilding;
+        public InputAction @ChangeBuilding => m_Wrapper.m_Player_ChangeBuilding;
+        public InputAction @RotateBuilding => m_Wrapper.m_Player_RotateBuilding;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1129,6 +1283,12 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                 @PlaceBuilding.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPlaceBuilding;
                 @PlaceBuilding.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPlaceBuilding;
                 @PlaceBuilding.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPlaceBuilding;
+                @ChangeBuilding.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeBuilding;
+                @ChangeBuilding.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeBuilding;
+                @ChangeBuilding.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeBuilding;
+                @RotateBuilding.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateBuilding;
+                @RotateBuilding.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateBuilding;
+                @RotateBuilding.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateBuilding;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1154,6 +1314,12 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
                 @PlaceBuilding.started += instance.OnPlaceBuilding;
                 @PlaceBuilding.performed += instance.OnPlaceBuilding;
                 @PlaceBuilding.canceled += instance.OnPlaceBuilding;
+                @ChangeBuilding.started += instance.OnChangeBuilding;
+                @ChangeBuilding.performed += instance.OnChangeBuilding;
+                @ChangeBuilding.canceled += instance.OnChangeBuilding;
+                @RotateBuilding.started += instance.OnRotateBuilding;
+                @RotateBuilding.performed += instance.OnRotateBuilding;
+                @RotateBuilding.canceled += instance.OnRotateBuilding;
             }
         }
     }
@@ -1326,6 +1492,8 @@ public class @EndlessInputActions : IInputActionCollection, IDisposable
         void OnToggleCamera(InputAction.CallbackContext context);
         void OnToggleBuildMode(InputAction.CallbackContext context);
         void OnPlaceBuilding(InputAction.CallbackContext context);
+        void OnChangeBuilding(InputAction.CallbackContext context);
+        void OnRotateBuilding(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
