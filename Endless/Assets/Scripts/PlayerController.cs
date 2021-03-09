@@ -111,7 +111,7 @@ public class PlayerController : CharacterBase
         if (lookVec.magnitude > 0.1f){
             playerModel.transform.rotation = Quaternion.LookRotation(new Vector3(lookVec.x, 0, lookVec.y),transform.up);
         }
-        else if (moveVec.magnitude > 0.1f){
+        else if (moveVec.magnitude > 0.1f && playerState != PlayerStates.building){
             playerModel.transform.rotation = Quaternion.LookRotation(new Vector3(moveVec.x, 0, moveVec.y),transform.up);
         }
         if(playerState != PlayerStates.building)
@@ -225,13 +225,18 @@ public class PlayerController : CharacterBase
 
     private void ShowCurrentPlaceableObject()
     {
+
+        // TODO: remembe orientation of most recently placed piece
+        // TODO: Make sure the buildings get placed as vector of the structure as the normal of the raycast
+        // TODO: Make sure buildings touch the grounddd
+        
         // Only check for the ground
         int layer_mask = LayerMask.GetMask("Ground");
         Vector3 down = transform.TransformDirection(Vector3.down);
         RaycastHit hit;
-        float distanceFromPlayer = 2f;
+        float distanceFromPlayer = buildingExtents.x + 0.2f;
         Physics.Raycast((playerModel.transform.forward * distanceFromPlayer + transform.position) + new Vector3(0, 20f, 0), down, out hit, 100f, layer_mask); 
-        currentPlaceableObject.transform.position = hit.point + new Vector3(0, .5f, 0);
+        currentPlaceableObject.transform.position = hit.point + new Vector3(0, buildingExtents.y / 4, 0);
 
         // Grab extents before the collider is disabled
         buildingExtents = currentPlaceableObject.GetComponent<Structure>().StructureCollider.bounds.extents;
@@ -251,7 +256,7 @@ public class PlayerController : CharacterBase
         // The building is always a bit ahead of the player's facing
         Vector3 down = transform.TransformDirection(Vector3.down);
         RaycastHit hit;
-        float distanceFromPlayer = 2f;
+        float distanceFromPlayer = buildingExtents.x + 0.2f; // Depends on the extents
         Physics.Raycast((playerModel.transform.forward * distanceFromPlayer + transform.position) + new Vector3(0, 20f, 0), down, out hit, 100f, layer_mask); 
         currentPlaceableObject.transform.position = hit.point + new Vector3(0, .5f, 0);
 
@@ -263,7 +268,7 @@ public class PlayerController : CharacterBase
 
         validPlacement = true;
         // Check if too far
-        float allowedRadius = 10f; //TODO: Get from somewhere better
+        float allowedRadius = 10f; //TODO: Get from somewhere better, like the level settings or sth
         if(transform.position.magnitude > allowedRadius)
         {
             validPlacement = false;
