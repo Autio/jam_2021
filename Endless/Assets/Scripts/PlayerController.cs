@@ -227,9 +227,7 @@ public class PlayerController : CharacterBase
     private void ShowCurrentPlaceableObject()
     {
 
-        // TODO: Make sure the buildings get placed as vector of the structure as the normal of the raycast
-        // TODO: Make sure buildings touch the grounddd
-        
+        // TODO: Building switching
         // Only check for the ground
         int layer_mask = LayerMask.GetMask("Ground");
         Vector3 down = transform.TransformDirection(Vector3.down);
@@ -261,9 +259,11 @@ public class PlayerController : CharacterBase
         RaycastHit hit;
         float distanceFromPlayer = buildingExtents.x * 1.4f; // Depends on the extents
         Physics.Raycast((playerModel.transform.forward * distanceFromPlayer + transform.position) + new Vector3(0, 20f, 0), down, out hit, 100f, layer_mask); 
-        currentPlaceableObject.transform.position = hit.point;
+        currentPlaceableObject.transform.position = hit.point + new Vector3(0, buildingExtents.y * 0.33f, 0);
         
-        // Make sure aligns with ground
+        // Make sure aligns with ground 
+        // NOTE: Makes sense for walls but not so sure it makes sense for all towers? They might all look wonky.
+        // People tend to build upright despite slopes
         var slopeRotation = Quaternion.FromToRotation(currentPlaceableObject.transform.up, hit.normal);
         // Shoulder buttons rotate
         int dir = (int)inputActions.Player.RotateBuilding.ReadValue<float>();

@@ -1111,7 +1111,7 @@ MonoBehaviour:
   muzzlePoint: {fileID: 548116289}
   projectileObject: {fileID: 1238213150754825875, guid: 74b636fa16d0f8b4c8f12f956aed0b29,
     type: 3}
-  placeableObjectPrefab: {fileID: 4795422738242632414, guid: adbee6203dd53784098820a991387168,
+  placeableObjectPrefab: {fileID: 5460035795136086729, guid: b122d40512d889b4b9157d460fe05f5d,
     type: 3}
   buildingPlacementMaterial: {fileID: 2100000, guid: 39a15513f0af62c44bbd3f5476410f7d,
     type: 2}
