@@ -34,6 +34,7 @@ public class PlayerController : CharacterBase
     private GameObject currentPlaceableObject;
     private bool validPlacement;
     private Vector3 buildingExtents;
+    private Quaternion previousBuildingOrientation;
     public Material buildingPlacementMaterial;
     public Material invalidPlacementMaterial;
 
@@ -226,7 +227,6 @@ public class PlayerController : CharacterBase
     private void ShowCurrentPlaceableObject()
     {
 
-        // TODO: remembe orientation of most recently placed piece
         // TODO: Make sure the buildings get placed as vector of the structure as the normal of the raycast
         // TODO: Make sure buildings touch the grounddd
         
@@ -237,7 +237,10 @@ public class PlayerController : CharacterBase
         float distanceFromPlayer = buildingExtents.x + 0.2f;
         Physics.Raycast((playerModel.transform.forward * distanceFromPlayer + transform.position) + new Vector3(0, 20f, 0), down, out hit, 100f, layer_mask); 
         currentPlaceableObject.transform.position = hit.point + new Vector3(0, buildingExtents.y / 4, 0);
-
+        if(previousBuildingOrientation != null)
+        {
+            currentPlaceableObject.transform.rotation = previousBuildingOrientation;
+        }
         // Grab extents before the collider is disabled
         buildingExtents = currentPlaceableObject.GetComponent<Structure>().StructureCollider.bounds.extents;
         // Disable collider
@@ -256,16 +259,24 @@ public class PlayerController : CharacterBase
         // The building is always a bit ahead of the player's facing
         Vector3 down = transform.TransformDirection(Vector3.down);
         RaycastHit hit;
-        float distanceFromPlayer = buildingExtents.x + 0.2f; // Depends on the extents
+        float distanceFromPlayer = buildingExtents.x * 1.4f; // Depends on the extents
         Physics.Raycast((playerModel.transform.forward * distanceFromPlayer + transform.position) + new Vector3(0, 20f, 0), down, out hit, 100f, layer_mask); 
-        currentPlaceableObject.transform.position = hit.point + new Vector3(0, .5f, 0);
-
+        currentPlaceableObject.transform.position = hit.point;
+        
+        // Make sure aligns with ground
+        var slopeRotation = Quaternion.FromToRotation(currentPlaceableObject.transform.up, hit.normal);
         // Shoulder buttons rotate
         int dir = (int)inputActions.Player.RotateBuilding.ReadValue<float>();
-        float rotationSpeed = 180f;
-        float rotation = dir * Time.deltaTime * rotationSpeed;
-        currentPlaceableObject.transform.Rotate(0, rotation, 0);
+        if(dir != 0)
+        {
+            
+            float rotationSpeed = 180f;
+            float rotation = dir * Time.deltaTime * rotationSpeed;
+            currentPlaceableObject.transform.Rotate(0, rotation, 0);       
 
+        }
+        currentPlaceableObject.transform.rotation = Quaternion.Slerp(currentPlaceableObject.transform.rotation, slopeRotation * currentPlaceableObject.transform.rotation, 10 * Time.deltaTime);        
+        
         validPlacement = true;
         // Check if too far
         float allowedRadius = 10f; //TODO: Get from somewhere better, like the level settings or sth
@@ -305,6 +316,9 @@ public class PlayerController : CharacterBase
         {
             currentPlaceableObject.GetComponent<Structure>().ResetMaterials();
             currentPlaceableObject.GetComponent<Structure>().StructureCollider.enabled = true;
+            // Store the rotation to be ready for the next placement
+            previousBuildingOrientation = currentPlaceableObject.transform.rotation;
+
             currentPlaceableObject = null;
 
             playerState = PlayerStates.idle;
