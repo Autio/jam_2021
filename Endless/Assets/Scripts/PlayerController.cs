@@ -196,21 +196,34 @@ public class PlayerController : CharacterBase
             PlaceCurrentPlaceableObject();
         }
 
+        if (playerState == PlayerStates.building && inputActions.Player.ChangeBuilding.triggered)
+        {
+            ChangeBuilding();
+        }
     }
 
     // Change building being placed
     private void ChangeBuilding()
     {
-        var x = StructuresManager.Instance.AllowedStructures.Count;
-        // Only if building
-        if (inputActions.Player.ChangeBuilding.triggered){
             Debug.Log($"Logging: CHANGE BUILDING");
-            // StructuresManager.Instance
-            // var currentStructureIndex = Structure.IndexOf(currentlySelectedPlayer);
-            // var newSelectedStructureIndex = Mathf.Abs((currentPlayerIndex + (int) inputActions.Player.ChangeCharacter.ReadValue<float>()) % players.Count);
-            // currentlySeletctedStructure = structures[newSelectedStructureIndex];
-            
-        }
+            var allowedStructures = StructuresManager.Instance.AllowedStructures;
+            var currentStructureIndex = 0;
+            for (int i = 0; i < allowedStructures.Count; i++)
+            {
+                if(allowedStructures[i].name == placeableObjectPrefab.name)
+                {
+                    currentStructureIndex = i;
+                }
+            }
+
+            var newSelectedStructureIndex = Mathf.Abs((currentStructureIndex + (int) inputActions.Player.ChangeBuilding.ReadValue<float>()) % allowedStructures.Count);
+            Destroy(currentPlaceableObject);
+            placeableObjectPrefab = allowedStructures[newSelectedStructureIndex];
+            currentPlaceableObject = null;
+            currentPlaceableObject = Instantiate(placeableObjectPrefab); 
+            currentPlaceableObject.GetComponent<Structure>().StructureCollider.enabled = true;
+
+            ShowCurrentPlaceableObject();
     }
 
     // Sets the materials of the building to be placed to show if it's a valid placement or not
@@ -229,21 +242,22 @@ public class PlayerController : CharacterBase
     {
 
         // TODO: Building switching
-
+        // Grab extents before the collider is disabled
         placeableStructure = currentPlaceableObject.GetComponent<Structure>();
+        buildingExtents = placeableStructure.StructureCollider.bounds.extents;
         // Only check for the ground
         int layer_mask = LayerMask.GetMask("Ground");
         Vector3 down = transform.TransformDirection(Vector3.down);
         RaycastHit hit;
-        float distanceFromPlayer = buildingExtents.x + 0.2f;
+        float distanceFromPlayer = buildingExtents.x * 1.5f;
+
         Physics.Raycast((playerModel.transform.forward * distanceFromPlayer + transform.position) + new Vector3(0, 20f, 0), down, out hit, 100f, layer_mask); 
         currentPlaceableObject.transform.position = hit.point + new Vector3(0, buildingExtents.y / 4, 0);
         if(previousBuildingOrientation != null)
         {
             currentPlaceableObject.transform.rotation = previousBuildingOrientation;
         }
-        // Grab extents before the collider is disabled
-        buildingExtents = currentPlaceableObject.GetComponent<Structure>().StructureCollider.bounds.extents;
+
         // Disable collider
         currentPlaceableObject.GetComponent<Structure>().StructureCollider.enabled = false;
 
@@ -260,15 +274,13 @@ public class PlayerController : CharacterBase
         // The building is always a bit ahead of the player's facing
         Vector3 down = transform.TransformDirection(Vector3.down);
         RaycastHit hit;
-        float distanceFromPlayer = buildingExtents.x * 1.4f; // Depends on the extents
+        float distanceFromPlayer = buildingExtents.x * 1.6f; // Depends on the extents
         Physics.Raycast((playerModel.transform.forward * distanceFromPlayer + transform.position) + new Vector3(0, 20f, 0), down, out hit, 100f, layer_mask); 
-        currentPlaceableObject.transform.position = hit.point + new Vector3(0, buildingExtents.y * 0.33f, 0);
         
         // Make sure aligns with ground 
-        // NOTE: Makes sense for walls but not so sure it makes sense for all towers? They might all look wonky.
-        // People tend to build upright despite slopes
         var slopeRotation = Quaternion.FromToRotation(currentPlaceableObject.transform.up, hit.normal);
         var slopeIncline = Vector3.Angle(Vector3.up, hit.normal);
+
         // Shoulder buttons rotate
         int dir = (int)inputActions.Player.RotateBuilding.ReadValue<float>();
         if(dir != 0)
@@ -278,13 +290,19 @@ public class PlayerController : CharacterBase
             currentPlaceableObject.transform.Rotate(0, rotation, 0);       
         }
 
+        float yBuffer = .1f;
+
         // Only apply sloping for WALLS
+        // Otherwise folks build things vertically even if they are on an incline base
         if(placeableStructure.StructureData.Type == StructureDataScriptableObject.BuildingType.wall)
         {
             currentPlaceableObject.transform.rotation = Quaternion.Slerp(currentPlaceableObject.transform.rotation, slopeRotation * currentPlaceableObject.transform.rotation, 10 * Time.deltaTime);        
+            yBuffer = -0.2f;
         }   
-        // Otherwise folks build things vertically even if they are on an incline base
          
+         
+        currentPlaceableObject.transform.position = hit.point + new Vector3(0, buildingExtents.y + yBuffer, 0);
+
         validPlacement = true;
         // Check if too far
         float allowedRadius = 10f; //TODO: Get from somewhere better, like the level settings or sth
@@ -293,7 +311,7 @@ public class PlayerController : CharacterBase
             validPlacement = false;
         }
         // Check if overlapping with existing buildings
-        int s_layerMask = LayerMask.GetMask("Structure");
+        int s_layerMask = LayerMask.GetMask("Structure"); // TODO: A bug with new builds
         Collider[] hitColliders = Physics.OverlapBox(currentPlaceableObject.transform.position + new Vector3(0, -.5f, 0), buildingExtents / 1.6f, currentPlaceableObject.transform.rotation, s_layerMask);
         
         foreach(Collider c in hitColliders)
@@ -305,9 +323,10 @@ public class PlayerController : CharacterBase
             }
         }
 
-        // Check on a valid incline
-        float allowedIncline = placeableStructure.StructureData.maxIncline;
-        if(slopeIncline > allowedIncline)
+        //Check on a valid incline
+        float allowedIncline = placeableStructure.StructureData.MaxIncline;
+        
+        if(slopeIncline > allowedIncline && allowedIncline != 0)
         {
             validPlacement = false;
         }

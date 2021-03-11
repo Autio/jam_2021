@@ -8,7 +8,7 @@ public class StructuresManager : Singleton<StructuresManager>
     public List<Structure> Structures;
     
     // Structure types the player can build
-    public List<Structure> AllowedStructures;
+    public List<GameObject> AllowedStructures;
 
     void Awake(){
         Structures = GameObject.FindObjectsOfType<Structure>().ToList();

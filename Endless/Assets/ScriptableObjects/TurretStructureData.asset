@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 40
   Type: 0
-  maxIncline: 22.5
+  MaxIncline: 22.5
   KnockBackInflictedUponAttacker: 0.5
   StuntimeInflictedUponAttacker: 0.3
   IsTurret: 1

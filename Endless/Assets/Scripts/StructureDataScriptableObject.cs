@@ -9,7 +9,7 @@ public class StructureDataScriptableObject : ScriptableObject
     public enum BuildingType {turret, wall, other};
     public BuildingType Type;
     // How much of an incline can the building be on and still be accepted 
-    public float maxIncline;
+    public float MaxIncline;
     public float KnockBackInflictedUponAttacker;
     public float StuntimeInflictedUponAttacker;
     public bool IsTurret = false;

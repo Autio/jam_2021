@@ -13,5 +13,11 @@ MonoBehaviour:
   m_Name: GenericStructureData
   m_EditorClassIdentifier: 
   Health: 40
+  Type: 0
+  MaxIncline: 22.5
   KnockBackInflictedUponAttacker: 0.5
   StuntimeInflictedUponAttacker: 0.3
+  IsTurret: 0
+  AttackRadiusAsTurret: 0
+  AttackRateAsTurret: 0
+  AttackDamageAsTurret: 0
