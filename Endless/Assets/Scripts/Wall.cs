@@ -11,12 +11,12 @@ public class Wall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach(Transform wallblock in transform)
+        foreach(Transform wall in transform)
         {
             if(Random.Range(0,10) < 2)
             {
                 try {
-                wallblock.GetComponent<Renderer>().material = altWallMaterial;
+                wall.GetComponent<Renderer>().material = altWallMaterial;
                 }
                 catch{
                     // No material on child

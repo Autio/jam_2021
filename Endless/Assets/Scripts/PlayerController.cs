@@ -312,8 +312,14 @@ public class PlayerController : CharacterBase
         }
         // Check if overlapping with existing buildings
         int s_layerMask = LayerMask.GetMask("Structure"); // TODO: A bug with new builds
-        Collider[] hitColliders = Physics.OverlapBox(currentPlaceableObject.transform.position + new Vector3(0, -.5f, 0), buildingExtents / 1.6f, currentPlaceableObject.transform.rotation, s_layerMask);
-        
+        float overlapBuffer = 1.3f;
+        if(placeableStructure.StructureData.Type == StructureDataScriptableObject.BuildingType.wall){
+            overlapBuffer = 0.1f;
+        }
+        Debug.Log(buildingExtents / overlapBuffer);
+        Collider[] hitColliders = Physics.OverlapBox(
+            currentPlaceableObject.transform.position, buildingExtents * overlapBuffer, currentPlaceableObject.transform.rotation, s_layerMask);
+
         foreach(Collider c in hitColliders)
         {
             // Check isn't self
