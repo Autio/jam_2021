@@ -2647,10 +2647,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 201ab24d97799904cb82c959946bc940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StructureData: {fileID: 11400000, guid: 06ef961df0a27fd4fb370df2f9c0a3da, type: 2}
+  StructureData: {fileID: 11400000, guid: 2e9f340efadfddf4f957acdf8bfa05cf, type: 2}
   StructureCollider: {fileID: 7242320125805266583}
   projectileObject: {fileID: 1238213150754825875, guid: 74b636fa16d0f8b4c8f12f956aed0b29,
     type: 3}
+  TurretStandPoint: {fileID: 0}
 --- !u!65 &7242320125805266583
 BoxCollider:
   m_ObjectHideFlags: 0

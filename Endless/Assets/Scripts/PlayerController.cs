@@ -32,6 +32,7 @@ public class PlayerController : CharacterBase
     [SerializeField] 
     private GameObject placeableObjectPrefab;
     private GameObject currentPlaceableObject;
+    private Structure placeableStructure;
     private bool validPlacement;
     private Vector3 buildingExtents;
     private Quaternion previousBuildingOrientation;
@@ -228,6 +229,8 @@ public class PlayerController : CharacterBase
     {
 
         // TODO: Building switching
+
+        placeableStructure = currentPlaceableObject.GetComponent<Structure>();
         // Only check for the ground
         int layer_mask = LayerMask.GetMask("Ground");
         Vector3 down = transform.TransformDirection(Vector3.down);
@@ -265,18 +268,23 @@ public class PlayerController : CharacterBase
         // NOTE: Makes sense for walls but not so sure it makes sense for all towers? They might all look wonky.
         // People tend to build upright despite slopes
         var slopeRotation = Quaternion.FromToRotation(currentPlaceableObject.transform.up, hit.normal);
+        var slopeIncline = Vector3.Angle(Vector3.up, hit.normal);
         // Shoulder buttons rotate
         int dir = (int)inputActions.Player.RotateBuilding.ReadValue<float>();
         if(dir != 0)
         {
-            
             float rotationSpeed = 180f;
             float rotation = dir * Time.deltaTime * rotationSpeed;
             currentPlaceableObject.transform.Rotate(0, rotation, 0);       
-
         }
-        currentPlaceableObject.transform.rotation = Quaternion.Slerp(currentPlaceableObject.transform.rotation, slopeRotation * currentPlaceableObject.transform.rotation, 10 * Time.deltaTime);        
-        
+
+        // Only apply sloping for WALLS
+        if(placeableStructure.StructureData.Type == StructureDataScriptableObject.BuildingType.wall)
+        {
+            currentPlaceableObject.transform.rotation = Quaternion.Slerp(currentPlaceableObject.transform.rotation, slopeRotation * currentPlaceableObject.transform.rotation, 10 * Time.deltaTime);        
+        }   
+        // Otherwise folks build things vertically even if they are on an incline base
+         
         validPlacement = true;
         // Check if too far
         float allowedRadius = 10f; //TODO: Get from somewhere better, like the level settings or sth
@@ -296,6 +304,14 @@ public class PlayerController : CharacterBase
                 validPlacement = false;
             }
         }
+
+        // Check on a valid incline
+        float allowedIncline = placeableStructure.StructureData.maxIncline;
+        if(slopeIncline > allowedIncline)
+        {
+            validPlacement = false;
+        }
+        
         SetPlacementValidity(validPlacement);
 
     }
