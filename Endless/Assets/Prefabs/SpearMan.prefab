@@ -982,6 +982,7 @@ GameObject:
   - component: {fileID: 1097663386082464998}
   - component: {fileID: 2960514827597785407}
   - component: {fileID: 6816079445683748426}
+  - component: {fileID: 1677924480}
   m_Layer: 11
   m_Name: SpearMan
   m_TagString: Untagged
@@ -1180,6 +1181,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76761de1433088c4b93c24d01ee952bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1677924480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6542326757959930650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86299bc2739534b449b1ba2038e8d6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radiusMaterial: {fileID: 2100000, guid: 17909737250b109439c7883c6507fbd3, type: 2}
+  radius: 3
+  color: {r: 0.9811321, g: 0.6907831, b: 0.33784264, a: 0.5529412}
 --- !u!1 &6542326757977389470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1991,12 +2007,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4841677570702607422}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &1035963538 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4841677570506950828, guid: cd46a2f4e80e27b468de759c892e681d,
-    type: 3}
-  m_PrefabInstance: {fileID: 4841677570702607422}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1171250905 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4841677571722271463, guid: cd46a2f4e80e27b468de759c892e681d,
@@ -2009,3 +2019,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &1035963538 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4841677570506950828, guid: cd46a2f4e80e27b468de759c892e681d,
+    type: 3}
+  m_PrefabInstance: {fileID: 4841677570702607422}
+  m_PrefabAsset: {fileID: 0}

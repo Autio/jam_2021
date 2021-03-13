@@ -311,7 +311,7 @@ public class PlayerController : CharacterBase
             validPlacement = false;
         }
         // Check if overlapping with existing buildings
-        int s_layerMask = LayerMask.GetMask("Structure"); // TODO: A bug with new builds
+        int s_layerMask = LayerMask.GetMask("Structure"); 
         float overlapBuffer = 1.3f;
         if(placeableStructure.StructureData.Type == StructureDataScriptableObject.BuildingType.wall){
             overlapBuffer = 0.1f;
