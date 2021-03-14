@@ -29,7 +29,7 @@ Material:
     - _Radius: 3
     - _RadiusWidth: 0.12
     m_Colors:
-    - _Center: {r: 1.7156513, g: -1.6950548, b: -7.763759, a: 0}
+    - _Center: {r: 4.66, g: -0.7907945, b: -3.48, a: 0}
     - _Color: {r: 0.07098794, g: 1, b: 0, a: 0.9019608}
     - _RadiusColor: {r: 0.9811321, g: 0.6907831, b: 0.33784264, a: 0.5529412}
   m_BuildTextureStacks: []
