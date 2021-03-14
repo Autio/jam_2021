@@ -23,6 +23,7 @@ public class Structure : MonoBehaviour
         try {
         health.SetCurrentHealth(StructureData.Health);
         health.SetMaxHealth(StructureData.Health);
+
         } catch{
             Debug.Log("Couldn't set health for " + gameObject.name);
         }
@@ -86,7 +87,7 @@ public class Structure : MonoBehaviour
         manningPlayer = player;
         
         player.transform.position = TurretStandPoint.transform.position;
-
+      
         // player.playerModel.transform.position = TurretStandPoint.transform.position;
     }
     public void RemovePlayerInTurret(PlayerController player){
@@ -128,7 +129,6 @@ public class Structure : MonoBehaviour
     }
 
 }
-
 
 class MaterialMap 
 {

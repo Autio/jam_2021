@@ -50,6 +50,7 @@ public class PlayerController : CharacterBase
         inputActions = new EndlessInputActions();
         inputActions.Player.Enable();
         base.Awake();
+
     }
 
 
@@ -96,6 +97,9 @@ public class PlayerController : CharacterBase
                     playerState = PlayerStates.idle;
                     navmeshAgent.enabled = true;
                     hostStructure.RemovePlayerInTurret(this);
+
+                    // Don't show radius no more
+                    GetComponent<Radius>().radius = 0;
                 // }
                 return;
             }
@@ -119,7 +123,7 @@ public class PlayerController : CharacterBase
         if(playerState != PlayerStates.building)
         {      
             if (inputActions.Player.Fire.triggered){
-                // Needs to check against something dynamic 
+                // TODO: Needs to check against something dynamic 
                 if(currentStamina > 4)
                 {
                     // Swing if not already swinging
@@ -135,6 +139,7 @@ public class PlayerController : CharacterBase
             }
         }
 
+        // Enter a building
         if (inputActions.Player.PlaceBuilding.triggered && playerState != PlayerStates.building){
             // Debug.DrawLine(transform.position + playerModel.transform.forward * 2 + Vector3.up * 10, transform.position + playerModel.transform.forward * 2 + Vector3.up * 10 + Vector3.down * 20, Color.red, 4);
             var ray = new Ray(transform.position + playerModel.transform.forward * 1 + Vector3.up * 10, Vector3.down * 20);
@@ -151,6 +156,10 @@ public class PlayerController : CharacterBase
                     structure.PlacePlayerInTurret(this);
                     hostStructure = structure;
                     
+                    // Start displaying radius around player
+                    GetComponent<Radius>().enabled = true;
+                    GetComponent<Radius>().radius = CharacterData.AttackRadiusAsTurret;
+
                     return;
                 }
             }

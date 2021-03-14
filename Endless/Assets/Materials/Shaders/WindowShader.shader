@@ -1,26 +1,22 @@
-Shader "Custom/RadiusShader"
+Shader "Custom/WindowShader"
 {
     Properties
     {
         _Color ("Color", Color) = (1,1,1,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
-        _Center("Center", Vector) = (0,0,0,0)
-        _Radius("Radius", Float) = 0.5
-        _RadiusColor("Radius Color", Color) = (1,0,0,1)
-        _RadiusWidth("Radius Width", Float) = 2
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { 
+            "Queue" = "Transparent"
+            "IgnoreProjector" = "True"
+            "RenderType" = "Transparent" }
         LOD 200
+        Cull Back
 
         CGPROGRAM
-        float3 _Center;
-        float _Radius;
-        fixed4 _RadiusColor;
-        float _RadiusWidth;
         // Physically based Standard lighting model, and enable shadows on all light types
-        #pragma surface surf Standard fullforwardshadows
+        #pragma surface surf Standard alpha:fade
 
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.0
@@ -30,9 +26,10 @@ Shader "Custom/RadiusShader"
         struct Input
         {
             float2 uv_MainTex;
-            float3 worldPos;
         };
 
+        half _Glossiness;
+        half _Metallic;
         fixed4 _Color;
 
         // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
@@ -44,12 +41,10 @@ Shader "Custom/RadiusShader"
 
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
-            float d = distance(_Center, IN.worldPos);
-            if (d > _Radius && d < _Radius + _RadiusWidth)
-                o.Albedo = _RadiusColor;
-            else
-                o.Albedo = tex2D(_MainTex, IN.uv_MainTex).rgb;
-
+            // Albedo comes from a texture tinted by color
+            float4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
+            o.Albedo = c.rgb;
+            o.Alpha = c.a;
         }
         ENDCG
     }

@@ -1188,14 +1188,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6542326757959930650}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86299bc2739534b449b1ba2038e8d6ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   radiusMaterial: {fileID: 2100000, guid: 17909737250b109439c7883c6507fbd3, type: 2}
   radius: 3
-  color: {r: 0.9811321, g: 0.6907831, b: 0.33784264, a: 0.5529412}
+  color: {r: 0.2264151, g: 0.64573914, b: 0.9056604, a: 0.5529412}
 --- !u!1 &6542326757977389470
 GameObject:
   m_ObjectHideFlags: 0
