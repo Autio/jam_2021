@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
-public class ResourceController : MonoBehaviour
+public class ResourceController : Singleton<ResourceController>
 {
     // Keeps track of level resources
     public enum ResourceTypes {wood, stone};
     public int initialWood, initialStone;
 
-    private int wood, stone;
+    [SerializeField] TextMeshProUGUI stoneText;
+    private int wood, stone;  
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +26,7 @@ public class ResourceController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        stoneText.text = stone.ToString();
     }
 
     public void AddResource(ResourceTypes resourceType, int amount)
@@ -57,4 +62,7 @@ public class ResourceController : MonoBehaviour
             break;
         }
     }
+
+    // Render Resources in the GUI
+
 }

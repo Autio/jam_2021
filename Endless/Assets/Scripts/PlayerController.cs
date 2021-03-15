@@ -50,9 +50,7 @@ public class PlayerController : CharacterBase
         inputActions = new EndlessInputActions();
         inputActions.Player.Enable();
         base.Awake();
-
     }
-
 
     void Update()
     {

@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: SmallStone
   m_EditorClassIdentifier: 
   Health: 0
+  lootPrefab: {fileID: 6621511249241708642, guid: a31d54751416e004fa44b053483e06e7,
+    type: 3}
   Type: 0
   yield: 0
