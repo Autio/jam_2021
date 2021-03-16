@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 
 public class StructuresManager : Singleton<StructuresManager>
 {
     public List<Structure> Structures;
-    
+    [SerializeField] TextMeshProUGUI buildingCostText; 
     // Structure types the player can build
     public List<GameObject> AllowedStructures;
 
@@ -47,5 +48,37 @@ public class StructuresManager : Singleton<StructuresManager>
     void Update() 
     {
     }
+
+    // Should GUI be handled in a separate controller entirely? 
+    // Shows the costs of the building you are wanting to build
+    public bool CanAffordToBuild(StructureDataScriptableObject StructureData)
+    {
+        if(StructureData.ResourceCosts.wood > ResourceController.Instance.GetWood())
+        {
+            return false;
+        }
+        if(StructureData.ResourceCosts.stone > ResourceController.Instance.GetStone())
+        {
+            return false;
+        }
+
+        return true;
+        
+        
+    }
+
+    public void ShowBuildingCosts(StructureDataScriptableObject StructureData)
+    {
+        string woodCost = StructureData.ResourceCosts.wood > 0 ? StructureData.ResourceCosts.wood + " wood\n" : "";
+        string stoneCost = StructureData.ResourceCosts.stone > 0 ? StructureData.ResourceCosts.stone + " stone\n" : "";
+
+        buildingCostText.text = "Cost:\n" + woodCost + stoneCost;
+    }
+
+    public void ClearBuildingCosts()
+    {
+        buildingCostText.text = "";
+    }
+
 
 }

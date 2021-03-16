@@ -1118,6 +1118,10 @@ MonoBehaviour:
     type: 2}
   invalidPlacementMaterial: {fileID: 2100000, guid: 0b73cd78696a8284fb74b52f817a2638,
     type: 2}
+  tooCostlyPlacementMaterial: {fileID: 2100000, guid: edf3b9f05765c284594d6dd803200b2a,
+    type: 2}
+  tooFarPlacementMaterial: {fileID: 2100000, guid: 8c41363e9b35e2249ab4e341bf5e2d21,
+    type: 2}
 --- !u!195 &1072092212
 NavMeshAgent:
   m_ObjectHideFlags: 0

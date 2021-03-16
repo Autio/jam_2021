@@ -13,8 +13,6 @@ public class ResourceController : Singleton<ResourceController>
     [SerializeField] TextMeshProUGUI stoneText, woodText;
     private int wood, stone;  
 
-    
-
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +25,15 @@ public class ResourceController : Singleton<ResourceController>
     void Update()
     {
         stoneText.text = stone.ToString();
+    }
+
+    public int GetWood()
+    {
+        return wood;
+    }
+    public int GetStone()
+    {
+        return stone;
     }
 
     public void AddResource(ResourceTypes resourceType, int amount)
@@ -44,6 +51,8 @@ public class ResourceController : Singleton<ResourceController>
             Debug.Log("Couldn't add that resource");
             break;
         }
+        UpdateResourceGUI();
+
     }
 
     public void RemoveResource(ResourceTypes resourceType, int amount)
@@ -60,6 +69,20 @@ public class ResourceController : Singleton<ResourceController>
         default:
             Debug.Log("Couldn't subtract that resource");
             break;
+        }
+
+        UpdateResourceGUI();
+    }
+
+    public void PayForBuilding(StructureDataScriptableObject StructureData)
+    {
+        if(StructureData.ResourceCosts.wood > 0)
+        {
+            RemoveResource(ResourceTypes.wood, StructureData.ResourceCosts.wood);
+        }
+        if(StructureData.ResourceCosts.stone > 0)
+        {
+            RemoveResource(ResourceTypes.stone, StructureData.ResourceCosts.stone);
         }
     }
 

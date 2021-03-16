@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 40
   Type: 1
+  ResourceCosts:
+    wood: 0
+    stone: 5
   MaxIncline: 30
   KnockBackInflictedUponAttacker: 0.5
   StuntimeInflictedUponAttacker: 0.3

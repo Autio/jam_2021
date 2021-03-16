@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ResourceType {stone, wood};
 [CreateAssetMenu(fileName = "ResourceData", menuName = "ScriptableObjects/ResourceData", order = 1)]
+
 public class ResourceDataScriptableObject : ScriptableObject
 {
     public float Health;
-    public enum ResourceType {stone, wood};
     // What gets spawned when the resource is harvested
     public GameObject lootPrefab;
     public ResourceType Type;

@@ -15,8 +15,8 @@ MonoBehaviour:
   Health: 40
   Type: 0
   ResourceCosts:
-    wood: 0
-    stone: 0
+    wood: 40
+    stone: 20
   MaxIncline: 22.5
   KnockBackInflictedUponAttacker: 0.5
   StuntimeInflictedUponAttacker: 0.3

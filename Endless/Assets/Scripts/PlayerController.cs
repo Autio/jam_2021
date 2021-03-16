@@ -39,7 +39,11 @@ public class PlayerController : CharacterBase
     private Quaternion previousBuildingOrientation;
     public Material buildingPlacementMaterial;
     public Material invalidPlacementMaterial;
+    public Material tooCostlyPlacementMaterial;
+    public Material tooFarPlacementMaterial;
+    
 
+    enum InvalidityType { tooCostly, tooFar, none }
 
     // Tick for player refresh
     float staminaTick = 0.6f;
@@ -226,6 +230,7 @@ public class PlayerController : CharacterBase
             } else 
             {
                 playerState = PlayerStates.idle;
+                StructuresManager.Instance.ClearBuildingCosts();
                 Destroy(currentPlaceableObject);
             }
 
@@ -278,7 +283,7 @@ public class PlayerController : CharacterBase
     }
 
     // Sets the materials of the building to be placed to show if it's a valid placement or not
-    private void SetPlacementValidity(bool isValid){
+    private void SetPlacementValidity(bool isValid, InvalidityType invalidityType = InvalidityType.none){
         if(isValid)
         {
             currentPlaceableObject.GetComponent<Structure>().SetMaterials(buildingPlacementMaterial);
@@ -286,13 +291,19 @@ public class PlayerController : CharacterBase
         {
             currentPlaceableObject.GetComponent<Structure>().SetMaterials(invalidPlacementMaterial);
         }
-        
+        if(invalidityType == InvalidityType.tooCostly)
+        {
+            currentPlaceableObject.GetComponent<Structure>().SetMaterials(tooCostlyPlacementMaterial);
+        }
+        if(invalidityType == InvalidityType.tooFar)
+        {
+            currentPlaceableObject.GetComponent<Structure>().SetMaterials(tooFarPlacementMaterial);
+        }
     }
 
     private void ShowCurrentPlaceableObject()
     {
 
-        // TODO: Building switching
         // Grab extents before the collider is disabled
         placeableStructure = currentPlaceableObject.GetComponent<Structure>();
         buildingExtents = placeableStructure.StructureCollider.bounds.extents;
@@ -314,6 +325,9 @@ public class PlayerController : CharacterBase
 
         // If valid
         SetPlacementValidity(true);
+
+        // Show costs in GUI
+        StructuresManager.Instance.ShowBuildingCosts(placeableStructure.StructureData);
 
     }
 
@@ -351,15 +365,22 @@ public class PlayerController : CharacterBase
             yBuffer = -0.2f;
         }   
          
-         
         currentPlaceableObject.transform.position = hit.point + new Vector3(0, buildingExtents.y + yBuffer, 0);
 
         validPlacement = true;
+        InvalidityType invalidityType = InvalidityType.none;
+        // Check can you even afford this beauty
+        if (!StructuresManager.Instance.CanAffordToBuild(placeableStructure.StructureData))
+        {
+            validPlacement = false;
+            invalidityType = InvalidityType.tooCostly;
+        }
         // Check if too far
         float allowedRadius = 10f; //TODO: Get from somewhere better, like the level settings or sth
         if(transform.position.magnitude > allowedRadius)
         {
             validPlacement = false;
+            invalidityType = InvalidityType.tooFar;
         }
         // Check if overlapping with existing buildings
         int s_layerMask = LayerMask.GetMask("Structure"); 
@@ -391,13 +412,14 @@ public class PlayerController : CharacterBase
 
         //Check on a valid incline
         float allowedIncline = placeableStructure.StructureData.MaxIncline;
-        
         if(slopeIncline > allowedIncline && allowedIncline != 0)
         {
             validPlacement = false;
         }
         
-        SetPlacementValidity(validPlacement);
+        SetPlacementValidity(validPlacement, invalidityType);
+
+        // TODO: Split monster function into more manageable chunks
 
     }
 
@@ -419,8 +441,10 @@ public class PlayerController : CharacterBase
             currentPlaceableObject.GetComponent<Structure>().StructureCollider.enabled = true;
             // Store the rotation to be ready for the next placement
             previousBuildingOrientation = currentPlaceableObject.transform.rotation;
-
             currentPlaceableObject = null;
+
+            // Subtract resource cost
+            ResourceController.Instance.PayForBuilding(placeableStructure.StructureData);
 
             playerState = PlayerStates.idle;
         }
