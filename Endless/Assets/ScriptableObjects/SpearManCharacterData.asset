@@ -15,8 +15,8 @@ MonoBehaviour:
   MovementSpeed: 4
   Health: 20
   Stamina: 10
-  AttackStaminaCost: 2
-  StaminaRechargeRate: 2
+  AttackStaminaCost: 4
+  StaminaRechargeRate: 0.5
   HitDamage: 5
   StunTimeAfterBeingHit: 0.1
   KnockBack: 0.5
@@ -27,4 +27,4 @@ MonoBehaviour:
   AttackRadiusAsTurret: 9
   AttackRadiusModifierWhenInTurret: 1.3
   AttackDamageModifierWhenInTurret: 1.4
-  AttackSpeedModifierWhenInTurret: 3
+  AttackSpeedModifierWhenInTurret: 2

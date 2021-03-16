@@ -7,7 +7,7 @@ public class Loot : MonoBehaviour
     // Loot contains the resource the player can pick up 
     // Once they have smashed the resource item
     // Maybe later on something more like equipment
-    public ResourceController.ResourceTypes resourceType;
+    public ResourceType resourceType;
     public int amount;
     private bool collected = false;
 

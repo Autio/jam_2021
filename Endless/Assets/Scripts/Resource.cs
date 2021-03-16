@@ -8,14 +8,14 @@ public class Resource : MonoBehaviour
     public GameObject lootPrefab;
     //private float health;
     Health health;
-    ResourceController.ResourceTypes resourceType;
+    ResourceType resourceType;
     private bool dead = false;
     // Start is called before the first frame update
     void Start()
     {
         health = GetComponent<Health>();
         health.SetCurrentHealth(ResourceData.Health);
-        resourceType = ResourceController.ResourceTypes.stone; //TODO: FIX
+        resourceType = ResourceData.Type; 
     }
 
     // Update is called once per frame

@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+public enum ResourceType {stone, wood};
+
 public class ResourceController : Singleton<ResourceController>
 {
     // Keeps track of level resources
-    public enum ResourceTypes {wood, stone};
     public int initialWood, initialStone;
 
     [SerializeField] TextMeshProUGUI stoneText, woodText;
@@ -36,14 +37,15 @@ public class ResourceController : Singleton<ResourceController>
         return stone;
     }
 
-    public void AddResource(ResourceTypes resourceType, int amount)
+    public void AddResource(ResourceType resourceType, int amount)
     {
+        Debug.Log(resourceType);
         switch (resourceType)
         {
-            case ResourceTypes.wood:
+            case ResourceType.wood:
                 wood += amount;
                 break;
-            case ResourceTypes.stone:
+            case ResourceType.stone:
                 stone += amount;
                 break;
         
@@ -55,14 +57,14 @@ public class ResourceController : Singleton<ResourceController>
 
     }
 
-    public void RemoveResource(ResourceTypes resourceType, int amount)
+    public void RemoveResource(ResourceType resourceType, int amount)
     {
         switch (resourceType)
         {
-            case ResourceTypes.wood:
+            case ResourceType.wood:
                 wood -= amount;
                 break;
-            case ResourceTypes.stone:
+            case ResourceType.stone:
                 stone -= amount;
                 break;
         
@@ -78,11 +80,11 @@ public class ResourceController : Singleton<ResourceController>
     {
         if(StructureData.ResourceCosts.wood > 0)
         {
-            RemoveResource(ResourceTypes.wood, StructureData.ResourceCosts.wood);
+            RemoveResource(ResourceType.wood, StructureData.ResourceCosts.wood);
         }
         if(StructureData.ResourceCosts.stone > 0)
         {
-            RemoveResource(ResourceTypes.stone, StructureData.ResourceCosts.stone);
+            RemoveResource(ResourceType.stone, StructureData.ResourceCosts.stone);
         }
     }
 
