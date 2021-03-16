@@ -107,17 +107,17 @@ public class PlayerController : CharacterBase
         navmeshAgent.Move(new Vector3(moveVec.x,0,moveVec.y) * Time.deltaTime * CharacterData.MovementSpeed);     
         
         //JUMPING OVER WALLS
-        if (moveVec.magnitude > 0.3f){
+        if (moveVec.magnitude > 0.8f){
             NavMeshHit hit;
             RaycastHit physicsCastHit;
-            var maxDistanceToJumpOver = 1; // should also be a thing in character data. Fuck that thing is growing. 
+            var maxDistanceToJumpOver = .6f; // should also be a thing in character data. Fuck that thing is growing. 
                 if (Physics.Raycast(transform.position + new Vector3(moveVec.x, 0, moveVec.y).normalized * maxDistanceToJumpOver + Vector3.up, Vector3.down,out physicsCastHit,2f,1 << LayerMask.NameToLayer("Ground"))){
 
                 // Vector3 nearbyDestination = transform.position + new Vector3(moveVec.x, 0, moveVec.y).normalized * maxDistanceToJumpOver;
                 Vector3 nearbyDestination = physicsCastHit.point;
 
                 if (NavMesh.Raycast(transform.position,nearbyDestination,out hit,1 << LayerMask.GetMask("Walkable"))){
-                    if (hit.distance < 0.2f &&  NavMesh.SamplePosition(nearbyDestination,out hit,.1f,1 << LayerMask.GetMask("Walkable"))){
+                    if (hit.distance < 0.1f &&  NavMesh.SamplePosition(nearbyDestination,out hit,.1f,1 << LayerMask.GetMask("Walkable"))){
                         navmeshAgent.Warp(hit.position);
                     }
                 }
