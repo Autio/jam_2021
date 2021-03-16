@@ -115,27 +115,27 @@ public class PlayerController : CharacterBase
         }
         var lookVec = inputActions.Player.Look.ReadValue<Vector2>();
 
-        navmeshAgent.Move(new Vector3(moveVec.x,0,moveVec.y) * Time.deltaTime * CharacterData.MovementSpeed);     
-        
-        //JUMPING OVER WALLS
-        if (moveVec.magnitude > 0.8f){
-            NavMeshHit hit;
-            RaycastHit physicsCastHit;
-            var maxDistanceToJumpOver = .6f; // should also be a thing in character data. Fuck that thing is growing. 
-                if (Physics.Raycast(transform.position + new Vector3(moveVec.x, 0, moveVec.y).normalized * maxDistanceToJumpOver + Vector3.up, Vector3.down,out physicsCastHit,2f,1 << LayerMask.NameToLayer("Ground"))){
+        // TODO: Something with jumping fucks up the player placement on the navmesh and leads to errors:
+        // E.g. placeable objects get stuck and detach from the player
+        // //JUMPING OVER WALLS
+        // if (moveVec.magnitude > 0.8f){
+        //     NavMeshHit hit;
+        //     RaycastHit physicsCastHit;
+        //     var maxDistanceToJumpOver = .6f; // should also be a thing in character data. Fuck that thing is growing. 
+        //         if (Physics.Raycast(transform.position + new Vector3(moveVec.x, 0, moveVec.y).normalized * maxDistanceToJumpOver + Vector3.up, Vector3.down,out physicsCastHit,2f,1 << LayerMask.NameToLayer("Ground"))){
 
-                // Vector3 nearbyDestination = transform.position + new Vector3(moveVec.x, 0, moveVec.y).normalized * maxDistanceToJumpOver;
-                Vector3 nearbyDestination = physicsCastHit.point;
+        //         // Vector3 nearbyDestination = transform.position + new Vector3(moveVec.x, 0, moveVec.y).normalized * maxDistanceToJumpOver;
+        //         Vector3 nearbyDestination = physicsCastHit.point;
 
-                if (NavMesh.Raycast(transform.position,nearbyDestination,out hit,1 << LayerMask.GetMask("Walkable"))){
-                    if (hit.distance < 0.1f &&  NavMesh.SamplePosition(nearbyDestination,out hit,.1f,1 << LayerMask.GetMask("Walkable"))){
-                        playerState = PlayerStates.jumping;
-                        jumpDestination = hit.position;
-                        navmeshAgent.enabled = false;
-                    }
-                }
-            }
-        }
+        //         if (NavMesh.Raycast(transform.position,nearbyDestination,out hit,1 << LayerMask.GetMask("Walkable"))){
+        //             if (hit.distance < 0.1f &&  NavMesh.SamplePosition(nearbyDestination,out hit,.1f,1 << LayerMask.GetMask("Walkable"))){
+        //                 playerState = PlayerStates.jumping;
+        //                 jumpDestination = hit.position;
+        //                 navmeshAgent.enabled = false;
+        //             }
+        //         }
+        //     }
+        // }
         
         // Move the building you are placing 
         if (playerState == PlayerStates.building && currentPlaceableObject != null)
@@ -187,7 +187,7 @@ public class PlayerController : CharacterBase
                     
                     // Start displaying radius around player
                     GetComponent<Radius>().enabled = true;
-                    GetComponent<Radius>().radius = CharacterData.AttackRadiusAsTurret;
+                    GetComponent<Radius>().radius = structure.StructureData.AttackRadiusAsTurret * CharacterData.AttackRadiusModifierWhenInTurret;
 
                     return;
                 }
@@ -238,6 +238,19 @@ public class PlayerController : CharacterBase
         {
             ChangeBuilding();
         }
+
+        // This gives some grief so let's do it last
+        try {
+            navmeshAgent.Move(new Vector3(moveVec.x,0,moveVec.y) * Time.deltaTime * CharacterData.MovementSpeed);     
+        }  catch 
+        {
+            Debug.Log("Error in navmeshAgent moving. Did the guy get knocked off the navmesh somehow?");
+        }
+
+    }
+
+    private void FixedUpdate() {
+        
     }
 
     // Change building being placed
@@ -350,16 +363,31 @@ public class PlayerController : CharacterBase
         }
         // Check if overlapping with existing buildings
         int s_layerMask = LayerMask.GetMask("Structure"); 
-        float overlapBuffer = 1.3f;
+        float overlapBuffer = 0.5f;
         if(placeableStructure.StructureData.Type == StructureDataScriptableObject.BuildingType.wall){
             overlapBuffer = 0.1f;
         }
-        Debug.Log(buildingExtents / overlapBuffer);
+        ///buildingExtents * overlapBuffer
+        Vector3 size = currentPlaceableObject.transform.TransformVector(currentPlaceableObject.GetComponent<Collider>().bounds.size / 2);
+        size.x = Mathf.Abs(size.x);
+        size.y = Mathf.Abs(size.y);
+        size.z = Mathf.Abs(size.z);
+
+        Debug.Log(size);
+
+        //Debug.Log(buildingExtents * overlapBuffer / 2);
         Collider[] hitColliders = Physics.OverlapBox(
             currentPlaceableObject.transform.position, buildingExtents * overlapBuffer, currentPlaceableObject.transform.rotation, s_layerMask);
 
         foreach(Collider c in hitColliders)
         {
+            // Allow all kinds of wall placement
+            if (placeableStructure.StructureData.Type == StructureDataScriptableObject.BuildingType.wall && 
+                c.transform.GetComponent<Structure>().StructureData.Type == StructureDataScriptableObject.BuildingType.wall
+            )   
+            {
+                validPlacement = true;
+            }
             // Check isn't self
             if (c.transform != currentPlaceableObject.transform)
             {

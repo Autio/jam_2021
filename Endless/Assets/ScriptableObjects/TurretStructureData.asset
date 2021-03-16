@@ -14,10 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 40
   Type: 0
+  ResourceCosts:
+    wood: 0
+    stone: 0
   MaxIncline: 22.5
   KnockBackInflictedUponAttacker: 0.5
   StuntimeInflictedUponAttacker: 0.3
   IsTurret: 1
   AttackRadiusAsTurret: 7
-  AttackRateAsTurret: 0.7
+  AttackRateAsTurret: 0.6
   AttackDamageAsTurret: 3

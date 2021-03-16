@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: CrystalStructureData
   m_EditorClassIdentifier: 
   Health: 200
+  Type: 2
+  ResourceCosts:
+    wood: 0
+    stone: 0
+  MaxIncline: 0
   KnockBackInflictedUponAttacker: 0.5
   StuntimeInflictedUponAttacker: 0.3
   IsTurret: 0

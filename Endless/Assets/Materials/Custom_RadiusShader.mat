@@ -26,10 +26,10 @@ Material:
     m_Floats:
     - _Glossiness: 0.474
     - _Metallic: 0.547
-    - _Radius: 5
+    - _Radius: 0
     - _RadiusWidth: 0.12
     m_Colors:
-    - _Center: {r: 4.659546, g: -0.004049897, b: 5.8083115, a: 0}
+    - _Center: {r: 3.0313303, g: -1.5598031, b: 7.9965606, a: 0}
     - _Color: {r: 0.07098794, g: 1, b: 0, a: 0.9019608}
     - _RadiusColor: {r: 0.2264151, g: 0.64573914, b: 0.9056604, a: 0.5529412}
   m_BuildTextureStacks: []

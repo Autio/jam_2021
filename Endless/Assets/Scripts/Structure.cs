@@ -48,7 +48,7 @@ public class Structure : MonoBehaviour
 
             var turretRange = isManned ? StructureData.AttackRadiusAsTurret * manningPlayer.CharacterData.AttackRadiusModifierWhenInTurret : StructureData.AttackRadiusAsTurret;
             var turretDamage = isManned ? StructureData.AttackDamageAsTurret * manningPlayer.CharacterData.AttackDamageModifierWhenInTurret : StructureData.AttackDamageAsTurret;
-            var turretRateOfFire = isManned ? StructureData.AttackRateAsTurret * manningPlayer.CharacterData.AttackSpeedModifierWhenInTurret : StructureData.AttackRateAsTurret;
+            var turretRateOfFire = isManned ? StructureData.AttackRateAsTurret / manningPlayer.CharacterData.AttackSpeedModifierWhenInTurret : StructureData.AttackRateAsTurret;
             
             fireCountdown = turretRateOfFire;
             var numberOfSurroundingEnemies = Physics.OverlapCapsuleNonAlloc(transform.position + Vector3.up * 5, transform.position + Vector3.down * 5, turretRange, results, LayerMask.GetMask("Enemy"), QueryTriggerInteraction.Ignore);
