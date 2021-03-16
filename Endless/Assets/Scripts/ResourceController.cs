@@ -10,7 +10,7 @@ public class ResourceController : Singleton<ResourceController>
     public enum ResourceTypes {wood, stone};
     public int initialWood, initialStone;
 
-    [SerializeField] TextMeshProUGUI stoneText;
+    [SerializeField] TextMeshProUGUI stoneText, woodText;
     private int wood, stone;  
 
     
@@ -64,5 +64,9 @@ public class ResourceController : Singleton<ResourceController>
     }
 
     // Render Resources in the GUI
-
+    public void UpdateResourceGUI()
+    {
+        stoneText.text = stone.ToString();
+        woodText.text = wood.ToString();
+    }
 }

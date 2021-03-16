@@ -9,11 +9,15 @@ public class Loot : MonoBehaviour
     // Maybe later on something more like equipment
     public ResourceController.ResourceTypes resourceType;
     public int amount;
+    private bool collected = false;
 
     // Add loot amount to the controller
     public void CollectLoot()
     {
-        ResourceController.Instance.AddResource(resourceType, amount);
+        if(!collected){
+            ResourceController.Instance.AddResource(resourceType, amount);
+        }
+        collected = true;
         Destroy(gameObject);
     }
 
