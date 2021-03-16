@@ -123,7 +123,6 @@ public class Blob : CharacterBase
     void OnTriggerEnter(Collider other) {
         //We hit a player
         if (other.gameObject.layer == LayerMask.NameToLayer("Player")) { 
-            Debug.Log($"Logging:  YO IMMA PLAYER II GOT IT  ");
 
             var playerCharacter = other.GetComponentInParent<CharacterBase>();//We'll need some weird shit to know we're calling the right function here, the specific enemy's rather than the character base one. 
             Vector3 knockBackVector = (playerCharacter.transform.position - transform.position) * CharacterData.KnockBack;

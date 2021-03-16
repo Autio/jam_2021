@@ -78,7 +78,7 @@ public class PlayerController : CharacterBase
 
             return;
         }
-
+        //PLAYER MOVEMENT
         var moveVec = inputActions.Player.Move.ReadValue<Vector2>();
 
         if (playerState == PlayerStates.turreting ){
@@ -104,7 +104,25 @@ public class PlayerController : CharacterBase
         }
         var lookVec = inputActions.Player.Look.ReadValue<Vector2>();
 
-        navmeshAgent.Move(new Vector3(moveVec.x,0,moveVec.y) * Time.deltaTime * CharacterData.MovementSpeed);       
+        navmeshAgent.Move(new Vector3(moveVec.x,0,moveVec.y) * Time.deltaTime * CharacterData.MovementSpeed);     
+        
+        //JUMPING OVER WALLS
+        if (moveVec.magnitude > 0.3f){
+            NavMeshHit hit;
+            RaycastHit physicsCastHit;
+            var maxDistanceToJumpOver = 1; // should also be a thing in character data. Fuck that thing is growing. 
+                if (Physics.Raycast(transform.position + new Vector3(moveVec.x, 0, moveVec.y).normalized * maxDistanceToJumpOver + Vector3.up, Vector3.down,out physicsCastHit,2f,1 << LayerMask.NameToLayer("Ground"))){
+
+                // Vector3 nearbyDestination = transform.position + new Vector3(moveVec.x, 0, moveVec.y).normalized * maxDistanceToJumpOver;
+                Vector3 nearbyDestination = physicsCastHit.point;
+
+                if (NavMesh.Raycast(transform.position,nearbyDestination,out hit,1 << LayerMask.GetMask("Walkable"))){
+                    if (hit.distance < 0.2f &&  NavMesh.SamplePosition(nearbyDestination,out hit,.1f,1 << LayerMask.GetMask("Walkable"))){
+                        navmeshAgent.Warp(hit.position);
+                    }
+                }
+            }
+        }
         
         // Move the building you are placing 
         if (playerState == PlayerStates.building && currentPlaceableObject != null)
@@ -122,7 +140,7 @@ public class PlayerController : CharacterBase
         {      
             if (inputActions.Player.Fire.triggered){
                 // TODO: Needs to check against something dynamic 
-                if(currentStamina > 4)
+                if(currentStamina > 4) //should be an entry in the CharacterData 
                 {
                     // Swing if not already swinging
                     if(playerState != PlayerStates.attacking)
@@ -407,7 +425,6 @@ public class PlayerController : CharacterBase
 
     public override void GetHit(float damage, Vector3 knockback)
     {
-        Debug.Log($"Logging: GOTHITIHTHIGN");
         base.GetHit(damage, knockback);
         
     }
