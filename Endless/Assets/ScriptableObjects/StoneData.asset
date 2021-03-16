@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 643ce2a6e6533074cab479381fb7c9c9, type: 3}
-  m_Name: SmallStone
+  m_Name: StoneData
   m_EditorClassIdentifier: 
-  Health: 0
+  Health: 15
   lootPrefab: {fileID: 6621511249241708642, guid: a31d54751416e004fa44b053483e06e7,
     type: 3}
   Type: 0
-  yield: 0
+  yield: 5

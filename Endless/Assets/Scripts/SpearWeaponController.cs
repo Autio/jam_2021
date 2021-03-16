@@ -45,5 +45,9 @@ public class SpearWeaponController : WeaponBase,IWeaponController
             Vector3 knockBackVector = (enemy.transform.position - SpearOwner.transform.position) * SpearOwner.CharacterData.KnockBack;
             enemy.GetHit(SpearOwner.CharacterData.HitDamage, knockBackVector);
         }
+        if (other.gameObject.layer == LayerMask.NameToLayer("Resource")) { 
+            other.GetComponent<Resource>().GetHit(SpearOwner.CharacterData.HitDamage);;//We'll need some weird shit to know we're calling the right function here, the specific enemy's rather than the character base one. 
+
+        }
     }
 }

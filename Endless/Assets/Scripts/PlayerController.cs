@@ -368,12 +368,6 @@ public class PlayerController : CharacterBase
             overlapBuffer = 0.1f;
         }
         ///buildingExtents * overlapBuffer
-        Vector3 size = currentPlaceableObject.transform.TransformVector(currentPlaceableObject.GetComponent<Collider>().bounds.size / 2);
-        size.x = Mathf.Abs(size.x);
-        size.y = Mathf.Abs(size.y);
-        size.z = Mathf.Abs(size.z);
-
-        Debug.Log(size);
 
         //Debug.Log(buildingExtents * overlapBuffer / 2);
         Collider[] hitColliders = Physics.OverlapBox(
@@ -494,7 +488,14 @@ public class PlayerController : CharacterBase
             Camera.main.transform.localPosition = cameraNear;
         }
 
+    }
 
+    void OnTriggerEnter(Collider other) {
+        Debug.Log("Collidin'");
+        if (other.gameObject.layer == LayerMask.NameToLayer("Loot")) { 
+           other.GetComponent<Loot>().CollectLoot();
+
+        }
     }
 
 }

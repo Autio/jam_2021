@@ -11,7 +11,7 @@ public class Loot : MonoBehaviour
     public int amount;
 
     // Add loot amount to the controller
-    void CollectLoot()
+    public void CollectLoot()
     {
         ResourceController.Instance.AddResource(resourceType, amount);
         Destroy(gameObject);
