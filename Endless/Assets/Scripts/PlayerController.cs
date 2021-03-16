@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : CharacterBase
 {
-    public enum PlayerStates {idle, attacking, building, turreting};
+    public enum PlayerStates {idle, attacking, building, turreting, jumping};
 
     public Vector3 positionBeforeGettingInTurret { get; private set; }
 
@@ -27,6 +27,7 @@ public class PlayerController : CharacterBase
     public GameObject projectileObject;
     private float fireCountdown = 1f;
 
+    private Vector3 jumpDestination;
 
     // Building placement
     [SerializeField] 
@@ -54,6 +55,16 @@ public class PlayerController : CharacterBase
 
     void Update()
     {
+        if (playerState == PlayerStates.jumping){
+            transform.position = Vector3.MoveTowards(transform.position, jumpDestination, 2 * Time.deltaTime);
+            if (Vector3.Distance(transform.position,jumpDestination) <= 0.01f){
+                playerState = PlayerStates.idle;
+                navmeshAgent.enabled = true;
+            }
+            else{
+                return;
+            }
+        }
         if (enemyState == EnemyStates.stunned){ //awful awful workaround. Awful
             if ( (Time.time - stunStartTime ) >= CharacterData.StunTimeAfterBeingHit){
                 enemyState = EnemyStates.idle;
@@ -118,7 +129,9 @@ public class PlayerController : CharacterBase
 
                 if (NavMesh.Raycast(transform.position,nearbyDestination,out hit,1 << LayerMask.GetMask("Walkable"))){
                     if (hit.distance < 0.1f &&  NavMesh.SamplePosition(nearbyDestination,out hit,.1f,1 << LayerMask.GetMask("Walkable"))){
-                        navmeshAgent.Warp(hit.position);
+                        playerState = PlayerStates.jumping;
+                        jumpDestination = hit.position;
+                        navmeshAgent.enabled = false;
                     }
                 }
             }
