@@ -10,6 +10,8 @@ public class Resource : MonoBehaviour
     Health health;
     ResourceType resourceType;
     private bool dead = false;
+    public AudioClip sound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,13 +26,26 @@ public class Resource : MonoBehaviour
         
     }
     public void GetHit(float damage){
-        Debug.Log("Rock taking " + damage);
+        
         health.ModifyHealth(-damage);
+
+        // Play an effect
+        GameObject soundeffect = Instantiate(SoundManager.Instance.soundeffect, transform.position, Quaternion.identity);
+        AudioSource audioSource = soundeffect.GetComponent<AudioSource>();
+        audioSource.clip = sound;
+        audioSource.pitch = Random.Range(0.7f, 1.3f);
+        audioSource.Play();
+        Destroy(audioSource, 2f);
+        // visual
+        GameObject particles = Instantiate(ResourceController.Instance.resourceParticles, transform.position + new Vector3(Random.Range(-.1f,.1f),Random.Range(0f,.4f),Random.Range(-.1f,.1f)),Quaternion.identity);
+        Destroy(particles,1.6f);
+
         if (health.GetCurrentHealth() <= 0 && !dead) {
             dead = true;
             Die();
         }
-        // Play an effect
+
+
     }
 
     public void Die(){

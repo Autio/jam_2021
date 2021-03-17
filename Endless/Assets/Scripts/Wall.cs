@@ -11,18 +11,7 @@ public class Wall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach(Transform wall in transform)
-        {
-            if(Random.Range(0,10) < 2)
-            {
-                try {
-                wall.GetComponent<Renderer>().material = altWallMaterial;
-                }
-                catch{
-                    // No material on child
-                }
-            }
-        }
+        MakePatchy();
     }
 
     // Update is called once per frame
@@ -30,4 +19,20 @@ public class Wall : MonoBehaviour
     {
         
     }
+
+    public void MakePatchy()
+    {
+        foreach(Transform wall in transform)
+            {
+                if(Random.Range(0,10) < 2)
+                {
+                    try {
+                    wall.GetComponent<Renderer>().material = altWallMaterial;
+                    }
+                    catch{
+                        // No material on child
+                    }
+                }
+            }
+        }
 }

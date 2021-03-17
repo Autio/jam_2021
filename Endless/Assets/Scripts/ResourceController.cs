@@ -10,7 +10,7 @@ public class ResourceController : Singleton<ResourceController>
 {
     // Keeps track of level resources
     public int initialWood, initialStone;
-
+    public GameObject resourceParticles;
     [SerializeField] TextMeshProUGUI stoneText, woodText;
     private int wood, stone;  
 

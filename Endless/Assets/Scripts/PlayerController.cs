@@ -50,9 +50,14 @@ public class PlayerController : CharacterBase
     private Collider[] results = new Collider[100];
     private Structure hostStructure;
 
+    // Sounds, very temp
+    public AudioClip[] soundeffects;
+    private AudioSource audioSource;
+
     public override void Awake()
     {
         inputActions = new EndlessInputActions();
+        audioSource = GetComponent<AudioSource>();
         inputActions.Player.Enable();
         base.Awake();
     }
@@ -162,6 +167,12 @@ public class PlayerController : CharacterBase
                     // Swing if not already swinging
                     if(playerState != PlayerStates.attacking)
                         {
+                            audioSource.clip = soundeffects[0];
+                            audioSource.pitch = Random.Range(0.9f, 1.1f);
+                            audioSource.volume = Random.Range(0.8f, 1.0f);
+
+                            audioSource.Play();
+                            
                             Weapon.TrySwing();
                             // Deplete stamina
                             ModifyStamina(-CharacterData.AttackStaminaCost); // Temp fixed arbitrary value
@@ -441,8 +452,14 @@ public class PlayerController : CharacterBase
             currentPlaceableObject.GetComponent<Structure>().StructureCollider.enabled = true;
             // Store the rotation to be ready for the next placement
             previousBuildingOrientation = currentPlaceableObject.transform.rotation;
-            currentPlaceableObject = null;
 
+            // Do a little wall thing
+            if(placeableStructure.StructureData.Type == StructureDataScriptableObject.BuildingType.wall)
+            {
+                currentPlaceableObject.GetComponent<Wall>().MakePatchy();
+            }
+
+            currentPlaceableObject = null;
             // Subtract resource cost
             ResourceController.Instance.PayForBuilding(placeableStructure.StructureData);
 
@@ -470,6 +487,18 @@ public class PlayerController : CharacterBase
             }
             if(target != null)
             {
+                try 
+                    {   
+                        audioSource.clip = soundeffects[1];
+                        audioSource.Play();
+                        audioSource.pitch = Random.Range(0.7f, 1.3f);
+                        audioSource.volume = Random.Range(0.8f, 1.0f);
+                    }
+                    catch 
+                    {
+                        Debug.Log("Error playing turret sound");
+                    }
+
                 // Turn towards the target
                 playerModel.transform.LookAt(target.transform);
                 // Fire a projectile
@@ -493,6 +522,7 @@ public class PlayerController : CharacterBase
         base.Die();
     }
     public void SetSelectedState(bool isSelected){
+        GetComponent<AudioListener>().enabled = isSelected;
         playerCamera.gameObject.SetActive(isSelected);
         isCurrentlySelected = isSelected;
     }
@@ -518,7 +548,17 @@ public class PlayerController : CharacterBase
         Debug.Log("Collidin'");
         if (other.gameObject.layer == LayerMask.NameToLayer("Loot")) { 
            other.GetComponent<Loot>().CollectLoot();
-
+            try 
+            {   
+                audioSource.clip = soundeffects[2];
+                audioSource.Play();
+                audioSource.pitch = Random.Range(0.7f, 1.3f);
+                audioSource.volume = Random.Range(0.8f, 1.0f);
+            }
+            catch 
+            {
+                Debug.Log("Error playing loot sound");
+            }
         }
     }
 

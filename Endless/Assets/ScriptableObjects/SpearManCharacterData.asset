@@ -15,7 +15,7 @@ MonoBehaviour:
   MovementSpeed: 4
   Health: 20
   Stamina: 10
-  AttackStaminaCost: 4
+  AttackStaminaCost: 3
   StaminaRechargeRate: 0.5
   HitDamage: 5
   StunTimeAfterBeingHit: 0.1

@@ -69,6 +69,17 @@ public class Structure : MonoBehaviour
                 if(target != null)
                 {
                     // Turn towards the target
+                    // Make a sound
+                    try 
+                    {   
+                        GetComponent<AudioSource>().Play();
+                        GetComponent<AudioSource>().pitch = Random.Range(0.7f, 1.3f);
+                        GetComponent<AudioSource>().volume = Random.Range(0.8f, 1.0f);
+                    }
+                    catch 
+                    {
+                        Debug.Log("Error playing turret sound");
+                    }
                     // Fire a projectile
                     GameObject projectile = ObjectPooler.Instance.GetPooledObject(projectileObject);
                     projectile.transform.position = transform.position + Vector3.up * 3;
