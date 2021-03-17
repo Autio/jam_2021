@@ -1850,6 +1850,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1072092210, guid: bc752af94e83c2c4e9776ce9d75f6136, type: 3}
+      propertyPath: soundeffects.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072092210, guid: bc752af94e83c2c4e9776ce9d75f6136, type: 3}
+      propertyPath: soundeffects.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 51944aa4b4888e3448fff7db29458222, type: 3}
     - target: {fileID: 6542326757959930650, guid: bc752af94e83c2c4e9776ce9d75f6136,
         type: 3}
       propertyPath: m_Name

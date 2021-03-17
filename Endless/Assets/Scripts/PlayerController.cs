@@ -366,10 +366,14 @@ public class PlayerController : CharacterBase
             currentPlaceableObject.transform.Rotate(0, rotation, 0);       
         }
 
-        float yBuffer = .1f;
+        // VALIDITY CHECKS
+        validPlacement = true;
+
 
         // Only apply sloping for WALLS
         // Otherwise folks build things vertically even if they are on an incline base
+        float yBuffer = .1f;
+
         if(placeableStructure.StructureData.Type == StructureDataScriptableObject.BuildingType.wall)
         {
             currentPlaceableObject.transform.rotation = Quaternion.Slerp(currentPlaceableObject.transform.rotation, slopeRotation * currentPlaceableObject.transform.rotation, 10 * Time.deltaTime);        
@@ -378,7 +382,6 @@ public class PlayerController : CharacterBase
          
         currentPlaceableObject.transform.position = hit.point + new Vector3(0, buildingExtents.y + yBuffer, 0);
 
-        validPlacement = true;
         InvalidityType invalidityType = InvalidityType.none;
         // Check can you even afford this beauty
         if (!StructuresManager.Instance.CanAffordToBuild(placeableStructure.StructureData))
@@ -393,7 +396,10 @@ public class PlayerController : CharacterBase
             validPlacement = false;
             invalidityType = InvalidityType.tooFar;
         }
-        // Check if overlapping with existing buildings
+ 
+
+
+       // Check if overlapping with existing buildings
         int s_layerMask = LayerMask.GetMask("Structure"); 
         float overlapBuffer = 0.5f;
         if(placeableStructure.StructureData.Type == StructureDataScriptableObject.BuildingType.wall){
@@ -405,8 +411,14 @@ public class PlayerController : CharacterBase
         Collider[] hitColliders = Physics.OverlapBox(
             currentPlaceableObject.transform.position, buildingExtents * overlapBuffer, currentPlaceableObject.transform.rotation, s_layerMask);
 
+
         foreach(Collider c in hitColliders)
         {
+            // Check isn't self
+            if (c.transform != currentPlaceableObject.transform)
+            {
+                validPlacement = false;
+            }
             // Allow all kinds of wall placement
             if (placeableStructure.StructureData.Type == StructureDataScriptableObject.BuildingType.wall && 
                 c.transform.GetComponent<Structure>().StructureData.Type == StructureDataScriptableObject.BuildingType.wall
@@ -414,13 +426,9 @@ public class PlayerController : CharacterBase
             {
                 validPlacement = true;
             }
-            // Check isn't self
-            if (c.transform != currentPlaceableObject.transform)
-            {
-                validPlacement = false;
-            }
-        }
 
+        }
+        
         //Check on a valid incline
         float allowedIncline = placeableStructure.StructureData.MaxIncline;
         if(slopeIncline > allowedIncline && allowedIncline != 0)
@@ -448,6 +456,13 @@ public class PlayerController : CharacterBase
     {   
         if(validPlacement)
         {
+            // Play sounds 
+
+            audioSource.clip = soundeffects[3];
+            audioSource.Play();
+            audioSource.pitch = Random.Range(0.7f, 1.3f);
+            audioSource.volume = Random.Range(0.8f, 1.0f);
+
             currentPlaceableObject.GetComponent<Structure>().ResetMaterials();
             currentPlaceableObject.GetComponent<Structure>().StructureCollider.enabled = true;
             // Store the rotation to be ready for the next placement
