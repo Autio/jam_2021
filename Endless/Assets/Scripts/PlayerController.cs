@@ -126,25 +126,25 @@ public class PlayerController : CharacterBase
 
         // TODO: Something with jumping fucks up the player placement on the navmesh and leads to errors:
         // E.g. placeable objects get stuck and detach from the player
-        // //JUMPING OVER WALLS
-        // if (moveVec.magnitude > 0.8f){
-        //     NavMeshHit hit;
-        //     RaycastHit physicsCastHit;
-        //     var maxDistanceToJumpOver = .6f; // should also be a thing in character data. Fuck that thing is growing. 
-        //         if (Physics.Raycast(transform.position + new Vector3(moveVec.x, 0, moveVec.y).normalized * maxDistanceToJumpOver + Vector3.up, Vector3.down,out physicsCastHit,2f,1 << LayerMask.NameToLayer("Ground"))){
+        //JUMPING OVER WALLS
+        if (moveVec.magnitude > 0.8f && playerState != PlayerStates.building){
+            NavMeshHit hit;
+            RaycastHit physicsCastHit;
+            var maxDistanceToJumpOver = .6f; // should also be a thing in character data. Fuck that thing is growing. 
+                if (Physics.Raycast(transform.position + new Vector3(moveVec.x, 0, moveVec.y).normalized * maxDistanceToJumpOver + Vector3.up, Vector3.down,out physicsCastHit,2f,1 << LayerMask.NameToLayer("Ground"))){
 
-        //         // Vector3 nearbyDestination = transform.position + new Vector3(moveVec.x, 0, moveVec.y).normalized * maxDistanceToJumpOver;
-        //         Vector3 nearbyDestination = physicsCastHit.point;
+                // Vector3 nearbyDestination = transform.position + new Vector3(moveVec.x, 0, moveVec.y).normalized * maxDistanceToJumpOver;
+                Vector3 nearbyDestination = physicsCastHit.point;
 
-        //         if (NavMesh.Raycast(transform.position,nearbyDestination,out hit,1 << LayerMask.GetMask("Walkable"))){
-        //             if (hit.distance < 0.1f &&  NavMesh.SamplePosition(nearbyDestination,out hit,.1f,1 << LayerMask.GetMask("Walkable"))){
-        //                 playerState = PlayerStates.jumping;
-        //                 jumpDestination = hit.position;
-        //                 navmeshAgent.enabled = false;
-        //             }
-        //         }
-        //     }
-        // }
+                if (NavMesh.Raycast(transform.position,nearbyDestination,out hit,1 << LayerMask.GetMask("Walkable"))){
+                    if (hit.distance < 0.1f &&  NavMesh.SamplePosition(nearbyDestination,out hit,.1f,1 << LayerMask.GetMask("Walkable"))){
+                        playerState = PlayerStates.jumping;
+                        jumpDestination = hit.position;
+                        navmeshAgent.enabled = false;
+                    }
+                }
+            }
+        }
         
         // Move the building you are placing 
         if (playerState == PlayerStates.building && currentPlaceableObject != null)
